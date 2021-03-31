@@ -1,0 +1,34 @@
+Placa L337P89
+Marca: Honda
+Cor: Petróleo
+Proprietário: Mike Bostock
+Altura: 1,93 m
+Peso: 78,5 kg
+--
+Placa 51S4D8U
+Marca: BMW
+Cor: Amarela
+Proprietário: Nikolaus Milatz
+Altura: 1,86 m
+Peso: 103,4 kg
+--
+Placa L337GB9
+Marca: Toyota
+Cor: Azul
+Proprietário: Matt Waite
+Altura: 1,86 m
+Peso: 86,2 kg
+--
+Placa 7CG83R7
+Marca: Toyota
+Cor: Vermelho
+Proprietário: Augustin Lozano
+Altura: 1,93 m
+Peso: 69,9 kg
+--
+Placa L3375A9
+Marca: Honda
+Cor: Azul
+Proprietário: Jeremy Bowers
+Altura: 1,86 m
+Peso: 92,5 kg

@@ -1,0 +1,493 @@
+: 1617202555:0;unzip assassinato-na-linha-de-comando.zip
+: 1617202571:0;ls assassinato-na-linha-de-comando
+: 1617202605:0;vim assassinato-na-linha-de-comando/README.md
+: 1617202658:0;cd assassinato-na-linha-de-comando
+: 1617202664:0;cat inicio
+: 1617202719:0;ls misterio
+: 1617202728:0;cd misterio
+: 1617202741:0;cat cena-do-crime
+: 1617202770:0;grep "PISTA" cena-do-crime
+: 1617202820:0;grep -C 10 "PISTA" cena-do-crime
+: 1617202871:0;grep -C 5 "PISTA" automoveis
+: 1617202875:0;grep -C 5 "PISTA" pessoas
+: 1617202889:0;cat automoveis
+: 1617202899:0;grep "PISTA" cena-do-crime
+: 1617202949:0;man grep
+: 1617203067:0;grep "Altura: (1,[83-99])|(2)" automoveis
+: 1617203077:0;grep "Altura: 1," automoveis
+: 1617203132:0;tail -n 10 automoveis
+: 1617203161:0;grep -A 1 -B 5 "Altura: 1," automoveis
+: 1617203184:0;grep -A 1 -B 5 "Altura: 1,\[8-9]" automoveis
+: 1617203188:0;grep -A 1 -B 5 "Altura: 1,\[8-9\]" automoveis
+: 1617203233:0;grep -A 1 -B 5 "Altura: 1,83" automoveis
+: 1617203243:0;grep -A 1 -B 5 "Altura: 1,[8-9]" automoveis
+: 1617203305:0;grep -E -A 1 -B 5 "Altura: 1,[83-99]" automoveis
+: 1617203346:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis
+: 1617203514:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -E -A 1 -B 5  -v "((8\ )|(81)|(82))"
+: 1617203569:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -E -A 1 -B 5  -v "((8\ m)|(81 m)|(82 m))"
+: 1617203581:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v "((8\ m)|(81 m)|(82 m))"
+: 1617203592:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v "8 m"
+: 1617203643:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v -E "(8 m)"
+: 1617203670:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v -E "(8 m)|(81 m)|(82 m)"
+: 1617203699:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v -E "(8 m)|(81 m)|(82 m)" | grep -A 1 -B 5 Altura
+: 1617203735:0;grep "PISTA" cena-do-crime
+: 1617203830:0;cat pessoas
+: 1617203841:0;grep "PISTA" cena-do-crime
+: 1617203908:0;grep " F " pessoas
+: 1617203923:0;grep "* F *" pessoas
+: 1617203934:0;grep ".* F" pessoas
+: 1617203948:0;grep ".* F  " pessoas
+: 1617203959:0;grep ".* F .*" pessoas
+: 1617203963:0;grep ".* F *" pessoas
+: 1617203977:0;grep ".* F  .*" pessoas
+: 1617203983:0;grep -E ".* F  .*" pessoas
+: 1617203987:0;grep -E ".* F" pessoas
+: 1617204003:0;grep -E ".* F    " pessoas
+: 1617204010:0;grep -E ".* F    .*" pessoas
+: 1617204014:0;grep -E ".* F.*" pessoas
+: 1617204023:0;grep -E ".*F .*" pessoas
+: 1617204026:0;grep -E ".*F " pessoas
+: 1617204029:0;grep -E ".*F" pessoas
+: 1617204101:0;grep -E "+*F" pessoas
+: 1617204109:0;grep -E "+*F " pessoas
+: 1617204124:0;grep -E "*F " pessoas
+: 1617204127:0;grep -E ".*F " pessoas
+: 1617204132:0;grep -E ".*F" pessoas
+: 1617204135:0;grep -E ".*F " pessoas
+: 1617204138:0;grep -E ".*F" pessoas
+: 1617204141:0;grep -E ".* F" pessoas
+: 1617204157:0;grep -E ".* F    [0-9]" pessoas
+: 1617204177:0;grep -E ".* F " pessoas
+: 1617204179:0;grep -E ".* F" pessoas
+: 1617204317:0;grep -E ".*F" pessoas
+: 1617204322:0;grep -E ".*\tF" pessoas
+: 1617204332:0;.*F	.*
+: 1617204337:0;grep -E ".*F	.*" pessoas
+: 1617204358:0;grep -E ".*\tF	.*" pessoas
+: 1617204362:0;grep -E ".*\tF.*" pessoas
+: 1617204390:0;grep -E ".*[\t]F.*" pessoas
+: 1617204397:0;grep -E ".*F\t.*" pessoas
+: 1617204401:0;grep -E ".*F[\t].*" pessoas
+: 1617204407:0;grep -E ".*F\\t.*" pessoas
+: 1617204412:0;grep -E ".*F.*" pessoas
+: 1617204425:0;grep -E ".*F	.*" pessoas
+: 1617204430:0;grep -E ".*F	" pessoas
+: 1617204810:0;grep -E ".*F	" pessoas | grep -Eo "\w+ \w+\t"
+: 1617204855:0;grep -E ".*F	" pessoas | grep -Eo "\w+ \w+\t F"
+: 1617204860:0;grep -E ".*F	" pessoas | grep -Eo "\w+ \w+\tF"
+: 1617204863:0;grep -E ".*F	" pessoas | grep -Eo "\w+ \w+\t"
+: 1617204872:0;grep -E ".*F\t" pessoas | grep -Eo "\w+ \w+\t"
+: 1617204884:0;grep -E "F\t" pessoas |
+: 1617204886:0;grep -E "F\t" pessoas
+: 1617204891:0;grep -E ".*F\t" pessoas | grep -Eo "\w+ \w+\t"
+: 1617204908:0;grep -E ".*F	" pessoas | grep -Eo "\w+ \w+\t"
+: 1617204994:0;grep -E ".*F	" -f pessoas | grep -Eo "\w+ \w+\t" |
+: 1617204996:0;grep -E ".*F	" -f pessoas | grep -Eo "\w+ \w+\t"
+: 1617205042:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v -E "(8 m)|(81 m)|(82 m)" | grep -A 1 -B 5 Altura > possiveisAutomoveis.txt
+: 1617205056:0;grep -E ".*F	" pessoas | grep -Eo "\w+ \w+\t" > possiveisNomes.txt
+: 1617205149:0;grep -f possiveisNomes.txt possiveisAutomoveis.txt
+: 1617205186:0;grep "ProprietÃrio" possiveisAutomoveis.txt
+: 1617205197:0;cat possiveisAutomoveis.txt
+: 1617205235:0;grep -A 2 -B 3 -f possiveisNomes.txt possiveisAutomoveis.txt
+: 1617205276:0;grep Debbie possiveisAutomoveis.txt
+: 1617205286:0;grep Debbie possiveisNomes.txt
+: 1617205291:0;grep -A 2 -B 3 -f possiveisNomes.txt possiveisAutomoveis.txt
+: 1617205313:0;grep "PISTA" cena-do-crime
+: 1617205340:0;grep "CLUE" cena-do-crime
+: 1617205378:0;grep -A 2 -B 3 -f possiveisNomes.txt possiveisAutomoveis.txt
+: 1617205399:0;grep -A 2 -B 3 -f possiveisNomes.txt possiveisAutomoveis.txt > possiveisNomesAutomoveis.txt
+: 1617205423:0;grep -A 2 -B 3 -f Annabel automoveis
+: 1617205433:0;grep -A 2 -B 3  Annabel automoveis
+: 1617205462:0;grep -A 2 -B 3  Annabel possiveisNomesAutomoveis.txt
+: 1617205516:0;cd ..
+: 1617205522:0;cat inicio
+: 1617205527:0;cat README.md
+: 1617205697:0;grep -E ".*M	" pessoas | grep -Eo "\w+ \w+\t" > possiveisNomes.txt
+: 1617205702:0;cd misterio
+: 1617205704:0;grep -E ".*M	" pessoas | grep -Eo "\w+ \w+\t" > possiveisNomes.txt
+: 1617205716:0;grep -A 2 -B 3 -f possiveisNomes.txt possiveisAutomoveis.txt > possiveisNomesAutomoveis.txt
+: 1617205721:0;cat possiveisNomesAutomoveis.txt
+: 1617205794:0;grep -A 2 -B 3 -f Annabel pessoas
+: 1617205800:0;grep -A 2 -B 3 Annabel pessoas
+: 1617205807:0;grep Annabel pessoas
+: 1617205874:0;grep -A 2 -B 3 -f possiveisNomes.txt possiveisAutomoveis.txt | grep -E -A 2 -B 3 "(sun)|(church)" 
+: 1617205882:0;grep -A 2 -B 3 -f possiveisNomes.txt possiveisAutomoveis.txt | grep -E -A 2 -B 3 "sun" 
+: 1617205899:0;grep -A 2 -B 3 sun automoveis
+: 1617205911:0;grep -A 2 -B 3 " sun " automoveis
+: 1617205920:0;grep Annabel pessoas
+: 1617205937:0;grep -A 2 -B 3 " Church " automoveis
+: 1617205981:0;grep "Annabel.*\tF" pessoas
+: 1617206035:0;grep "Annabel.*	F" pessoas
+: 1617206047:0;grep "Annabel.*	F" pessoas > annabeis.txt
+: 1617206084:0;grep -E "Annabel.*	F" pessoas | grep -Eo "\w+ \w+\t" > annabeis.txt
+: 1617206087:0;cat annabeis.txt
+: 1617206096:0;grep -E "Annabel.*	F" pessoas | grep -Eo "\w+ \w+\t"
+: 1617206102:0;grep -E "Annabel.*	F" pessoas
+: 1617206107:0;grep -E "Annabel.*	F" pessoas | grep -Eo "\w+ \w+"
+: 1617206123:0;grep -E "Annabel.*	F" pessoas | grep -Eo "\w+ \w+	"
+: 1617206128:0;grep -E "Annabel.*	F" pessoas | grep -Eo "\w+ \w+	" > annabeis.txt
+: 1617206154:0;grep AAA automoveis
+: 1617206160:0;grep Delta automoveis
+: 1617206217:0;grep Annabel automoveis
+: 1617206242:0;grep -f annabeis.txt automoveis
+: 1617206255:0;grep -A 2 -B 3 -f possiveisNomes.txt possiveisAutomoveis.txt
+: 1617206263:0;grep -f annabeis.txt automoveis
+: 1617206288:0;grep -A 2 -B 3 -f annabeis.txt automoveis
+: 1617206299:0;cat annabeis.txt
+: 1617206354:0;grep -A 2 -B 3 Annabel automoveis
+: 1617206422:0;grep  -E -A 2 -B 3 "(BMW|Fiat)" possiveisNomesAutomoveis.txt
+: 1617206460:0;grep  -E -A 1 -B 4 "Marca: (BMW|Fiat)" possiveisNomesAutomoveis.txt
+: 1617206468:0;cat possiveisNomesAutomoveis.txt
+: 1617206478:0;head possiveisNomesAutomoveis.txt
+: 1617206509:0;grep  -E -A 5 -B 1 "Marca: (BMW|Fiat)" possiveisNomesAutomoveis.txt
+: 1617206518:0;grep  -E -A 4 -B 1 "Marca: (BMW|Fiat)" possiveisNomesAutomoveis.txt
+: 1617206554:0;grep Annabel automoveis
+: 1617206561:0;grep -A 2 -B 3 Annabel automoveis
+: 1617206596:0;grep  -E -A 4 -B 1 "Placa (L2E48EF|L2E48EF)" possiveisNomesAutomoveis.txt
+: 1617206610:0;grep  -E -A 4 -B 1 "Placa (0O27BTD|L2E48EF)" possiveisNomesAutomoveis.txt
+: 1617206615:0;grep  -E -A 4 -B 1 "(0O27BTD|L2E48EF)" possiveisNomesAutomoveis.txt
+: 1617206649:0;grep "PISTA" automoveis
+: 1617206657:0;grep "PISTA" pessoas
+: 1617206658:0;ls
+: 1617206666:0;cd associacoes
+: 1617206667:0;ls
+: 1617206777:0;cat AAA
+: 1617206795:0;grep -f AAA Delta_SkyMiles
+: 1617206831:0;ls
+: 1617206852:0;grep -f AAA Delta_SkyMiles | grep -F Biblioteca_da_Cidade
+: 1617206856:0;grep -f AAA Delta_SkyMiles
+: 1617206889:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash
+: 1617206898:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade
+: 1617206923:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > nomesNasCarteiras
+: 1617206950:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisNomesCarteiras.txt
+: 1617206958:0;rm nomesNasCarteiras
+: 1617206959:0;cd ..
+: 1617206960:0;ls
+: 1617206983:0;grep -f possiveisNomesCarteiras.txt possiveisNomes
+: 1617206988:0;grep -f possiveisNomesCarteiras.txt possiveisNomes.txt
+: 1617207061:0;grep "Deron Estanguet" automoveis
+: 1617207068:0;grep -C 10 "Deron Estanguet" automoveis
+: 1617207089:0;cat possiveisNomes.txt
+: 1617207147:0;grep -E ".*M	" pessoas | grep -Eo "\w+ \w+	"
+: 1617207155:0;grep -E ".*M	" pessoas | grep -Eo "\w+ \w+	" > possiveisNomes.txt
+: 1617207194:0;cd associacoes
+: 1617207195:0;ls
+: 1617207210:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisNomesCarteiras.txt
+: 1617207213:0;cd ..
+: 1617207230:0;grep -f possiveisNomesCarteiras.txt possiveisNomes.txt
+: 1617207260:0;cd entrevistas
+: 1617207260:0;ls
+: 1617207271:0;cat entrevista-999372
+: 1617207290:0;grep "PISTA" *
+: 1617207296:0;grep "PISTA" entrevista-000296 entrevista-00448418 entrevista-00502304 entrevista-005702 entrevista-00617019 entrevista-00805135 entrevista-016463 entrevista-020337 entrevista-022751 entrevista-0234126 entrevista-02422821 entrevista-0251720 entrevista-03098229 entrevista-0315125 entrevista-03316077 entrevista-034070 entrevista-0349327 entrevista-04393507 entrevista-044492 entrevista-0462097 entrevista-049721 entrevista-05297663 entrevista-06032377 entrevista-0613334 entrevista-066291 entrevista-071537 entrevista-0732631 entrevista-07497003 entrevista-0768255 entrevista-092423 entrevista-0953437 entrevista-096267 entrevista-102490 entrevista-109118 entrevista-1108561 entrevista-114661 entrevista-11495001 entrevista-116803 entrevista-11705111 entrevista-11783660 entrevista-11817172 entrevista-1186827 entrevista-1205060 entrevista-1250176 entrevista-125204 entrevista-125271 entrevista-1269181 entrevista-1310392 entrevista-13768464 entrevista-13889608 entrevista-13920860 entrevista-1395414 entrevista-141030 entrevista-14153840 entrevista-144873 entrevista-14590717 entrevista-147283 entrevista-15187437 entrevista-15354942 entrevista-1536668 entrevista-155049 entrevista-1578206 entrevista-159848 entrevista-16098538 entrevista-1642421 entrevista-1643440 entrevista-16889008 entrevista-17248453 entrevista-17343208 entrevista-174898 entrevista-1767435 entrevista-17827186 entrevista-179719 entrevista-1811770 entrevista-18193261 entrevista-1823688 entrevista-18270219 entrevista-18441251 entrevista-1850922 entrevista-1857368 entrevista-1906958 entrevista-191206 entrevista-19300543 entrevista-1933118 entrevista-19577850 entrevista-2058907 entrevista-210355 entrevista-218131 entrevista-221039 entrevista-223913 entrevista-2277882 entrevista-229443 entrevista-23167806 entrevista-2326746 entrevista-23371263 entrevista-233800 entrevista-2415821 entrevista-243703 entrevista-2481877 entrevista-250112 entrevista-253705 entrevista-255531 entrevista-25582311 entrevista-25834905 entrevista-259909 entrevista-2601508 entrevista-26373485 entrevista-2642139 entrevista-27042476 entrevista-27504937 entrevista-275706 entrevista-279087 entrevista-280877 entrevista-2834518 entrevista-284560 entrevista-2846076 entrevista-289524 entrevista-290346 entrevista-291440 entrevista-2922290 entrevista-29316965 entrevista-2939888 entrevista-296128 entrevista-29680692 entrevista-29741223 entrevista-2976680 entrevista-29838622 entrevista-2995681 entrevista-301018 entrevista-30259493 entrevista-3049045 entrevista-305694 entrevista-305949 entrevista-306616 entrevista-3074127 entrevista-3099757 entrevista-312546 entrevista-3128999 entrevista-3140662 entrevista-31635890 entrevista-3201508 entrevista-322305 entrevista-32365018 entrevista-324389 entrevista-325611 entrevista-32639981 entrevista-32712166 entrevista-331178 entrevista-332596 entrevista-33399976 entrevista-340396 entrevista-34041151 entrevista-342393 entrevista-34359897 entrevista-344331 entrevista-34690644 entrevista-347303 entrevista-351963 entrevista-353218 entrevista-353467 entrevista-354262 entrevista-3588302 entrevista-3609204 entrevista-36398447 entrevista-364735 entrevista-36527398 entrevista-376115 entrevista-37747405 entrevista-3804339 entrevista-3824641 entrevista-38299069 entrevista-3871205 entrevista-3871242 entrevista-38899905 entrevista-3917097 entrevista-391811 entrevista-39481114 entrevista-39825862 entrevista-40534453 entrevista-40610944 entrevista-409731 entrevista-41553314 entrevista-416243 entrevista-41814745 entrevista-4204949 entrevista-42161907 entrevista-4223536 entrevista-4225866 entrevista-42396365 entrevista-4262657 entrevista-42934869 entrevista-4299898 entrevista-4335306 entrevista-4366523 entrevista-44533008 entrevista-4463090 entrevista-448086 entrevista-45615686 entrevista-457117 entrevista-457451 entrevista-466195 entrevista-4673074 entrevista-46773428 entrevista-47246024 entrevista-4735823 entrevista-4765278 entrevista-476744 entrevista-478217 entrevista-48088300 entrevista-48148020 entrevista-483817 entrevista-485229 entrevista-4950099 entrevista-4961376 entrevista-496772 entrevista-498331 entrevista-499096 entrevista-50168425 entrevista-50291987 entrevista-504687 entrevista-509105 entrevista-5143029 entrevista-514793 entrevista-52280505 entrevista-528044 entrevista-529706 entrevista-53318557 entrevista-535181 entrevista-5372865 entrevista-538900 entrevista-54026669 entrevista-541518 entrevista-5455315 entrevista-54619323 entrevista-54851634 entrevista-549055 entrevista-55382746 entrevista-55410365 entrevista-55435298 entrevista-55477243 entrevista-555536 entrevista-5581158 entrevista-55841398 entrevista-55984022 entrevista-565396 entrevista-566707 entrevista-56784802 entrevista-56892213 entrevista-57236791 entrevista-5739404 entrevista-5766907 entrevista-5774468 entrevista-5782759 entrevista-579105 entrevista-5835471 entrevista-586668 entrevista-58910793 entrevista-5905106 entrevista-591273 entrevista-5993978 entrevista-60081985 entrevista-604403 entrevista-608607 entrevista-6093093 entrevista-618764 entrevista-6203192 entrevista-628618 entrevista-63308519 entrevista-637657 entrevista-637928 entrevista-638121 entrevista-6417794 entrevista-645385 entrevista-6553472 entrevista-65792229 entrevista-659803 entrevista-66101490 entrevista-66282920 entrevista-6643191 entrevista-67279454 entrevista-673985 entrevista-676473 entrevista-67790846 entrevista-680549 entrevista-6808205 entrevista-68195573 entrevista-68488577 entrevista-68764140 entrevista-6884359 entrevista-6894000 entrevista-69170457 entrevista-6933068 entrevista-699607 entrevista-70067280 entrevista-70199425 entrevista-703831 entrevista-704443 entrevista-70458099 entrevista-7046684 entrevista-7066082 entrevista-706620 entrevista-707438 entrevista-708943 entrevista-7103823 entrevista-71186817 entrevista-71226767 entrevista-71298441 entrevista-7180973 entrevista-71993338 entrevista-720268 entrevista-7254073 entrevista-728181 entrevista-730123 entrevista-73035802 entrevista-7305678 entrevista-73585672 entrevista-737609 entrevista-7422077 entrevista-74225310 entrevista-7469675 entrevista-7541406 entrevista-75434722 entrevista-755037 entrevista-75633580 entrevista-7580872 entrevista-77014856 entrevista-770439 entrevista-77135281 entrevista-7791374 entrevista-780255 entrevista-7863761 entrevista-789564 entrevista-791289 entrevista-79360358 entrevista-79411932 entrevista-794525 entrevista-7959148 entrevista-796439 entrevista-79667499 entrevista-79935965 entrevista-7998181 entrevista-8095917 entrevista-809922 entrevista-812725 entrevista-81443363 entrevista-822576 entrevista-8245680 entrevista-825165 entrevista-82705993 entrevista-831512 entrevista-833367 entrevista-838259 entrevista-8387710 entrevista-8402388 entrevista-8421696 entrevista-8464899 entrevista-84688694 entrevista-849256 entrevista-85262552 entrevista-8531248 entrevista-856221 entrevista-8586380 entrevista-861780 entrevista-862173 entrevista-862717 entrevista-8631232 entrevista-86395001 entrevista-865918 entrevista-867999 entrevista-8700943 entrevista-87126591 entrevista-871877 entrevista-879569 entrevista-8819490 entrevista-891720 entrevista-896668 entrevista-9004767 entrevista-901603 entrevista-901645 entrevista-90394637 entrevista-904020 entrevista-907126 entrevista-9074626 entrevista-911451 entrevista-91673757 entrevista-917210 entrevista-9185205 entrevista-920304 entrevista-92391023 entrevista-92670500 entrevista-927642 entrevista-9332386 entrevista-9346061 entrevista-93473333 entrevista-93696502 entrevista-938991 entrevista-9408565 entrevista-94126412 entrevista-9437737 entrevista-944493 entrevista-9446528 entrevista-9501580 entrevista-95095182 entrevista-95601730 entrevista-9618669 entrevista-9620713 entrevista-9651888 entrevista-9666149 entrevista-97043057 entrevista-9709892 entrevista-9711852 entrevista-9712946 entrevista-9728756 entrevista-97393699 entrevista-97409610 entrevista-980963 entrevista-982013 entrevista-9824821 entrevista-98912259 entrevista-9901455 entrevista-9912172 entrevista-992072 entrevista-99643550 entrevista-9969223 entrevista-999372 
+: 1617207326:0;grep "Deron" *
+: 1617207330:0;cd ..
+: 1617207331:0;ls
+: 1617207351:0;grep -f possiveisNomesCarteiras.txt possiveisAutomoveis.txt
+: 1617207391:0;grep -f possiveisNomesCarteiras.txt possiveisNomes.txt
+: 1617207480:0;grep -f possiveisNomesCarteiras.txt possiveisNomes.txt | grep -f automoveis
+: 1617207497:0;grep -f possiveisNomesCarteiras.txt possiveisNomes.txt | grep -f possiveisAutomoveis.txt
+: 1617207545:0;grep -f possiveisNomesCarteiras.txt possiveisNomes.txt > possiveisNomesCarteirasHomens.txt
+: 1617207565:0;grep -f possiveisNomesCarteirasHomens.txt possiveisAutomoveis.txt
+: 1617207581:0;cat possiveisNomesCarteirasHomens.txt
+: 1617207589:0;cd associacoes
+: 1617207635:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade
+: 1617207660:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade | grep -f ../pessoas
+: 1617207667:0;cd ..
+: 1617207692:0;grep -f possiveisNomesCarteiras.txt pessoas
+: 1617207790:0;grep -E ".*M	" pessoas | grep -Eo "\w+ \w+	" > possiveisNomes.txt
+: 1617207797:0;cd associacoes
+: 1617207825:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade | grep -f ../possiveisNomes.txt
+: 1617207837:0;grep -E ".*M	" pessoas | grep -Eo "\w+ \w+	"
+: 1617207841:0;cd ,,
+: 1617207843:0;cd ..
+: 1617207845:0;grep -E ".*M	" pessoas | grep -Eo "\w+ \w+	"
+: 1617207860:0;cd associacoes
+: 1617207869:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade
+: 1617207885:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisNomesCarteiras.txt
+: 1617207888:0;cd ..
+: 1617207898:0;grep -f possiveisNomesCarteiras.txt pessoas
+: 1617207906:0;grep -f possiveisNomesCarteiras.txt possiveisNomes.txt
+: 1617207940:0;mv possiveisNomesCarteiras.txt possiveisCarteiras.txt
+: 1617207945:0;ls
+: 1617207952:0;cd ruas
+: 1617207972:0;cd ..
+: 1617208020:0;grep -f possiveisCarteiras.txt pessoas
+: 1617208054:0;cat cena-do-crime
+: 1617208065:0;head cena-do-crime
+: 1617208083:0;head -n 20 cena-do-crime
+: 1617208094:0;cat ../inicio
+: 1617208117:0;less cena-do-crime
+: 1617208153:0;head -n 20 cena-do-crime
+: 1617208229:0;grep -f possiveisCarteiras.txt pessoas | grep ".*M	" 
+: 1617208247:0;grep -f possiveisCarteiras.txt possiveisAutomoveis.txt
+: 1617208269:0;grep -f possiveisCarteiras.txt pessoas | grep ".*M	"  | grep -f possiveisAutomoveis.txt
+: 1617208362:0;ld
+: 1617208363:0;ls
+: 1617208386:0;rm possiveisNomesAutomoveis.txt possiveisNomesCarteirasHomens.txt
+: 1617208388:0;ls
+: 1617208422:0;grep -f possiveisCarteiras.txt pessoas > possiveisNomes.txt
+: 1617208470:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v -E "(8 m)|(81 m)|(82 m)" | grep -A 1 -B 5 Altura > possiveisAutomoveis.txt
+: 1617208513:0;grep -E "Annabel.*	F" pessoas | grep -Eo "\w+ \w+	" > annabeis.txt
+: 1617208516:0;cat annabeis.txt
+: 1617208528:0;grep -E "Annabel.*	F" pessoas > annabeis.txt
+: 1617208540:0;cat annabeis.txt
+: 1617208561:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v -E "(8 m)|(81 m)|(82 m)" | grep -A 1 -B 5 Altura > possiveisAutomoveis.txt
+: 1617208571:0;grep -E "Annabel.*	F" pessoas > annabeis.txt
+: 1617208575:0;cd associacoes
+: 1617208613:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisCarteiras.txt
+: 1617208615:0;cd ..
+: 1617208616:0;ls
+: 1617208630:0;rm possiveisNomes.txt
+: 1617208644:0;grep -f possiveisCarteiras.txt pessoas > possiveisPessoas.txt
+: 1617208645:0;ls
+: 1617208651:0;cat possiveisPessoas.txt
+: 1617208734:0;grep -f possiveisCarteiras.txt pessoas > grep ".*M	"
+: 1617208743:0;grep -f possiveisCarteiras.txt pessoas | grep ".*M	"
+: 1617208753:0;grep -f possiveisCarteiras.txt pessoas | grep ".*M	" > possiveisPessoas.txt
+: 1617208754:0;ls
+: 1617208773:0;cat annabeis.txt
+: 1617208776:0;cat possiveisPessoas.txt
+: 1617208804:0;grep "PISTA" pessoas
+: 1617208812:0;grep "PISTA" pessoas 
+: 1617208815:0;ls
+: 1617208825:0;grep "PISTA" cena-do-crime
+: 1617208914:0;grep "\w+ \w+	" possiveisPessoas.txt
+: 1617208944:0;grep "\w+ \w+" possiveisPessoas.txt
+: 1617208948:0;cat possiveisPessoas.txt
+: 1617208956:0;grep "\w+" possiveisPessoas.txt
+: 1617208960:0;grep -E "\w+" possiveisPessoas.txt
+: 1617208966:0;grep -E "\w+ \w+	" possiveisPessoas.txt
+: 1617208972:0;grep -oE "\w+ \w+	" possiveisPessoas.txt
+: 1617208981:0;grep -oE "\w+ \w+	" possiveisPessoas.txt > possiveisNomes.txt
+: 1617208993:0;grep -f possiveisNomes.txt possiveisAutomoveis.txt
+: 1617208997:0;grep -f possiveisNomes.txt automoveis
+: 1617209011:0;grep possiveisNomes.txt automoveis
+: 1617209135:0;grep -oE "\w+ \w+	" possiveisPessoas.txt | grep automoveis
+: 1617209143:0;grep -oE "\w+ \w+	" possiveisPessoas.txt | grep -f automoveis
+: 1617209170:0;grep "Deron Estanguet" automoveis
+: 1617209190:0;grep -f possiveisCarteiras.txt pessoas | grep ".*M" > possiveisPessoas.txt
+: 1617209195:0;grep possiveisNomes.txt automoveis
+: 1617209199:0;grep -f possiveisNomes.txt automoveis
+: 1617209210:0;grep -f possiveisCarteiras.txt pessoas | grep ".*M"
+: 1617209230:0;grep -f possiveisCarteiras.txt pessoas | grep ".*M	" > possiveisPessoas.txt
+: 1617209251:0;grep -oE "\w+ \w+" possiveisPessoas.txt > possiveisNomes.txt
+: 1617209256:0;grep -f possiveisNomes.txt automoveis
+: 1617209274:0;grep -A 1 -B 5 -f possiveisNomes.txt automoveis
+: 1617209284:0;grep -A 1 -B 4 -f possiveisNomes.txt automoveis
+: 1617209299:0;grep -A 1 -B 4 -f possiveisNomes.txt possiveisAutomoveis.txt
+: 1617209325:0;grep -A 1 -B 4 -f possiveisNomes.txt possiveisAutomoveis.txt > cruzamentoNomeAutomoveis.txt
+: 1617209431:0;cat annabeis.txt
+: 1617209445:0;cat ruas/Vila_Hart 
+: 1617209461:0;cat ruas/Vila_Buckingham
+: 1617209521:0;grep "PISTA" cena-do-crime
+: 1617209544:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v -E "(8 m)|(81 m)|(82 m)" | grep -A 1 -B 5 Altura > possiveisAutomoveis.txt
+: 1617209585:0;cd associacoes
+: 1617209597:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisCarteiras.txt
+: 1617209672:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade | grep -f ../pessoas
+: 1617209716:0;cd ..
+: 1617209720:0;cat cruzamentoNomeAutomoveis.txt
+: 1617209745:0;grep "Mike Bostock" pessoas
+: 1617209759:0;ls
+: 1617209773:0;cat ruas/Alameda_Senders
+: 1617209793:0;cat entrevistas/entrevista-290346
+: 1617209849:0;grep -E "\w+ \w+" cruzamentoNomeAutomoveis.txt
+: 1617209875:0;grep -E "\w+ \w+" cruzamentoNomeAutomoveis.txt | grep -f pessoas
+: 1617209912:0;grep -E "\w+ \w+" cruzamentoNomeAutomoveis.txt > cruzamentoNomeAutomoveis.txt
+: 1617209960:0;grep -E ": \w+ \w+" cruzamentoNomeAutomoveis.txt | grep "\w+ \w+"
+: 1617209969:0;grep -E ": \w+ \w+" cruzamentoNomeAutomoveis.txt
+: 1617209990:0;grep -E "\w+ \w+" cruzamentoNomeAutomoveis.txt
+: 1617210018:0;grep -A 1 -B 4 -f possiveisNomes.txt possiveisAutomoveis.txt > cruzamentoNomeAutomoveis.txt
+: 1617210024:0;grep -E ": \w+ \w+" cruzamentoNomeAutomoveis.txt | grep "\w+ \w+"
+: 1617210030:0;grep -E "\w+ \w+" cruzamentoNomeAutomoveis.txt
+: 1617210038:0;grep -E ":.*\w+ \w+" cruzamentoNomeAutomoveis.txt
+: 1617210050:0;grep -E ":	\w+ \w+" cruzamentoNomeAutomoveis.txt
+: 1617210058:0;grep -E " \w+ \w+" cruzamentoNomeAutomoveis.txt
+: 1617210072:0;grep -E " \w+ \w+" cruzamentoNomeAutomoveis.txt > possiveisNomes2.txt
+: 1617210088:0;grep -f possiveisNomes.txt pessoas
+: 1617210098:0;grep -f possiveisNomes2.txt pessoas
+: 1617210129:0;grep -E " \w+ \w+" cruzamentoNomeAutomoveis.txt | grep -E "\w+ \w+"
+: 1617210138:0;grep -E " \w+ \w+" cruzamentoNomeAutomoveis.txt | grep -Eo "\w+ \w+"
+: 1617210144:0;grep -E " \w+ \w+" cruzamentoNomeAutomoveis.txt | grep -Eo "\w+ \w+" > possiveisNomes2.txt
+: 1617210158:0;grep -f possiveisNomes2.txt pessoas
+: 1617210199:0;grep "ENTREVISTA" ruas/*
+: 1617210262:0;grep -f possiveisNomes2.txt pessoas | grep "\w+ \w+,"
+: 1617210266:0;grep -f possiveisNomes2.txt pessoas | grep "\w+ \w+"
+: 1617210272:0;grep -f possiveisNomes2.txt pessoas | grep "\w+"
+: 1617210275:0;grep -f possiveisNomes2.txt pessoas
+: 1617210295:0;grep -f possiveisNomes2.txt pessoas | grep "w"
+: 1617210298:0;grep -f possiveisNomes2.txt pessoas | grep "\w"
+: 1617210301:0;grep -f possiveisNomes2.txt pessoas | grep "\w,"
+: 1617210304:0;grep -f possiveisNomes2.txt pessoas | grep "\w+,"
+: 1617210315:0;grep -f possiveisNomes2.txt pessoas | grep -E "\w+ \w+,"
+: 1617210347:0;grep -f possiveisNomes2.txt pessoas | grep -Eo "\w+ \w+," | grep -E "\w+ \w+"
+: 1617210352:0;grep -f possiveisNomes2.txt pessoas | grep -Eo "\w+ \w+," | grep -Eo "\w+ \w+"
+: 1617210376:0;grep -f possiveisNomes2.txt pessoas | grep -Eo "\w+ \w+," | grep -Eo " \w+"
+: 1617210397:0;grep -f possiveisNomes2.txt pessoas | grep -Eo "\w+ \w+," | grep -Eo " \w+" | grep "\w+"
+: 1617210407:0;grep -f possiveisNomes2.txt pessoas | grep -Eo "\w+ \w+," | grep -Eo " \w+" | grep -E "\w+"
+: 1617210411:0;grep -f possiveisNomes2.txt pessoas | grep -Eo "\w+ \w+," | grep -Eo " \w+" | grep -Eo "\w+"
+: 1617210420:0;grep -f possiveisNomes2.txt pessoas | grep -Eo "\w+ \w+," | grep -Eo " \w+" | grep -Eo "\w+" > possiveisRuas.txt
+: 1617210437:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt
+: 1617210465:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep "#"
+: 1617210471:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep "#\w"
+: 1617210474:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep "#\w+"
+: 1617210485:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep "#\w"
+: 1617210488:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep "#\w\w"
+: 1617210491:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep "#\w+"
+: 1617210501:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep "#.*"
+: 1617210517:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep -o "#.*"
+: 1617210526:0;cat entrevistas/entrevista-862173
+: 1617210551:0;cat entrevistas/entrevista-9620713
+: 1617210637:0;cat annabeis.txt
+: 1617210662:0;grep "ENTREVISTA" ruas/Vila_Hart
+: 1617210668:0;grep "ENTREVISTA" ruas/Vila_Buckingham
+: 1617210685:0;cat entrevistas/entrevista-47246024
+: 1617210702:0;cat entrevistas/entrevista-699607
+: 1617210739:0;grep -f possiveisNomes2.txt pessoas
+: 1617210850:0;ls
+: 1617210862:0;cat cruzamentoNomeAutomoveis.txt
+: 1617210922:0;cat possiveisPessoas.txt
+: 1617211007:0;grep "ENTREVISTA" ruas/Travessa_Dunstable
+: 1617211033:0;cat entrevistas/entrevista-9620713 
+: 1617211055:0;grep "ENTREVISTA" ruas/Rua_Alpine
+: 1617211062:0;cat entrevistas/entrevista-862173
+: 1617211105:0;grep  -A 1 B 5 "waite"
+: 1617211117:0;grep  -A 1 B 5 "waite" automoveis
+: 1617211127:0;grep  -A 1 -B 5 "waite" automoveis
+: 1617211159:0;cat cruzamentoNomeAutomoveis.txt
+: 1617211212:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep -o "#.*" | grep -o -v"#"
+: 1617211215:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep -o "#.*" | grep -o -v "#"
+: 1617211224:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep -o "#.*" | grep -v "#"
+: 1617211228:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep -o "#.*" 
+: 1617211239:0;grep "ENTREVISTA" ruas/* | grep -f possiveisRuas.txt | grep -o "#.*" | grep "#"
+: 1617211325:0;grep "L337.*9" automoveis
+: 1617211382:0;cat automoveis
+: 1617211408:0;grep -A 6 "L337.*9" automoveis
+: 1617211424:0;grep -A 6 "L337.*9" automoveis > possiveisAutomoveis2.txt
+: 1617211487:0;grep -A 6 "L337.*9" automoveis | grep "azul"
+: 1617211500:0;grep -A 6 "L337.*9" automoveis
+: 1617211508:0;grep -A 6 "L337.*9" automoveis | grep "Azul"
+: 1617211542:0;grep -A 6 "L337.*9" automoveis | grep -B 3 -A 4 "Azul" 
+: 1617211563:0;grep -A 6 "L337.*9" automoveis | grep -B 3 -A 4 "Azul" | grep -B 2 -A 5 "Honda"
+: 1617211642:0;grep -C 3 "Math Waite" automoveis
+: 1617211646:0;grep -C 3 "Math" automoveis
+: 1617211653:0;grep -C 3 "Matt Waite" automoveis
+: 1617211711:0;rm possiveisAutomoveis2.txt possiveisAutomoveis.txt possiveisCarteiras.txt possiveisNomes2.txt possiveisNomes.txt possiveisPessoas.txt possiveisRuas.txt 
+: 1617211713:0;ld
+: 1617211714:0;ls
+: 1617211723:0;rm annabeis.txt cruzamentoNomeAutomoveis.txt grep
+: 1617211725:0;ls
+: 1617211762:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v -E "(8 m)|(81 m)|(82 m)" | grep -A 1 -B 5 Altura > possiveisAutomoveis.txt
+: 1617211772:0;cd associacoes
+: 1617211786:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisCarteiras.txt
+: 1617211794:0;cd ..
+: 1617211821:0;grep -f possiveisCarteiras.txt pessoas | grep ".*M	" > possiveisPessoas.txt
+: 1617211930:0;grep "\w+ \w+	" possiveisPessoas.txt
+: 1617211934:0;grep "\w+ \w+" possiveisPessoas.txt
+: 1617211938:0;cat possiveisPessoas.txt
+: 1617211960:0;grep -E "\w+ \w+	" possiveisPessoas.txt
+: 1617211992:0;grep -E "\w+ \w+	" possiveisPessoas.txt | grep -E "\w+ \w+" 
+: 1617212001:0;grep -Eo "\w+ \w+	" possiveisPessoas.txt | grep -E "\w+ \w+" 
+: 1617212010:0;grep -Eo "\w+ \w+	" possiveisPessoas.txt | grep -E "\w+ \w+" > possiveisNomes.txt
+: 1617212027:0;grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v -E "(8 m)|(81 m)|(82 m)" | grep -A 1 -B 5 Altura > possiveisAutomoveis.txt
+: 1617212036:0;cd associacoes
+: 1617212042:0;grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisCarteiras.txt
+: 1617212047:0;cd ..
+: 1617212057:0;grep -f possiveisCarteiras.txt pessoas | grep ".*M	" > possiveisPessoas.txt
+: 1617212063:0;grep -Eo "\w+ \w+	" possiveisPessoas.txt | grep -E "\w+ \w+" > possiveisNomes.txt
+: 1617212081:0;grep -f possiveisNomes.txt automoveis 
+: 1617212093:0;grep -Eo "\w+ \w+	" possiveisPessoas.txt | grep -Eo "\w+ \w+" > possiveisNomes.txt
+: 1617212095:0;grep -f possiveisNomes.txt automoveis 
+: 1617212102:0;grep -f possiveisNomes.txt possiveisAutomoveis.txt
+: 1617212245:0;head automoveis
+: 1617212253:0;head -n 10 automoveis
+: 1617212257:0;head -n 20 automoveis
+: 1617212297:0;grep -B 3 A 2 -f possiveisNomes.txt possiveisAutomoveis.txt
+: 1617212305:0;grep -B 3 -A 2 -f possiveisNomes.txt possiveisAutomoveis.txt 
+: 1617212329:0;grep -B 3 -A 2 -f possiveisNomes.txt possiveisAutomoveis.txt  > possiveisAutomoveis2.txt
+: 1617212370:0;grep "Annabel.*	F" pessoas > annabeis.txt
+: 1617212393:0;grep "Annabel.*	F" pessoas 
+: 1617212435:0;grep -E "\w+ \w+	" annabeis.txt
+: 1617212441:0;grep -E "\w+ \w+," annabeis.txt
+: 1617212492:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+"
+: 1617212687:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -e 's/\ /_'
+: 1617212726:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -e 's/ /_'
+: 1617212730:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -e 's/ /'
+: 1617212734:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -e 's///'
+: 1617212743:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -e 's/a/b'
+: 1617212816:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -i 's/a/b'
+: 1617212822:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+"
+: 1617212841:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -i 's/a/b/'
+: 1617212846:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -i 's/a/b/g'
+: 1617212862:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -i 's/ /_/g'
+: 1617212909:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -i 's/ /_/g' > annabeisRuas.txt
+: 1617212979:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | xargs -r sed -i 's/ /_/g' > annabeisRuas.txt
+: 1617212991:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+" | sed -i 's/ /_/g' > annabeisRuas.txt
+: 1617213044:0;cat annabeisRuas.txt
+: 1617213051:0;grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+"  > annabeisRuas.txt
+: 1617213065:0;sed -i "s/ /_/g" annabeisRuas.txt
+: 1617213070:0;cat annabeisRuas.txt
+: 1617213108:0;grep "ENTREVISTA" ruas/* | grep -f annabeisRuas.txt
+: 1617213157:0;grep "ENTREVISTA" ruas/* | grep -f annabeisRuas.txt | grep "#.*"
+: 1617213161:0;grep "ENTREVISTA" ruas/* | grep -f annabeisRuas.txt | grep -o "#.*"
+: 1617213196:0;grep "ENTREVISTA" ruas/* | grep -f annabeisRuas.txt | grep -o "#.*" | grep "[0-9].*"
+: 1617213205:0;grep "ENTREVISTA" ruas/* | grep -f annabeisRuas.txt | grep -o "#.*" | grep -o "[0-9].*"
+: 1617213238:0;grep "ENTREVISTA" ruas/* | grep -f annabeisRuas.txt | grep -o "#.*" | grep -o "[0-9].*" > annabeisEntrevistas.txt
+: 1617213260:0;cat entrevistas/entrevista-699607
+: 1617213269:0;cat entrevistas/entrevista-47246024
+: 1617213275:0;cat entrevistas/entrevista-699607
+: 1617213344:0;grep "Azul" possiveisAutomoveis2.txt
+: 1617213366:0;grep -C 3 "Azul" possiveisAutomoveis2.txt
+: 1617213388:0;grep -B 3 -A 3 "Azul" possiveisAutomoveis2.txt
+: 1617213391:0;grep -B 3 -A 2 "Azul" possiveisAutomoveis2.txt
+: 1617213403:0;grep -C 3 "Azul" possiveisAutomoveis2.txt
+: 1617213433:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 1 "Honda" 
+: 1617213443:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda" 
+: 1617213457:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda" > suspeitoFinal.txt
+: 1617213470:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda" > nomeSuspeitoFinal.txt
+: 1617213517:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda"
+: 1617213530:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda" | grep "Prop"
+: 1617213547:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda" | grep "Prop" | grep -E "\w+ \w+"
+: 1617213551:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda" | grep "Prop" | grep -Eo "\w+ \w+"
+: 1617213555:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda" | grep "Prop" | grep -Eo "\w+ \w+" > nomeSuspeitoFinal.txt
+: 1617213645:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda" | grep "Prop" | grep -Eo "\w+ \w+" | grep -f pessoas
+: 1617213658:0;grep -f nomeSuspeitoFinal.txt pessoas
+: 1617213677:0;grep -f nomeSuspeitoFinal.txt pessoas > suspeitoFinal.txt
+: 1617213719:0;grep "EN" ruas/Travessa_Dunstable
+: 1617213761:0;grep "ENTREVISTA" ruas/Travessa_Dunstable | grep "[0-9].*"
+: 1617213766:0;grep "ENTREVISTA" ruas/Travessa_Dunstable | grep -o "[0-9].*"
+: 1617213772:0;cat entrevistas/entrevista-9620713 
+: 1617214006:0;[200~cd associacoes && grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisCarteiras.txt && cd ..
+: 1617214017:0;cd associacoes && grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisCarteiras.txt && cd ..\
+
+: 1617214026:0;rm possiveisCarteiras.txt
+: 1617214028:0;cd associacoes && grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisCarteiras.txt && cd ..\
+
+: 1617214032:0;cat possiveisCarteiras.txt
+: 1617216527:0;grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda" | grep "Prop" | grep -Eo "\w+ \w+" > nomeSuspeitoFinal.txt \
+
+: 1617216532:0;cat nomeSuspeitoFinal.txt
+: 1617216712:0;grep "Annabel.*	F" pessoas 
+: 1617216904:0;cat entrevistas/entrevista-9620713 
+: 1617217011:0;cd ..
+: 1617217012:0;ls
+: 1617217018:0;rm possiveisNomes.txt
+: 1617217041:0;cd misterio
+: 1617217052:0;cd associacoes && grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisCarteiras.txt && cd ..\
+
+: 1617217058:0;rm possiveisCarteiras.txt
+: 1617217061:0;cd associacoes && grep -f AAA Delta_SkyMiles | grep -f Museu_da_HistÃ³ria_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisCarteiras.txt && cd ..\
+
+: 1617217066:0;cat possiveisCarteiras.txt
+: 1617217115:0;cat README.md
+: 1617217117:0;cd ..
+: 1617217119:0;cat README.md
+: 1617217180:0;cd misterio && cat inicio
+: 1617217194:0;cd ..
+: 1617217196:0;ls
+: 1617217208:0;cat inicio
+: 1617217567:0;vim resoluÃ§Ã£o.md
+: 1617218260:0;mv resoluÃ§Ã£o.md resoluÃ§Ã£o.txt
+: 1617218264:0;vim resoluÃ§Ã£o.txt
+: 1617218284:0;vim ~/.bash_history
+: 1617218308:0;vim ~/.zsh_history

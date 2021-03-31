@@ -1,0 +1,13 @@
+Deron Estanguet	M	71	Rua L, linha 401
+Brian Boyer	M	39	Harbor Point Boulevard, linha 183
+Didier Munoz	M	42	Rua Norman, linha 37
+Krystian Pen	M	88	Rua Glenmore, linha 76
+Mike Bostock	M	45	Alameda Senders, linha 287
+Jeremy Bowers	M	34	Travessa Dunstable, linha 284
+Nikolaus Milatz	M	79	Travessa Taylor, linha 187
+Dalibor Vidal	M	88	Avenida Maple, linha 354
+Aldo Nicolas	M	40	Rua Corbet, linha 400
+Augustin Lozano	M	19	Vila Spinelli, linha 28
+Andrei Masna	M	58	Rua Stoughton, linha 301
+Liangliang Miller	M	31	Travessa Wellsmere, linha 486
+Matt Waite	M	24	Rua Alpine, linha 79

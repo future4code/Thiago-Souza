@@ -1,0 +1,54 @@
+#RESOLUÇÂO DO EXERCÍCIO ASSASSINATO NA LINHA DE COMANDO
+
+Primeiro vamos descompactar o arquivo .zip e ver do diretório criado.
+unzip assassinato-na-linha-de-comando.zip
+ls assassinato-na-linha-de-comando
+
+Olhando o diretório criado descobrimos um arquivo README.me.
+cat README.md
+
+Lendo as informações do arquivo vamos para o arquivo inicio.
+cat inicio
+
+Depois de ler o arquivo de início vamos filtrar os automóveis com as dicas dadas na PISTA 1.
+grep -E -A 1 -B 5 "Altura: ((1,[8-9])|2,)" automoveis | grep -v -E "(8 m)|(81 m)|(82 m)" | grep -A 1 -B 5 Altura > possiveisAutomoveis.txt
+
+Depois vamos filtrar as pessoas que estão nas associações citadas na PISTA 2.
+cd associacoes && grep -f AAA Delta_SkyMiles | grep -f Museu_da_História_do_Bash | grep -f Biblioteca_da_Cidade > ../possiveisCarteiras.txt && cd ..
+
+Vamos filtrar só os homens encontrados.
+grep -f possiveisCarteiras.txt pessoas | grep ".*M   " > possiveisPessoas.txt
+
+Agora iremos adicionar em um novo arquivo só com nome e sobrenome dos suspeitos.
+grep -Eo "\w+ \w+    " possiveisPessoas.txt | grep -Eo "\w+ \w+" > possiveisNomes.txt
+
+Podemos agora unir tanto o filtro de possíveis carros e de possíveis nomes.
+grep -B 3 -A 2 -f possiveisNomes.txt possiveisAutomoveis.txt  > possiveisAutomoveis2.txt
+
+Usando a PISTA 3 podemos filtrar possíveis Annebeis.
+grep "Annabel.*      F" pessoas > annabeis.txt
+
+Os dois próximos comandos iremos  pegar o nome da rua das Annebeis.
+grep -Eo "\w+ \w+," annabeis.txt | grep -Eo "\w+ \w+"  > annabeisRuas.txt 
+sed -i "s/ /_/g" annabeisRuas.txt 
+
+Olhando o arquivos das ruas das Annabeis vimos que Temos duas entrevistas para ver.
+grep "ENTREVISTA" ruas/* | grep -f annabeisRuas.txt | grep -o "#.*" | grep -o "[0-9].*"
+
+O conteúdo da primeira entrevista da bastante informações sobre o carro do assassino.
+cat entrevistas/entrevista-699607
+
+A segunda entrevista descobrimos que não é a Annabel certa.
+cat entrevistas/entrevista-47246024
+
+Fazendo um filtro com os possíveis automóveis e os dados fornecido pela Annabel fica só um suspeito, Jeremy Bowers.
+grep -C 3 "Azul" possiveisAutomoveis2.txt | grep -A 2 "Honda" | grep "Prop" | grep -Eo "\w+ \w+" > nomeSuspeitoFinal.txt 
+
+Descobrimos o endereço do único suspeito.
+grep -f nomeSuspeitoFinal.txt pessoas > suspeitoFinal.txt 
+
+Olhando o endereço do suspeito descobrimos uma nova entrevista.
+grep "ENTREVISTA" ruas/Travessa_Dunstable | grep -o "[0-9].*"
+
+Por final a única possibilidade dada pela entrevista é que Jeremy Bowers é o assassino.
+cat entrevistas/entrevista-9620713  
