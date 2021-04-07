@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./styles/standard.css">
+    <title>Adicionar Venda</title>
+</head>
+<body>
+  <header>
+    <h1>Castelo Dos Bolos</h1>
+
+    <a href="./index.html">Página Inicial</a>
+    <a href="./add-produto.html">Adicionar Produto</a>
+    <a href="./ctrl-estoque.html">Controle de Estoque</a>
+    <a href="./add-venda.html">Adicionar Venda</a>
+    <a href="./hist-vendas.html">Histórico De Vendas</a>
+    <a href="./funcionarios.html">Funcionários</a>
+  </header>
+    
+    <div class="information">
+      <h2>Adicionar Venda</h2>
+      <form action="">
+        <label for="cliente">Nome Do Cliente</label>
+        <input type="url" id="cliente" name="cliente">
+
+        <label for="vendedor">Nome Do Vendedor</label>
+        <select name="vendedor" id="vendedor">
+          <option value="thiago">Thiago Felipe</option>
+          <option value="jordana">Jordana Carolina</option>
+          <option value="livia">Lívia Gabriele</option>
+          <option value="marcia">Marcia Matheus</option>
+        </select>
+
+        <label for="produtos">Escolha Os Produtos</label>
+        <select name="produtos" id="produtos" multiple>
+          <option value="brigadeiro">Brigadeiro</option>
+          <option value="cupcake">Cupcake</option>
+          <option value="bolo-de-mandioca">Bolo De Mandioca(Mané Pelado)</option>
+          <option value="bolo-de-chocolate">Bolo De Chocolate</option>
+          <option value="bolo-de-cenoura">Bolo De Cenoura</option>
+        </select>
+
+        <label for="forma-pagamento">Forma De Pagamento</label>
+        <select name="forma-pagamento" id="forma-pagamento">
+          <option value="dinheiro">Dinheiro</option>
+          <option value="cartao-credito">Cartão De Crédito</option>
+          <option value="cartap-debito">Cartão De Débito</option>
+        </select>
+
+        <div class="form-add">
+          <button type="submit">Adicionar</button>
+        </div>
+      </form>
+    </div>
+
+    <footer>
+      <p>Siga-nos nas redes sociais!</p>
+
+      <div>
+        <img class="logo" src="https://image.flaticon.com/icons/png/512/25/25305.png"/>
+        <img class="logo" src="https://image.flaticon.com/icons/png/512/25/25425.png"/>
+        <img class="logo" src="https://image.flaticon.com/icons/png/512/8/8800.png"/>
+      </div>
+    </footer>
+</body>
+</html>
