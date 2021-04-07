@@ -1,9 +1,16 @@
-html, body {
+html, 
+body {
+  height: 100%;
+}
+
+body {
   text-align: center;
   padding: 0;
   margin: 0;
   font-family: sans-serif;
   min-height: 100%;
+  background-color: #9E4F98;
+  vertical-align: middle;
 }
 
 a:link {
@@ -58,19 +65,72 @@ header a, header h1 {
   display: block;
   margin: 10px auto;
   width: 200px;
+  min-height: 30px;
   text-align: center;
+  border-radius: 15px;
+  appearance: textfield;
+  border: 2px solid #9E4F98;
+}
+
+.information label {
+  color: white;
+}
+
+.information select,
+.information input {
+  color: #9E4F98;
+  background-color: white;
+}
+
+.information label:disabled, 
+.information input:disabled, 
+.information select:disabled {
+    background-color: #9E4F98;
+    color: white;
+    border-color: white;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+
+.information label::placeholder, 
+.information input::placeholder, 
+.information select::placeholder {
+  color: white;
+  opacity: 0.8;
+}
+
+.information label:-ms-input-placeholder,
+.information input:-ms-input-placeholder, 
+.information select:-ms-input-placeholder {
+      color: white;
+}
+
+.information option:hover, 
+.information option:active,
+.information option:checked {
+  color: #9E4F98;
+  background-color: white;
+}
+
+.information table {
+  border-collapse: collapse;
+}
+
+.information td, .information th {
+  padding: 10px;
+  border-bottom: 1px solid white;
 }
 
 footer {
   background-color: white;
   color: #9E4F98;
   position: fixed;
-  bottom: 10px;
+  padding: 20px;
+  bottom: 0px;
   width: 100%;
 }
 
-.logo {
+footer .logo {
   width: 50px;
   height: 50px;
 }
-
