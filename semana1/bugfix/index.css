@@ -122,6 +122,13 @@ table img {
     height: 100px;
 }
 
+.comprar-button:active {
+  color: white;
+}
+
+.comprar-button:hover {
+  background-color: #d8b724;
+}
 
 #back-button {
     background-color: white;
