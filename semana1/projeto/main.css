@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+a:link {
+    text-decoration: inherit;
+    cursor: pointer;
+}
+
+a:visited {
+    text-decoration: inherit;
+    cursor: pointer;
+}
+
+header {
+  background-color: #49416D;
+  color: #FFFFFF;
+  padding: 20px;
+  text-align: center;
+}
+
+header > h1{
+  margin-top: 0;
+}
+
+nav > a {
+  color: #EDEBD7;
+  padding: 10px;
+  font-style: italic;
+}
+
+main {
+  background-color: #FB3640;
+  color: #EDEBD7;
+  text-align: center;
+}
+
+main:first-child {
+  margin-top: 0;
+}
+
+main > section {
+  margin: 25px;
+}
+
+.about-me {
+  margin-top: 0;
+}
+
+main h3, main h2 {
+  color: #FFFFFF;
+  font-style: italic;
+}
+
+.project {
+  display: inline-block;
+  margin: 20px;
+}
+
+.project > p {
+
+}
+
+main table {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+main td, main th {
+  border-bottom: 2px solid #FFFFFF;
+}
+
+.footer {
+  background-color: black;
+}
