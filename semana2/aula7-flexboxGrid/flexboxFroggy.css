@@ -1,0 +1,122 @@
+#exercício1 {
+  display: flex;
+  justify-content: flex-end;
+}
+#exercício2 {
+  display: flex;
+  justify-content: center;
+}
+#exercício3 {
+  display: flex;
+  justify-content: space-around;
+}
+#exercício4 {
+  display: flex;
+  justify-content: space-between;
+}
+#exercício5 {
+  display: flex;
+  align-items: flex-end;
+}
+#exercício6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#exercício7 {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+#exercício8 {
+  display: flex;
+  flex-direction: row-reverse;
+}
+#exercício9 {
+  display: flex;
+  flex-direction: column;
+}
+#exercício10 {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+#exercício11 {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+#exercício12 {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+}
+#exercício13 {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  justify-content: center
+}
+#exercício14{
+  display: flex;
+}
+#exercício14.yellow {
+  order: 2
+}
+#exercício15 {
+  display: flex;
+}
+#exercício15.red {
+  order: -1;
+}
+#exercício16 {
+  display: flex;
+  align-items: flex-start;
+}
+#exercício16.yellow {
+  align-self: flex-end;
+}
+#exercício17 {
+  display: flex;
+  align-items: flex-start;
+}
+#exercício17.yellow {
+  order: 2;
+  align-self: flex-end;
+}
+#exercício18 {
+  display: flex;
+  flex-wrap: wrap;
+}
+#exercício19 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+#exercício20 {
+  display: flex;
+  flex-flow: column wrap;
+}
+#exercício21 {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+#exercício22 {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-end;
+}
+#exercício23 {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  align-content: center;
+}
+#exercício24 {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap-reverse;
+  align-content: space-between;
+  justify-content: center;
+}
