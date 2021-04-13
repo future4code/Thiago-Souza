@@ -1,0 +1,262 @@
+#exercício1#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício1#water {
+  grid-column-start: 3;
+}
+
+#exercício2#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício2#poison {
+  grid-column-start: 5;
+}
+
+#exercício3#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício3#water {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+#exercício4#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício4#water {
+  grid-column-start: 5;
+  grid-column-end: 2;
+}
+
+#exercício5#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício5#water {
+  grid-column-start: 1;
+  grid-column-end: 5;
+}
+
+#exercício6#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício6#poison {
+  grid-column-start: -3
+}
+
+#exercício7#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício7#water {
+  grid-column-start: 2;
+  grid-column-end: span 2;
+}
+
+#exercício8#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício8#water {
+  grid-column-start: 1;
+  grid-column-end: span 5;
+}
+
+#exercício9#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício9#water {
+  grid-column-start: span 3;
+  grid-column-end: 6;
+}
+
+#exercício10#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício10#water {
+  grid-column: 4 / 6;
+}
+
+#exercício11#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício11#water {
+  grid-column: 2 / span 3;
+}
+
+#exercício12#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício12#water {
+  grid-row-start: 3;
+}
+
+#exercício13#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício13#water {
+  grid-row: 3 / span 3;
+}
+
+#exercício14#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício14#poison {
+  grid-column: 2;
+  grid-row: 5;
+}
+
+#exercício15#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício15#water {
+  grid-column: 2 / span 4;
+  grid-row: 1 / span 5;
+}
+
+#exercício16#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício16#water {
+  grid-area: 1 / 2 / span 3 / span 4;
+}
+
+#exercício17#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício17#water-1 {
+  grid-area: 1 / 4 / 6 / 5;
+}
+#exercício17#water-2 {
+  grid-area: 2 / 3 / span 3 / span 3;
+}
+
+#exercício18#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+#exercício18.water {
+  order: 0;
+}
+#exercício18#poison {
+  order: 4;
+}
+
+#exercício19#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício19.water {
+  order: 0;
+}
+#exercício19.poison {
+  order: -1;
+}
+
+#exercício20#garden {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício20#water {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#exercício21#garden {
+  display: grid;
+  grid-template-columns: repeat(8, 12.5%);
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício21#water {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#exercício22#garden {
+  display: grid;
+  grid-template-columns: 100px 3em 40%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+#exercício23#garden {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+#exercício24#garden {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 1fr 50px;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+#exercício24#water {
+  grid-area: 1 / 1 / 6 / 2;
+}
+#exercício24#poison {
+  grid-area: 1 / 5 / 6 / 6;
+}
+
+#exercício25#garden {
+  display: grid;
+  grid-template-columns: 75px 3fr 2fr;
+  grid-template-rows: 100%;
+}
+
+#exercício26#garden {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 50px repeat(3, 0fr) 1fr;
+}
+#exercício26#water {
+  grid-column: 1 / 6;
+  grid-row: 5 / 6;
+}
+
+#exercício27#garden {
+  display: grid;
+  grid-template: 60% 40% / 200px;
+}
+#exercício27#water {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#exercício28#garden {
+  display: grid;
+  grid-template: 1fr 50px / 20% 80%
+}
