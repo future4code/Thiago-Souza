@@ -1,0 +1,116 @@
+a:link {
+  text-decoration: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+a:visited {
+  text-decoration: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+body {
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: 7.5% 1fr 10%;
+  font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ef843a;
+  color: white;
+}
+
+#search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#search > input {
+  margin: 10px;
+  border: 8px;
+  padding: 8px;
+  border-radius: 16px;
+}
+
+#search > input:focus {
+  outline: 0;
+}
+
+#search > svg {
+  width: 20px;
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-video {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 20px;
+  grid-gap: 20px;
+  min-height: calc(100% - 40px) ;
+  min-width: calc(100% - 40px) ;
+}
+
+.grid-video article.video {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.grid-video article.video img {
+  width: 100%;
+  min-height: 50%;
+}
+
+.video-player {
+  width: 90%;
+  text-align: center;
+}
+
+.video-player video {
+  width: 100%;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ef843a;
+  color: white;
+  height: 100%;
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
+}
+
+footer .svgs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer svg {
+  cursor: pointer;
+  height: 40px;
+  margin: 14px;
+}
