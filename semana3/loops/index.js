@@ -74,7 +74,7 @@ console.log( "Vamos Jogar!" );
     Number( prompt( "Digite o número que que você está pensando" ) );
 */
 
-const numeroCerto = Math.floor( Math.random() * 101 );
+const numeroCerto = Math.floor( Math.random() * 100 ) + 1;
 let tentativa;
 let numeroTentativas = 0;
 
