@@ -1,27 +1,3 @@
-function gerarIdUnico() {
-
-  let indice = 0;
-  const tamanhoArray = 10;
-  const array = new Uint32Array( tamanhoArray );
-
-  window.crypto.getRandomValues( array );
-
-  while( document.getElementById( array[ indice ] ) ) {
-
-    indice++;
-    if( indice >= tamanhoArray ) {
-
-      indice = 0;
-      window.crypto.getRandomValues( array );
-
-    }
-
-  }
-
-  return array[ indice ];
-
-}
-
 function criarTarefa() {
 
   const diaSelecionado = document.getElementById( "dias-semana" );
@@ -32,9 +8,7 @@ function criarTarefa() {
 
   if( tarefa.value !== "" ) {
 
-    const _id = gerarIdUnico();
-    dia.innerHTML +=
-      `<p id="${ _id }" onclick="riscarTarefa(${ _id })">- ${ tarefa.value }</p>`;
+    dia.innerHTML += `<p onclick="riscarTarefa(this)">- ${ tarefa.value }</p>`;
     tarefa.value = "";
     horario.value = 0;
     diaSelecionado.value = "domingo";
@@ -43,9 +17,7 @@ function criarTarefa() {
 
 }
 
-function riscarTarefa( id ) {
-
-  const tarefa = document.getElementById( id );
+function riscarTarefa( tarefa ) {
 
   if( tarefa && !tarefa.className.match( /riscado/ ) )
     if( tarefa.className )
