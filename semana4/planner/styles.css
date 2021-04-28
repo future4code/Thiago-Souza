@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  min-height: 10vh;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  padding: clamp(12px, 5vw, 24px);
+}
+
+header  > form {
+  grid-column: 1 / span 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+label, input, select, button {
+  margin: clamp(6px, 1%, 12px);
+}
+
+.start {
+  justify-self: start;
+}
+
+.end {
+  justify-self: end;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+div.semana {
+  border: 1px dotted rgb(53, 53, 53);
+  min-width: 250px;
+  padding: 5px;
+}
+
+h3, h4, p {
+  text-align: center;
+}
+
+p.riscado {
+  text-decoration: line-through;
+}
