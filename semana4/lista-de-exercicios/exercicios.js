@@ -1,4 +1,4 @@
-/*eslint-disable @typescript/non-used*/
+/*eslint-disable @typescript-eslint/no-unused-vars, prefer-destructuring*/
 //Exercício 1
 
 function inverteArray( array ) {
@@ -82,15 +82,15 @@ function retornaNNumerosPares( limite ) {
 
 //Exercício 8
 
-function checaTriangulo( a, b, c ) {
+function checaTriangulo( ladoA, ladoB, ladoC ) {
 
-  if( a === b  )
-    if( a === c )
+  if( ladoA === ladoB  )
+    if( ladoA === ladoC )
       return "Equilátero";
     else
       return "Isósceles";
 
-  if( a === c || b === c )
+  if( ladoA === ladoC || ladoB === ladoC )
     return "Isósceles";
 
   return "Escaleno";
@@ -211,6 +211,7 @@ function imprimeChamada() {
   for( index = 0; index < filme.atores.length - 1; index++ )
     atores += `${ filme.atores[ index ]  }, `;
   atores += filme.atores[ index ];
+  /*eslint-disable-next-line max-len*/
   return `Venha assistir ao filme ${ filme.nome }, de ${ filme.ano }, dirigido por ${ filme.diretor } e estrelado por ${ atores }.`;
 
 }
@@ -346,7 +347,8 @@ const pessoas = [
 
 function retornaPessoasAutorizadas() {
 
-  return pessoas.filter( ( pessoa ) => pessoa.altura > 1.5 && pessoa.idade > 14 && pessoa.idade < 60 );
+  return pessoas.filter( ( pessoa ) => pessoa.altura > 1.5 &&
+    pessoa.idade > 14 && pessoa.idade < 60 );
 
 }
 
@@ -354,7 +356,8 @@ function retornaPessoasAutorizadas() {
 
 function retornaPessoasNaoAutorizadas() {
 
-  return pessoas.filter( ( pessoa ) => !( pessoa.altura > 1.5 && pessoa.idade > 14 && pessoa.idade < 60 ) );
+  return pessoas.filter( ( pessoa ) => !( pessoa.altura > 1.5 &&
+    pessoa.idade > 14 && pessoa.idade < 60 ) );
 
 }
 
@@ -383,6 +386,8 @@ const consultasNome = [
 
 function ordenaPorNome() {
 
+  return consultasNome.sort( ( pessoaA, pessoaB ) => pessoaA.nome > pessoaB.nome );
+
 }
 
 //Exercício 19, letra B
@@ -407,6 +412,26 @@ const consultasData = [
 ];
 
 function ordenaPorData() {
+
+  const result = consultasData.sort( ( pessoaA, pessoaB ) => {
+
+    const [
+      diaA,
+      mesA,
+      anoA
+    ] = pessoaA.dataDaConsulta.split( "/" );
+    const [
+      diaB,
+      mesB,
+      anoB
+    ] = pessoaB.dataDaConsulta.split( "/" );
+
+    return new Date( anoA, mesA - 1, diaA ).getTime() -
+           new Date( anoB, mesB - 1, diaB ).getTime();
+
+  } );
+
+  return result;
 
 }
 
