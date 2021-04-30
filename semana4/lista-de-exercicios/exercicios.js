@@ -205,7 +205,14 @@ function filmeFavorito() {
 
 function imprimeChamada() {
 
-  //Implemente sua lógica aqui
+  const filme = filmeFavorito();
+  let atores = "";
+  let index;
+  for( index = 0; index < filme.atores.length - 1; index++ )
+    atores += `${ filme.atores[ index ]  }, `;
+  atores += filme.atores[ index ];
+  return `Venha assistir ao filme ${ filme.nome }, de ${ filme.ano }, dirigido por ${ filme.diretor } e estrelado por ${ atores }.`;
+
 }
 
 //Exercício 14
