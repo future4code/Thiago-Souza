@@ -264,14 +264,16 @@ const arrayDePessoas = [
 
 function maioresDe18( arrayDePessoas ) {
 
-  //Implemente sua lógica aqui
+  return arrayDePessoas.filter( ( pessoa ) => pessoa.idade >= 18 );
+
 }
 
 //Exercício 16, letra B
 
 function menoresDe18( arrayDePessoas ) {
 
-  //Implemente sua lógica aqui
+  return arrayDePessoas.filter( ( pessoa ) => pessoa.idade <= 18 );
+
 }
 
 //Exercício 17, letra A
