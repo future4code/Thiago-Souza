@@ -10,7 +10,15 @@ function inverteArray( array ) {
 
 function retornaNumerosParesElevadosADois( array ) {
 
-  //Implemente sua lógica aqui
+  return array.reduce( ( result, current ) => {
+
+    if( current % 2 === 0 )
+      result.push( current ** 2 );
+
+    return result;
+
+  }, [] );
+
 }
 
 //Exercício 3
