@@ -346,14 +346,16 @@ const pessoas = [
 
 function retornaPessoasAutorizadas() {
 
-  //Implemente sua lógica aqui
+  return pessoas.filter( ( pessoa ) => pessoa.altura > 1.5 && pessoa.idade > 14 && pessoa.idade < 60 );
+
 }
 
 //Exercício 18, letra B
 
 function retornaPessoasNaoAutorizadas() {
 
-  //Implemente sua lógica aqui
+  return pessoas.filter( ( pessoa ) => !( pessoa.altura > 1.5 && pessoa.idade > 14 && pessoa.idade < 60 ) );
+
 }
 
 //Exercício 19
