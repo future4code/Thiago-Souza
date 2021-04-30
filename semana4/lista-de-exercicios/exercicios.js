@@ -33,7 +33,15 @@ function retornaNumerosPares( array ) {
 
 function retornaMaiorNumero( array ) {
 
-  //Implemente sua lógica aqui
+  return array.reduce( ( maior, current ) => {
+
+    if( current > maior )
+      return current;
+
+    return maior;
+
+  } );
+
 }
 
 //Exercício 5
