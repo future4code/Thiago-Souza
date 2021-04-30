@@ -1,3 +1,4 @@
+/*eslint-disable @typescript/non-used*/
 //Exercício 1
 
 function inverteArray( array ) {
@@ -121,7 +122,45 @@ function comparaDoisNumeros( num1, num2 ) {
 
 function segundoMaiorEMenor( array ) {
 
-  //Implemente sua lógica aqui
+  let [ maior ] = array;
+  let [ menor ] = array;
+
+  const result = array.reduce( ( segundos, current ) => {
+
+    if( segundos[ 0 ] === segundos[ 1 ] ) {
+
+      if( menor < current )
+        segundos[ 1 ] = current;
+
+      if( maior > current )
+        segundos[ 0 ] = current;
+
+    } else if( current > maior ) {
+
+      segundos[ 0 ] = maior;
+      maior = current;
+
+    } else if( current > segundos[ 0 ] ) {
+
+      segundos[ 0 ] = current;
+
+    } else if( current < menor ) {
+
+      segundos[ 1 ] = menor;
+      menor = current;
+
+    } else if( current < segundos[ 1 ] ) {
+
+      segundos[ 1 ] = current;
+
+    }
+
+    return segundos;
+
+  }, [ maior, menor ] );
+
+  return result;
+
 }
 
 //Exercício 11
