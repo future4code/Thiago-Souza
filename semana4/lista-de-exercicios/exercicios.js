@@ -280,21 +280,31 @@ function menoresDe18( arrayDePessoas ) {
 
 function multiplicaArrayPor2( array ) {
 
-  //Implemente sua lógica aqui
+  return array.map( ( valor ) => valor * 2 );
+
 }
 
 //Exercício 17, letra B
 
 function multiplicaArrayPor2S( array ) {
 
-  //Implemente sua lógica aqui
+  return array.map( ( valor ) => String( valor * 2 ) );
+
 }
 
 //Exercício 17, letra C
 
 function verificaParidade( array ) {
 
-  //Implemente sua lógica aqui
+  return array.map( ( valor ) => {
+
+    if( valor % 2 === 0 )
+      return `${ valor } é par`;
+
+    return `${ valor } é ímpar`;
+
+  } );
+
 }
 
 //Exercício 18
