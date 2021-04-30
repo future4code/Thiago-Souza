@@ -167,7 +167,20 @@ function segundoMaiorEMenor( array ) {
 
 function ordenaArray( array ) {
 
-  //Implemente sua lógica aqui
+  const result = [ ...array ];
+
+  for( let index = 0; index < result.length; index++ )
+    for( let current = index; current >= 0; current-- )
+      if( result[ current ] < result[ current - 1 ] ) {
+
+        const swap = result[ current ];
+        result[ current ] = result[ current - 1 ];
+        result[ current - 1 ] = swap;
+
+      }
+
+  return result;
+
 }
 
 //Exercício 12
