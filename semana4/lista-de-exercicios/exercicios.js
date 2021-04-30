@@ -25,7 +25,8 @@ function retornaNumerosParesElevadosADois( array ) {
 
 function retornaNumerosPares( array ) {
 
-  //Implemente sua lógica aqui
+  return array.filter( ( element ) => element % 2 === 0 );
+
 }
 
 //Exercício 4
