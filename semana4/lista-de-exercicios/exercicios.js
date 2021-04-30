@@ -100,7 +100,21 @@ function checaTriangulo( a, b, c ) {
 
 function comparaDoisNumeros( num1, num2 ) {
 
+  let maior, menor;
+
+  if( num1 > num2 )
+    [ maior, menor ] = [ num1, num2 ];
+  else
+    [ maior, menor ] = [ num2, num1 ];
+
+  return {
+    "maiorNumero":            maior,
+    "maiorDivisivelporMenor": maior % menor === 0,
+    "diferenca":              maior - menor
+  };
+
   //Implemente sua lógica aqui
+
 }
 
 //Exercício 10
