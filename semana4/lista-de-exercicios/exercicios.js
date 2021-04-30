@@ -460,5 +460,13 @@ const contas = [
 
 function atualizaSaldo() {
 
-  //Implemente sua lógica aqui
+  return contas.map( ( cliente ) => {
+
+    cliente.saldoTotal -= cliente.compras
+      .reduce( ( total, compra ) =>  total += compra, 0 );
+
+    return cliente;
+
+  } );
+
 }
