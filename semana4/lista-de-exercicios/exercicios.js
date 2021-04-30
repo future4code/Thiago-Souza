@@ -83,7 +83,17 @@ function retornaNNumerosPares( limite ) {
 
 function checaTriangulo( a, b, c ) {
 
-  //Implemente sua lógica aqui
+  if( a === b  )
+    if( a === c )
+      return "Equilátero";
+    else
+      return "Isósceles";
+
+  if( a === c || b === c )
+    return "Isósceles";
+
+  return "Escaleno";
+
 }
 
 //Exercício 9
