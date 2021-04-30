@@ -232,7 +232,11 @@ function criaRetangulo( lado1, lado2 ) {
 
 function anonimizaPessoa( pessoa ) {
 
-  //Implemente sua lógica aqui
+  return {
+    ...pessoa,
+    "nome": "ANÔNIMO"
+  };
+
 }
 
 //Exercício 16
