@@ -68,9 +68,15 @@ function retornaExpressoesBooleanas() {
 
 //Exercício 7
 
-function retornaNNumerosPares( n ) {
+function retornaNNumerosPares( limite ) {
 
-  //Implemente sua lógica aqui
+  const pares = [];
+
+  for( let indice = 0; indice < limite; indice++ )
+    pares.push( indice * 2 );
+
+  return pares;
+
 }
 
 //Exercício 8
