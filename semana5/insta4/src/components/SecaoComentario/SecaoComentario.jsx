@@ -28,10 +28,11 @@ export class SecaoComentario extends Component {
 
   aoEnviar = () => {
 
+    const { "state": { comentario } } = this;
     /*eslint-disable-next-line no-console*/
-    console.log( `Comentário enviado: ${ this.state.comentario }` );
+    console.log( `Comentário enviado: ${ comentario }` );
     this.setState( { "comentario": "" } );
-    this.props.aoEnviar();
+    this.props.aoEnviar( comentario );
 
   }
 
