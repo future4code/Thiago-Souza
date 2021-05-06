@@ -1,4 +1,5 @@
 {
+  "root": true,
   "env": {
     "browser": true,
     "es2020": true,
@@ -221,7 +222,7 @@
     }],
     "react/jsx-curly-spacing": ["warn", { "when": "always", "children": true}],
     "react/jsx-equals-spacing": ["warn", "always"],
-    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
+    "react/jsx-filename-extension": ["error", { "extensions": [".tsx", ".jsx"] }],
     "react/jsx-first-prop-new-line": ["warn", "multiline"],
     "react/jsx-fragments": ["warn", "syntax"],
     "react/jsx-indent": ["warn", 2, { 
@@ -250,5 +251,13 @@
     }],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error"
-  }
+   },
+   "overrides": [
+     {
+       "files": ["*.jsx"],
+       "rules": {
+         "@typescript-eslint/explicit-module-boundary-types": "off"
+       }
+     }
+   ]
 }
