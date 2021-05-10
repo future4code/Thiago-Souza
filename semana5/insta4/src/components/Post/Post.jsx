@@ -45,6 +45,10 @@ const PostPhoto = styled.img`
   width: 100%;
 `;
 
+const ComentarioText = styled.p`
+  margin-left: 10px;
+`;
+
 class Post extends React.Component {
 
   state = {
@@ -53,7 +57,8 @@ class Post extends React.Component {
     "comentando":        false,
     "numeroComentarios": 0,
     "postSalvo":         false,
-    "compartilhando":    false
+    "compartilhando":    false,
+    "comentarios":       []
   }
 
   onClickCurtida = () => {
@@ -91,11 +96,12 @@ class Post extends React.Component {
 
   }
 
-  aoEnviarComentario = () => {
+  aoEnviarComentario = ( comentario ) => {
 
     this.setState( {
       "comentando":        false,
-      "numeroComentarios": this.state.numeroComentarios + 1
+      "numeroComentarios": this.state.numeroComentarios + 1,
+      "comentarios":       [ ...this.state.comentarios, comentario ]
     } );
 
   }
@@ -114,11 +120,17 @@ class Post extends React.Component {
     const iconeSalvar = this.state
       .postSalvo ? iconeBookmarkrPreto : iconeBookmarkrBranco;
 
+    const Compartilhar = this.state.compartilhando &&
+      < SecaoCompartilhar aoCompartilhar = { this.aoCompartilhar } />;
+
     const Comentario = this.state.comentando &&
       < SecaoComentario aoEnviar = { this.aoEnviarComentario } />;
 
-    const Compartilhar = this.state.compartilhando &&
-      < SecaoCompartilhar aoCompartilhar = { this.aoCompartilhar } />;
+    const Comentarios = this.state.comentarios.map( ( comentario ) => (
+      < ComentarioText key = { comentario } >
+        { comentario }
+      </ ComentarioText >
+    ) );
 
     return (
       < PostContainer >
@@ -152,8 +164,9 @@ class Post extends React.Component {
             valorContador = { this.state.numeroComentarios }
           />
         </ PostFooter >
-        { Comentario }
         { Compartilhar }
+        { Comentario }
+        { Comentarios }
       </ PostContainer >
     );
 
