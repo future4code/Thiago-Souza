@@ -251,13 +251,13 @@
     }],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error"
-   },
-   "overrides": [
-     {
-       "files": ["*.jsx"],
-       "rules": {
-         "@typescript-eslint/explicit-module-boundary-types": "off"
-       }
-     }
-   ]
+  },
+  "overrides": [
+    {
+      "files": ["*.jsx"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    }
+  ]
 }
