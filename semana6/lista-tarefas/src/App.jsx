@@ -61,13 +61,14 @@ class App extends React.Component {
 
   componentDidUpdate() {
 
-    localStorage.setItem( "tarefas", JSON.stringify( this.state.tarefas ) );
+    localStorage.setItem( "tarefas", JSON.stringify( this.state.tarefas ) || [] );
 
   }
 
   componentDidMount() {
 
-    this.setState( { "tarefas": JSON.parse( localStorage.getItem( "tarefas" ) ) } );
+    const tarefas = JSON.parse( localStorage.getItem( "tarefas" ) ) || [];
+    this.setState( { tarefas } );
 
   }
 
@@ -189,8 +190,10 @@ class App extends React.Component {
   /*eslint-disable-next-line max-lines-per-function*/
   render() {
 
+    const regex = new RegExp( this.state.inputFiltro, "i" );
+
     const tarefas = this.state.tarefas
-      .filter( ( tarefa ) => tarefa.texto.match( this.state.inputFiltro ) )
+      .filter( ( tarefa ) => tarefa.texto.match( regex ) )
       .sort( this.ordenar )
       .reduce( ( tarefas, tarefa ) => {
 
