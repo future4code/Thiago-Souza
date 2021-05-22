@@ -17,6 +17,14 @@ export function criarPlaylist(name) {
   return axios.post(BASE_URL, { name }, { headers });
 }
 
+export function adicionarMúsica(playlistID, música) {
+  return axios.post(`${BASE_URL}/${playlistID}/tracks`, música, { headers });
+}
+
 export function deletarPlaylist(id) {
   return axios.delete(`${BASE_URL}/${id}`, { headers });
+}
+
+export function removerMúsica(playlistID, músicaID) {
+  return axios.delete(`${BASE_URL}/${playlistID}/tracks/${músicaID}`, { headers });
 }

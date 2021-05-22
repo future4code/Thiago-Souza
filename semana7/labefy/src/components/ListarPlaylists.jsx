@@ -2,8 +2,32 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { deletarPlaylist, listarPlaylists } from "../api";
 import VerPlaylist from "./VerPlaylist";
+import { MainStyled } from "./styled";
 
-const Main = styled.main``;
+const Main = styled(MainStyled)`
+  width: 100%;
+
+  > h3, h1 {
+    text-align: center;
+    width: 100%;
+  }
+`;
+
+const Playlist = styled.article`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  
+  p {
+    font-size: 24px;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin: 16px;
+  }
+`;
 
 class ListarPlaylists extends Component {
   state = {
@@ -74,17 +98,18 @@ class ListarPlaylists extends Component {
 
     return (
       <Main>
+        <h1>Playlists</h1>
         {this.state.carregando && <h3>Carregando As PLaylists</h3>}
-        <section>
+        <section style={{ width: "100%" }}>
           {this.state.playlists.map((playlist) => (
-            <article key={playlist.id}>
+            <Playlist key={playlist.id}>
               <p onClick={() => this.verPlaylist(playlist.id, playlist.name)}>
                 {playlist.name}
               </p>
               <button onClick={() => this.removerPlaylist(playlist.id)}>
                 Remover
               </button>
-            </article>
+            </Playlist>
           ))}
         </section>
       </Main>

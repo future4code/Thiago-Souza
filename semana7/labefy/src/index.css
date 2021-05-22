@@ -1,3 +1,7 @@
+* {
+  outline: none;
+}
+
 body {
   box-sizing: border-box;
   margin: 0;
@@ -11,4 +15,29 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button {
+  cursor: pointer;
+  transition: transform 200ms;
+  margin: 16px;
+  background-color: #ef843a;
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button:active {
+  transform: translateY(4px);
+}
+
+input {
+  border-radius: 16px;
+  border: 2px solid #ef843a;
+  margin: 16px;
+  font-size: 16px;
+  padding: 16px;
 }

@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { criarPlaylist, listarPlaylists } from "../api";
+import { MainStyled } from "./styled";
 
-const Main = styled.main``;
+const Main = styled(MainStyled)`
+  > h3 {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+`;
 
 class CriarPlaylist extends Component {
   state = {
@@ -29,6 +36,9 @@ class CriarPlaylist extends Component {
     const nome = this.state.nome.toLowerCase();
     if (this.state.playlists.find((playlist) => playlist.name === nome))
       return alert("Nome da playlist já existe");
+
+    if (!this.state.nome)
+      return alert("A playlist precisa de um nome");
 
     try {
       this.setState({ criando: true });
