@@ -1,10 +1,6 @@
-import axios from "axios";
 import React, { Component } from "react";
-
-const BASE_URL
-  = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users";
-
-const headers = { Authorization: "thiago-felipe-paiva" };
+import { pegarUsuario, alterarUsuario } from "../api";
+import { Button, Form, Main } from "../styles/basics";
 
 class Usuario extends Component {
   state = {
@@ -22,19 +18,18 @@ class Usuario extends Component {
     this.pegarUsuario();
   }
 
-  pegarUsuario = () => {
+  pegarUsuario = async () => {
     const id = this.props.id;
-    axios.get(`${BASE_URL}/${id}`, { headers })
-      .then((resposta) => {
-        this.setState({
-          usuario:    resposta.data,
-          inputNome:  resposta.data.name,
-          inputEmail: resposta.data.email
-        });
-      })
-      .catch((error) => {
-        alert(`Erro ao pegar o usuário\nErro: ${error}`);
+    try {
+      const usuario = (await pegarUsuario(id)).data;
+      this.setState({
+        usuario,
+        inputNome:  usuario.name,
+        inputEmail: usuario.email
       });
+    } catch (error) {
+      alert(`Erro ao pegar o usuário\nErro: ${error}`);
+    }
   }
 
   removerUsuario = () => {
@@ -45,22 +40,20 @@ class Usuario extends Component {
     this.setState({ [input]: evento.target.value });
   }
 
-  alterarUsuario = () => {
-    const id = this.props.id;
+  alterarUsuario = async () => {
     const usuario = {
       name:  this.state.inputNome,
       email: this.state.inputEmail
     };
 
-    axios.put(`${BASE_URL}/${id}`, usuario, { headers })
-      .then(() => {
-        this.pegarUsuario();
-        this.setState({ editar: false });
-        alert("Informações do usuário foram alterdas com sucesso.");
-      })
-      .catch((error) => {
-        alert(`Erro ao editar o usuário\nErro: ${error}`);
-      });
+    try {
+      await alterarUsuario(this.props.id, usuario);
+      this.pegarUsuario();
+      this.setState({ editar: false });
+      alert("Informações do usuário foram alterdas com sucesso.");
+    } catch (error) {
+      alert(`Erro ao editar o usuário\nErro: ${error}`);
+    }
   }
 
   render() {
@@ -68,7 +61,7 @@ class Usuario extends Component {
 
     if (this.state.editar)
       editar = (
-        <form>
+        <Form>
           <label htmlFor="nome">Nome Do Usuário</label>
           <input
             type="text"
@@ -89,32 +82,32 @@ class Usuario extends Component {
             id="email"
             required
           />
-          <button type="button" onClick={this.alterarUsuario}>
+          <Button type="Button" onClick={this.alterarUsuario}>
             Salvar
-          </button>
-        </form>
+          </Button>
+        </Form>
       );
 
     else
       editar = (
-        <button onClick={() => this.setState({ editar: true })}>
+        <Button center onClick={() => this.setState({ editar: true })}>
           Editar
-        </button>
+        </Button>
       );
 
     return (
-      <main>
+      <Main>
         <h1>Labenusers</h1>
-        <button onClick={this.props.mostrarLista}>
+        <Button onClick={this.props.mostrarLista}>
           Ir Para Lista De Usuários
-        </button>
+        </Button>
         <article>
           <p>{`Nome: ${this.state.usuario.name}`}</p>
           <p>{`Email: ${this.state.usuario.email}`}</p>
-          <button onClick={this.removerUsuario}>Remover</button>
+          <Button center onClick={this.removerUsuario}>Remover</Button>
           {editar}
         </article>
-      </main>
+      </Main>
     );
   }
 }

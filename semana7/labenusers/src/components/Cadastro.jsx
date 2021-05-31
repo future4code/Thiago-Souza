@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { criarUsuario } from "../api";
+import { Button, Form, Main } from "../styles/basics";
 
 class Cadastro extends Component {
   state = {
@@ -11,38 +12,32 @@ class Cadastro extends Component {
     this.setState({ [input]: evento.target.value });
   }
 
-  criarUsuario = () => {
+  criarUsuario = async () => {
     const usuario = {
       name:  this.state.nome,
       email: this.state.email
     };
 
-    const url
-      = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users";
-
-    const headers = { Authorization: "thiago-felipe-paiva" };
-
-    axios.post(url, usuario, { headers })
-      .then(() => {
-        alert("Usuário criado com sucesso");
-        this.setState({
-          nome:  "",
-          email: ""
-        });
-      })
-      .catch((error) => {
-        alert(`Erro ao criar o usuário\nErro: ${JSON.stringify(error, null, 2)}`);
+    try {
+      await criarUsuario(usuario);
+      alert("Usuário criado com sucesso");
+      this.setState({
+        nome:  "",
+        email: ""
       });
+    } catch (error) {
+      alert(`Erro ao criar o usuário\nErro: ${JSON.stringify(error, null, 2)}`);
+    }
   }
 
   render() {
     return (
-      <main>
+      <Main>
         <h1>Labenusers</h1>
-        <button onClick={this.props.irParaUsuarios}>
+        <Button onClick={this.props.irParaUsuarios}>
           Ir Para Lista De Usuários
-        </button>
-        <form>
+        </Button>
+        <Form>
           <label htmlFor="nome">Nome Do Usuário</label>
           <input
             type="text"
@@ -63,11 +58,11 @@ class Cadastro extends Component {
             id="email"
             required
           />
-          <button type="button" onClick={this.criarUsuario}>
+          <Button type="Button" onClick={this.criarUsuario}>
             Criar
-          </button>
-        </form>
-      </main>
+          </Button>
+        </Form>
+      </Main>
     );
   }
 }
