@@ -1,0 +1,21 @@
+@use "../utils" as *;
+@use "header";
+@use "profile";
+@use "loading";
+@use "buttons";
+@use "error";
+@use "matches";
+
+main {
+  width: 500px;
+  max-width: 90vw;
+  margin: 10px auto;
+  padding: $main-padding;
+  border: double $main-border transparent;
+  border-radius: 20px;
+  background-image: linear-gradient(white, white),  conic-gradient($green 0deg, $purple 45deg, $green 135deg, $purple 225deg, $green 315deg);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0px 0px 50px 2px rgba(0, 0, 0, 0.4);
+}
+

@@ -1,0 +1,89 @@
+@use "../utils" as *;
+
+$red: #ff4e25;
+$green: #00908d;
+$black: #6f6f6f;
+$white: #ffffff;
+
+main section.buttons {
+  margin-top: $section-margin;
+
+  &.for-match {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    place-content: space-between;
+  }
+
+  &.for-clean-matches {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  button {
+    padding: 10px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all 500ms;
+
+    svg { height: 40px; }
+
+    svg path { transition: all 500ms; }
+
+    &.reject {
+      box-shadow: 0px 0px 6px 1px #{$red + "44"};
+      background-color: #{$red + "15"};
+      border: 1px solid $red;
+
+      svg path { fill: $red; }
+    }
+
+    &.accept {
+      box-shadow: 0px 0px 6px 1px #{$green + "44"};
+      background-color: #{$green + "15"};
+      border: 1px solid $green;
+
+      svg {
+        position: relative;
+        top: 3px;
+      }
+
+      svg path { fill: $green; }
+    }
+
+    &.clean {
+      box-shadow: 0px 0px 6px 1px #{$purple + "44"};
+      background-color: #{$purple + "15"};
+      border: 1px solid $purple;
+
+      svg path { fill: $purple; }
+    }
+
+    &:hover {
+      transform: scale(1.2);
+
+      svg path { fill: $white; }
+
+      &.reject { background-color: $red; }
+
+      &.accept { background-color: $green; }
+
+      &.clean { background-color: $purple; }
+    }
+
+    &:active { transform: scale(0.8); }
+
+    &:disabled, &:hover:disabled, &:active:disabled {
+      box-shadow: 0px 0px 4px 0.5px $black;
+      background-color: $black;
+      transform: scale(0.8);
+      border: 1px solid $black;
+      cursor: not-allowed;
+
+      svg path { fill: $white; }
+    }
+  }
+}

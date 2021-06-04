@@ -1,0 +1,74 @@
+@use "sass:math";
+@use "utils" as *;
+
+$heart-size: 30px; 
+
+.heart {
+  display: inline-block;
+  position: relative;
+  height: $heart-size;
+  width: $heart-size;
+  animation: pulse45 1s ease infinite;
+
+  .principal {
+    position: absolute;
+    background-color: $purple;
+    height: $heart-size;
+    width: $heart-size;
+    border-bottom-right-radius: 25%;
+  }
+
+  .left, .right {
+    border-radius: 50%;
+    background-color: $green;
+    position: absolute;
+    height: $heart-size;
+    width: $heart-size;
+  }
+
+  .right {
+    right: math.div($heart-size, 2)
+  }
+
+  .left {
+    top: math.div(-$heart-size, 2);
+  }
+}
+
+.broken-heart {
+  height: 42.5px;
+  animation: pulseBroken 1s ease infinite;
+
+  path#right {
+    animation: moveRight 1s infinite;
+    fill: $purple;
+  }
+  path#left {
+    animation: moveLeft 1s infinite;
+    fill: $green;
+  }
+}
+
+@keyframes pulse45 {
+  0% { transform: scale(1) rotate(45deg); }
+  50% { transform: scale(1.5) rotate(45deg); }
+  100% { transform: scale(1) rotate(45deg); }
+}
+
+@keyframes pulseBroken {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.8); }
+  100% { transform: scale(1); }
+}
+
+@keyframes moveRight {
+ 0% {transform: translateX(0);}  
+ 50% {transform: translateX(10%);}  
+ 100% {transform: translateX(0);}  
+}
+
+@keyframes moveLeft {
+ 0% {transform: translateX(0);}  
+ 50% {transform: translateX(-10%);}  
+ 100% {transform: translateX(0);}  
+}

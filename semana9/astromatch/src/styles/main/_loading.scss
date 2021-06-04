@@ -1,0 +1,13 @@
+@use "../utils" as *;
+
+main section.loading {
+  height: $section-height;
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  p { text-align: center; }
+}

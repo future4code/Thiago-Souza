@@ -1,0 +1,40 @@
+@use "../utils" as *;
+
+main header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  position: relative;
+
+  &.end { justify-content: flex-end; }
+
+  &.start { justify-content: flex-start; }
+
+  h1.logo {
+    position: absolute;
+    text-align: center;
+    height: 36px;
+    width: 100%;
+    margin: 7px 0;
+  }
+
+  svg {
+    z-index: 2;
+    width: 40px;
+    cursor: pointer;
+    transition: transform 300ms, opacity 300ms;
+
+    &:hover { transform: scale(1.2); }
+  }
+
+  .green { 
+    color: $green; 
+    path { fill: $green; }
+  }
+
+  .purple { 
+    color: $purple; 
+    path { fill: $purple; } 
+  }
+}
+

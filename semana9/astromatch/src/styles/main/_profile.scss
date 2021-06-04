@@ -1,0 +1,40 @@
+@use "../utils" as *;
+
+main section.profile {
+  width: 100%;
+  height: $section-height;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden;
+  color: $white;
+  
+  img.background {
+    filter: blur(30px);
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  article.info {
+    padding: 24px 16px;
+    width: 100%;
+    background-image: linear-gradient(to top, rgb(0, 0, 0, 0.4), transparent);
+    h2, p {
+      margin: 4px 0;
+      font-weight: normal;
+    }
+    z-index: 2;
+  }
+}
