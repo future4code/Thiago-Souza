@@ -1,13 +1,16 @@
-@use "../utils" as *;
+@use "utils-section" as *;
 
 main section.loading {
-  height: $section-height;
-  width: 100%;
-  margin: 10px 0;
+  height: $height;
+  width: $width;
+  margin: $margin 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   
-  p { text-align: center; }
+  p { 
+    margin-top: 1.1em;
+    text-align: center; 
+  }
 }

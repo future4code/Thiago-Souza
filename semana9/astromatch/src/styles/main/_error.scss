@@ -1,9 +1,9 @@
-@use "../utils" as *;
+@use "utils-section" as *;
 
 main section.error {
-  height: $section-height;
-  width: 100%;
-  margin: 10px 0;
+  height: $height;
+  width: $width;
+  margin: $margin 0;
   display: flex;
   flex-direction: column;
   justify-content: center;

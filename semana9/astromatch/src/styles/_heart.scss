@@ -1,7 +1,8 @@
 @use "sass:math";
+@use "colors" as *;
 @use "utils" as *;
 
-$heart-size: 30px; 
+$heart-size: 2.5em; 
 
 .heart {
   display: inline-block;
@@ -27,16 +28,16 @@ $heart-size: 30px;
   }
 
   .right {
-    right: math.div($heart-size, 2)
+    right: math.div($heart-size, 2);
   }
 
   .left {
-    top: math.div(-$heart-size, 2);
+    bottom: math.div($heart-size, 2);
   }
 }
 
 .broken-heart {
-  height: 42.5px;
+  height: math.div($heart-size, math.cos(45deg));
   animation: pulseBroken 1s ease infinite;
 
   path#right {

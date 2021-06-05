@@ -1,13 +1,14 @@
-@use "../utils" as *;
+@use "utils-section" as *;
+@use 'sass:math';
 
 main section.matches {
-  height: $section-height;
-  width: 100%;
-  margin: 10px 0;
+  height: $height;
+  width: $width;
+  margin: $margin 0;
   overflow: auto;
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 10px;
+  grid-gap: $margin;
   align-items: center;
   align-content: start;
 
@@ -15,12 +16,13 @@ main section.matches {
     display: flex;
 
     div.img { 
-      width: 50px;
-      height: 50px;
+      $size: math.div(10em, 3);
+      width: $size;
+      height: $size;
       position: relative; 
       border-radius: 50%;
       overflow: hidden;
-      margin-right: 10px;
+      margin-right: $margin;
 
       img {
         left: 50%;

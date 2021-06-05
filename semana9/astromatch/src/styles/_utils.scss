@@ -1,7 +1,18 @@
-$green: #48a498;
-$purple: #9158a8;
-$white: #FFFFFF;
-$main-border: 2px;
-$main-padding: 15px;
-$section-margin: 10px;
-$section-height: min(466px, 90vw - #{2 * $main-padding + 2 * $main-border});
+@use 'sass:math';
+
+$min-screen: 300px;
+$max-screen: 600px;
+// Mixin based of https://codepen.io/MadeByMike/pen/vNrvdZ
+
+@function fluid($min-value, $max-value) {
+	$a: math.div( $max-value - $min-value, $max-screen - $min-screen );
+	$b: $min-value - $a * $min-screen; 
+
+	$sign: "+";
+	@if ($b < 0) {
+		$sign: "-";
+    $b: abs($b);
+  }
+	
+	@return clamp(#{$min-value}, calc(#{$a*100}vw #{$sign} #{$b}), #{$max-value});
+}

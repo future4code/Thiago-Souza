@@ -1,11 +1,12 @@
-@use "../utils" as *;
+@use "utils-section" as *;
+@use 'sass:math';
 
 main section.profile {
-  width: 100%;
-  height: $section-height;
-  margin: 10px 0;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  width: $width;
+  height: $height;
+  margin: $margin 0;
+  border-radius: $margin;
+  box-shadow: 0 0 1em 0.1em $light-gray;
   display: flex;
   align-items: flex-end;
   position: relative;
@@ -28,11 +29,11 @@ main section.profile {
   }
 
   article.info {
-    padding: 24px 16px;
+    padding: 1em;
     width: 100%;
     background-image: linear-gradient(to top, rgb(0, 0, 0, 0.4), transparent);
     h2, p {
-      margin: 4px 0;
+      margin: math.div(1em, 3) 0;
       font-weight: normal;
     }
     z-index: 2;
