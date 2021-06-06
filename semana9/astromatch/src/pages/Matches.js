@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { clearMatchesAndProfilesViewed, getMatches } from "../api";
 import ButtonsForCleanMatches from "../components/ButtonsForCleanMatches";
-import IconHome from "../components/Icons/Home";
+import Header from "../components/Header";
 import Loading from "../components/Loading";
-import Logo from "../components/Logo";
 import MatchesList from "../components/MatchesList";
 
 export default function Matches(props) {
@@ -12,13 +11,21 @@ export default function Matches(props) {
 
   async function getProfiles() {
     setLoading(true);
-    setMatches((await getMatches()).data.matches);
+    try {
+      setMatches((await getMatches()).data.matches);
+    } catch (error) {
+      alert(`Erro ao pegar os matches\nErro: ${JSON.stringify(error)}`);
+    }
     setLoading(false);
   }
 
   async function cleanMatches() {
     setLoading(true);
-    await clearMatchesAndProfilesViewed();
+    try {
+      await clearMatchesAndProfilesViewed();
+    } catch (error) {
+      alert(`Erro ao apagar os matches\nErro: ${JSON.stringify(error)}`);
+    }
     await getProfiles();
     setLoading(false);
   }
@@ -27,10 +34,7 @@ export default function Matches(props) {
 
   return (
     <main>
-      <header className="start">
-        <Logo/>
-        <IconHome className="green" onClick={props.gotToHome}/>
-      </header>
+      <Header type="matches" onClick={props.goToHome}/>
       {loading
         ? <Loading message="Procurando seus matches"/>
         : <MatchesList matches={matches}/> }

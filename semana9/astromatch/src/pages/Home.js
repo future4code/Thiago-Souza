@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { choosePerson, getProfileToChoose } from "../api";
-import IconMatches from "../components/Icons/Matches";
 import Loading from "../components/Loading";
-import Logo from "../components/Logo";
 import Profile from "../components/Profile";
 import ButtonsForMatch from "../components/ButtonsForMatch";
+import Header from "../components/Header";
 
 export default function Home(props) {
   const [ loading, setLoading ] = useState(true);
@@ -35,10 +34,7 @@ export default function Home(props) {
 
   return (
     <main>
-      <header className="end">
-        <Logo/>
-        <IconMatches className="purple" onClick={props.goToMatches}/>
-      </header>
+      <Header type="home" onClick={props.goToMatches}/>
       {loading
         ? <Loading message="Procurando o seu próximo match"/>
         : <Profile {...profile}/>}
