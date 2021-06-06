@@ -7,9 +7,9 @@ main header {
   position: relative;
   align-items: center;
 
-  &.end { justify-content: flex-end; }
+  &.home { justify-content: flex-end; }
 
-  &.start { justify-content: flex-start; }
+  &.matches { justify-content: flex-start; }
 
   h1.logo {
     top: 50%;
@@ -21,13 +21,19 @@ main header {
     width: 100%;
   }
 
-  svg {
+  button {
+    border: 0;
+    background-color: transparent;
     z-index: 2;
     height: fluid(25px, 50px);
     cursor: pointer;
     transition: transform 300ms, opacity 300ms;
 
-    &:hover { transform: scale(1.2); }
+    &:hover, &:focus { transform: scale(1.2); }
+  }
+
+  svg {
+    height: 100%;
   }
 
   .green { 

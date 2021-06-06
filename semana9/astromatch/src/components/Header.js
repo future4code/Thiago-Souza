@@ -9,7 +9,7 @@ export default function HeaderType(props) {
     : <IconMatches className="purple"/>;
 
   return (
-    <header className={props.type === "matches" ? "start" : "end"}>
+    <header className={props.type}>
       <Logo/>
       <button onClick={props.onClick}>
         {Icon}

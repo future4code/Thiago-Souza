@@ -61,7 +61,7 @@ main section.buttons {
       svg path { fill: $purple; }
     }
 
-    &:hover {
+    &:hover, &:focus {
       transform: scale(1.2);
 
       svg path { fill: $white; }
@@ -75,7 +75,7 @@ main section.buttons {
 
     &:active { transform: scale(0.8); }
 
-    &:disabled, &:hover:disabled, &:active:disabled {
+    &:disabled, &:focus:disabled, &:hover:disabled, &:active:disabled {
       box-shadow: $box-shadow $black;
       background-color: $black;
       transform: scale(0.8);

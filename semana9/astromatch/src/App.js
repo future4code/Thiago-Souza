@@ -15,7 +15,7 @@ function App() {
   }
 
   return page === "matches"
-    ? <Matches gotToHome={gotToHome}/>
+    ? <Matches goToHome={gotToHome}/>
     : <Home goToMatches={goToMatches}/>;
 }
 
