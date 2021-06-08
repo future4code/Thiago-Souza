@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function TripDetailsPage() {
+export default function App() {
   return (
     <main>
-      TripDetailsPage
+      App
     </main>
   );
 }

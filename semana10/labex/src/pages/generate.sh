@@ -1,4 +1,4 @@
-pages=("HomePage" "ListTripsPage" "ApplicationFormPage" "AdminHomePage" "TripDetailsPage" "CreateTripPage")
+pages=("HomePage" "ListTripsPage" "ApplicationFormPage" "LoginPage" "AdminHomePage" "TripDetailsPage" "CreateTripPage")
 defaultPage="App"
 
 for page in ${pages[@]} ;

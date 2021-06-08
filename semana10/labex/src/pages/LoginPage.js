@@ -1,21 +1,24 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { goToAdminPage, goToHomePage } from "../controls";
+import { goToAdminPage, goToHomePage, goToTripsCreate } from "../controls";
 
-export default function CreateTripPage() {
+export default function LoginPage() {
   const history = useHistory();
 
   return (
     <>
       <header>
-        <p>CreateTripPage</p>
+        <p>LoginPage</p>
       </header>
       <main className="home">
         <button onClick={() => goToHomePage(history)}>
-          Ir Para Página Inicial
+          Página Inicial
         </button>
         <button onClick={() => goToAdminPage(history)}>
-          Ir Para Página Do Adm
+          Ver Viagens No Sistema
+        </button>
+        <button onClick={() => goToTripsCreate(history)}>
+          Criar Viagem
         </button>
       </main>
     </>
