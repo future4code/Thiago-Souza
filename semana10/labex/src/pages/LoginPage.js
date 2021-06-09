@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { login } from "../api";
-import { goToHomePage, goToPage } from "../controls";
+import { goToHomePage, goToPage } from "../routes";
 import useHandleInput from "../hooks/useHandleInput";
 
 export default function LoginPage() {

@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { goToLogin, goToTripsList } from "../controls";
+import { goToLogin, goToTripsList } from "../routes";
 
 export default function HomePage() {
   const history = useHistory();

@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { goToHomePage, goToTripsCreate } from "../controls";
+import { goToHomePage, goToTripsCreate } from "../routes";
 import useProtectedPage from "../hooks/useProtectedPage";
 
 export default function AdminHomePage() {

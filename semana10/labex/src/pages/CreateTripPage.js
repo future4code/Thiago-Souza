@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { goToAdminPage, goToHomePage } from "../controls";
+import { goToAdminPage, goToHomePage } from "../routes";
 import useProtectedPage from "../hooks/useProtectedPage";
 
 export default function CreateTripPage() {
@@ -15,10 +15,10 @@ export default function CreateTripPage() {
       </header>
       <main className="home">
         <button onClick={() => goToHomePage(history)}>
-          Ir Para Página Inicial
+          Página Inicial
         </button>
         <button onClick={() => goToAdminPage(history)}>
-          Ir Para Página Do Adm
+          Página Do Adm
         </button>
       </main>
     </>
