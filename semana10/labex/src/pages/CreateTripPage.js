@@ -1,9 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { goToAdminPage, goToHomePage } from "../controls";
+import useProtectedPage from "../hooks/useProtectedPage";
 
 export default function CreateTripPage() {
   const history = useHistory();
+
+  useProtectedPage();
 
   return (
     <>

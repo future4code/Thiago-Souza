@@ -21,3 +21,25 @@ export function goToAdminPage(history) {
 export function goToTripsCreate(history) {
   history.push("/admin/trips/create");
 }
+
+export function goToPage(page, history) {
+  if (page === "HomePage")
+    return goToHomePage(history);
+
+  if (page === "TripsList")
+    return goToTripsList(history);
+
+  if (page === "TripsApplications")
+    return goToTripsApplications(history);
+
+  if (page === "Login")
+    return goToLogin(history);
+
+  if (page === "AdminPage")
+    return goToAdminPage(history);
+
+  if (page === "TripsCreate")
+    return goToTripsCreate(history);
+
+  return goToHomePage(history);
+}
