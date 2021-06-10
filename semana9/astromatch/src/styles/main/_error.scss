@@ -1,0 +1,13 @@
+@use "utils-section" as *;
+
+main section.error {
+  height: $height;
+  width: $width;
+  margin: $margin 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  p { text-align: center; }
+}

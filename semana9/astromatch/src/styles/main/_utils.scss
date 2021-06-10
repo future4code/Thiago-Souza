@@ -1,0 +1,10 @@
+@forward "../colors";
+@use "../utils" as *;
+
+$border: 2px;
+$padding: fluid(12px, 24px);
+$margin: fluid(15px, 30px);
+$width: $max-screen;
+$max-width: 90vw;
+$content-space: calc(2 * #{$padding} + 2 * #{$border});
+$border-radius: 1.5em;

@@ -1,0 +1,43 @@
+@use "utils-section" as *;
+@use 'sass:math';
+
+main section.matches {
+  height: $height;
+  width: $width;
+  margin: $margin 0;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: $margin;
+  align-items: center;
+  align-content: start;
+
+  article.match {
+    display: flex;
+
+    div.img { 
+      $size: math.div(10em, 3);
+      width: $size;
+      height: $size;
+      position: relative; 
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: $margin;
+
+      img {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        max-width: 100%;
+        max-height: 100%;
+
+        &.background {
+          height: 100%;
+          width: 100%;
+          filter: blur(2px);
+        }
+      }
+    }
+  }
+}

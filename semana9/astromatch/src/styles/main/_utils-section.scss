@@ -1,0 +1,9 @@
+@forward "../colors";
+@forward "../utils";
+@use "../utils" as *;
+@use "utils" as main;
+
+$width: 100%;
+$margin: 0.75em;
+$min-height: 2.5em;
+$height: calc( min(#{main.$width}, #{main.$max-width}) - #{main.$content-space} );

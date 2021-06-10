@@ -1,0 +1,49 @@
+@use "utils-section" as *;
+
+main header {
+  width: $width;
+  height: $min-height;
+  display: flex;
+  position: relative;
+  align-items: center;
+
+  &.home { justify-content: flex-end; }
+
+  &.matches { justify-content: flex-start; }
+
+  h1.logo {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+  }
+
+  button {
+    border: 0;
+    background-color: transparent;
+    z-index: 2;
+    height: fluid(25px, 50px);
+    cursor: pointer;
+    transition: transform 300ms, opacity 300ms;
+
+    &:hover, &:focus { transform: scale(1.2); }
+  }
+
+  svg {
+    height: 100%;
+  }
+
+  .green { 
+    color: $green; 
+    path { fill: $green; }
+  }
+
+  .purple { 
+    color: $purple; 
+    path { fill: $purple; } 
+  }
+}
+

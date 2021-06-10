@@ -1,0 +1,23 @@
+@use "sass:math";
+@use "utils" as *;
+@use "header";
+@use "profile";
+@use "loading";
+@use "buttons";
+@use "error";
+@use "matches";
+
+main {
+  font-size: 1em;
+  width: $width;
+  max-width: $max-width;
+  margin: $margin auto;
+  padding: $padding;
+  border: double $border transparent;
+  border-radius: $border-radius;
+  background-image: linear-gradient(white, white),  conic-gradient($green 0deg, $purple 45deg, $green 135deg, $purple 225deg, $green 315deg);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 0 #{2 * $border-radius} #{math.div($border-radius, 10)} $light-gray;
+}
+
