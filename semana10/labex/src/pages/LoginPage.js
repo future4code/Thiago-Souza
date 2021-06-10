@@ -2,27 +2,22 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { login } from "../api";
 import { goToHomePage, goToPage } from "../routes";
-import useHandleInput from "../hooks/useHandleInput";
+import useForm from "../hooks/useForm";
 
 export default function LoginPage() {
   const history = useHistory();
-  const [ email, onChangeEmail ] = useHandleInput();
-  const [ password, onChangePassword ] = useHandleInput();
+  const { form, onChange } = useForm({
+    email:    "",
+    password: ""
+  });
 
-  async function goToAdim(page) {
-    if (!email)
-      return alert("Digite um email");
+  async function onSubmit(event) {
+    event.preventDefault();
 
-    if (!password)
-      return alert("Digite uma senha");
-
-    const body = {
-      email,
-      password
-    };
+    const page = event.nativeEvent.submitter.name;
 
     try {
-      const response = await login(body);
+      const response = await login(form);
       localStorage.setItem("token", response.data.token);
       goToPage(page, history);
     } catch (error) {
@@ -37,33 +32,35 @@ export default function LoginPage() {
         <p>LoginPage</p>
       </header>
       <main className="home">
-        <form>
+        <form onSubmit={onSubmit}>
           <label htmlFor="email">E-mail</label>
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
-            value={email}
-            onChange={onChangeEmail}
+            value={form.email}
+            onChange={onChange}
+            required
           />
           <label htmlFor="password">Senha</label>
           <input
             type="password"
             name="password"
             id="password"
-            value={password}
-            onChange={onChangePassword}
+            value={form.password}
+            onChange={onChange}
+            required
           />
+          <button type="button" onClick={() => goToHomePage(history)}>
+            Página Inicial
+          </button>
+          <button name="AdminPage">
+            Ver Viagens No Sistema
+          </button>
+          <button name="TripsCreate">
+            Criar Viagem
+          </button>
         </form>
-        <button onClick={() => goToHomePage(history)}>
-          Página Inicial
-        </button>
-        <button onClick={() => goToAdim("AdminPage", history)}>
-          Ver Viagens No Sistema
-        </button>
-        <button onClick={() => goToAdim("TripsCreate", history)}>
-          Criar Viagem
-        </button>
       </main>
     </>
   );
