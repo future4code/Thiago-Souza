@@ -33,7 +33,7 @@ export default function AdminHomePage() {
           Página Inicial
         </button>
         <button onClick={() => goToTripsCreate(history)}>
-          Criar Viagem Nova
+          Criar Viagem
         </button>
         <section className="trips">
           {trips.map((trip) => (

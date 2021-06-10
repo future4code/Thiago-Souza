@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { tripDetail } from "../api";
 import useProtectedPage from "../hooks/useProtectedPage";
 import TripCard from "../components/TripCard";
@@ -7,6 +7,7 @@ import { goToAdminPage, goToHomePage, goToTripsCreate } from "../routes";
 
 export default function TripDetailsPage() {
   useProtectedPage();
+  const history = useHistory();
   const { id } = useParams();
   const [ trip, setTrip ] = useState({});
 
@@ -26,9 +27,9 @@ export default function TripDetailsPage() {
     return (
       <>
         <header>
-          TripDetailsPage
+          <p>TripDetailsPage</p>
         </header>
-        <main pending>
+        <main className="trip-details">
           <button onClick={() => goToHomePage(history)}>
             Página Inicial
           </button>
@@ -38,7 +39,7 @@ export default function TripDetailsPage() {
           <button onClick={() => goToTripsCreate(history)}>
             Criar Viagem
           </button>
-          <p>Carregando candidato</p>
+          <p>Carregando viagem</p>
         </main>
       </>
     );
@@ -46,9 +47,9 @@ export default function TripDetailsPage() {
   return (
     <>
       <header>
-        TripDetailsPage
+        <p>TripDetailsPage</p>
       </header>
-      <main>
+      <main className="trip-details">
         <button onClick={() => goToHomePage(history)}>
           Página Inicial
         </button>
