@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { goToHomePage, goToTripsApplications } from "../routes";
+import ListTrips from "../components/ListTrips";
 
 export default function ListTripsPage() {
   const history = useHistory();
@@ -17,6 +18,7 @@ export default function ListTripsPage() {
         <button onClick={() => goToTripsApplications(history)}>
           Aplicar Para Viagem
         </button>
+        <ListTrips/>
       </main>
     </>
   );

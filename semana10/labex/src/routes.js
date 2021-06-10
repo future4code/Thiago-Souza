@@ -22,6 +22,10 @@ export function goToTripsCreate(history) {
   history.push("/admin/trips/create");
 }
 
+export function goToTripDetails(history, tripID) {
+  history.push(`/admin/trips/${tripID}`);
+}
+
 export function goToPage(page, history) {
   if (page === "HomePage")
     return goToHomePage(history);
