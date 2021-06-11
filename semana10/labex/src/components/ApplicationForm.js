@@ -4,7 +4,7 @@ import useForm from "../hooks/useForm";
 import Error from "./Error";
 
 export default function ApplicationForm(props) {
-  const { form, onChange } = useForm({
+  const { form, onChange, cleanForm } = useForm({
     name:            "",
     age:             "",
     applicationText: "",
@@ -18,6 +18,7 @@ export default function ApplicationForm(props) {
 
     try {
       await applyTrip(form.trip, form);
+      cleanForm();
       alert("Aplicação feita com sucesso");
     } catch (error) {
       alert(`Erro na aplicação\n${error.data.message}`);

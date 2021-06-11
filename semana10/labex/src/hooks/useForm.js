@@ -10,8 +10,13 @@ export default function useForm(initialValues) {
     });
   }
 
+  function cleanForm() {
+    setForm(initialValues);
+  }
+
   return {
     form,
-    onChange
+    onChange,
+    cleanForm
   };
 }
