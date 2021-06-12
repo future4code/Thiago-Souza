@@ -1,0 +1,21 @@
+@use 'sass:math';
+
+$primary-color: rgb(200, 153, 0);
+$white: #FFFFFF;
+
+$min-screen: 300px;
+$max-screen: 600px;
+// Mixin based of https://codepen.io/MadeByMike/pen/vNrvdZ
+
+@function fluid($min-value, $max-value, $min-screen: $min-screen, $max-screen: $max-screen) {
+	$a: math.div( $max-value - $min-value, $max-screen - $min-screen );
+	$b: $min-value - $a * $min-screen; 
+
+	$sign: "+";
+	@if ($b < 0) {
+		$sign: "-";
+    $b: abs($b);
+  }
+	
+	@return clamp(#{$min-value}, calc(#{$a*100}vw #{$sign} #{$b}), #{$max-value});
+}

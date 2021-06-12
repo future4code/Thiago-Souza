@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import AdminHomePage from "./pages/AdminHomePage";
 import CreateTripPage from "./pages/CreateTripPage";
 import TripDetailsPage from "./pages/TripDetailsPage";
+import "./styles/styles.scss";
 
 function App() {
   return (
