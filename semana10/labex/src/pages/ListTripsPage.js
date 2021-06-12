@@ -12,7 +12,7 @@ export default function ListTripsPage() {
         <p>ListTripsPage</p>
         <Navigation history={history} homepage tripsapplications/>
       </header>
-      <main className="home">
+      <main className="list-trips">
         <ListTrips/>
       </main>
     </>

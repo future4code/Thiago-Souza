@@ -1,13 +1,16 @@
 import React from "react";
 
 export default function TripCard(props) {
+  const {
+    name, planet, description, date, durationInDays
+  } = props.trip;
+
   return (
     <article className="trip">
-      <h3>{props.trip.name}</h3>
-      <p>{props.trip.description}</p>
-      <p>{props.trip.planet}</p>
-      <p>{new Date(props.trip.date).toLocaleDateString()}</p>
-      <p>{`${props.trip.durationInDays} dias`}</p>
+      <h2>{name}</h2>
+      <h3>{planet}</h3>
+      <p>{description}</p>
+      <p>{`${new Date(date).toLocaleDateString()} - ${durationInDays} dias`}</p>
     </article>
   );
 }
