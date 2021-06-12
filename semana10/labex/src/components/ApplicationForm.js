@@ -48,7 +48,7 @@ export default function ApplicationForm(props) {
         min="18"
         required
       />
-      <label>Por Você É Um Ótimo Candidato</label>
+      <label>Por Que Você É Um Ótimo Candidato</label>
       <input
         type="text"
         name="applicationText"

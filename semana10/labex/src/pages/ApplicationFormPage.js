@@ -29,7 +29,7 @@ export default function ApplicationFormPage() {
         <p>ApplicationFormPage</p>
         <Navigation history={history} homepage tripslist/>
       </header>
-      <main className="home">
+      <main className="application-form">
         { loading
           ? <Loading message="Carregando Sua Próxima Viagem"/>
           : <ApplicationForm countries={countries} trips={trips}/>}

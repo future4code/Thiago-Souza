@@ -36,3 +36,32 @@ button {
     transform: translateY(0.25em);
   }
 }
+
+form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-size: 1rem;
+  max-width: 300px;
+  width: 100%;
+
+  label, input, select, textarea {
+    text-align: center;
+    margin: 0.5em 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  option {
+    max-width: 300px;
+  }
+
+  input, select, textarea {
+    resize: none;
+    border-radius: 1em;
+    border: 1px solid $primary-color;
+    padding: 0.5em;
+  }
+} 
