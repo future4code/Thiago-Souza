@@ -14,7 +14,7 @@ export default function TripDetails(props) {
       const token = localStorage.getItem("token");
       setTrip((await tripDetail(props.id, token)).data.trip);
     } catch (error) {
-      alert(error.data.message);
+      alert(`Não foi possível pegar os detalhes da viagem\n${error.data.message}`);
     }
     setLoading(false);
   }

@@ -15,7 +15,7 @@ export default function ListTripsAdmin() {
     try {
       setTrips((await listTrips()).data.trips || []);
     } catch (error) {
-      alert(error.data.message);
+      alert(`Não foi possível listar as viagens\n${error.data.message}`);
     }
     setLoading(false);
   }

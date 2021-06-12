@@ -22,7 +22,7 @@ export default function LoginPage() {
       goToPage(page, history);
     } catch (error) {
       localStorage.setItem("token", "");
-      alert(error.response.data.message);
+      alert(`Login não realizado com sucesso\n${error.response.data.message}`);
     }
   }
 

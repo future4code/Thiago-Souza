@@ -13,7 +13,7 @@ export default function ListTrips() {
     try {
       setTrips((await listTrips()).data.trips || []);
     } catch (error) {
-      alert(error.data.message);
+      alert(`Não foi possível listar as viagens${error.data.message}`);
     }
     setLoading(false);
   }
