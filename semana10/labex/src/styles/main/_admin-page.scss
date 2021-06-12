@@ -1,0 +1,41 @@
+@use "../utils" as *;
+
+main.admin-page section.trips {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 1rem;
+
+  article.trip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 17em;
+    margin: 1em;
+    padding: 1em;
+    border: 0;
+    border-radius: 1em;
+    background-color: $primary-color;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0px 0px 1em 0.01em rgba(0 0 0 / 0.3);
+    transition: transform 300ms;
+
+    p, button {
+      margin: 0;
+    }
+
+    button {
+      background-color: $white;
+      color: $primary-color;
+    }
+
+    &:hover {
+      transform: translateY(0.25em);
+    }
+
+    &:active {
+      transform: translateY(1em);
+    }
+  }
+}
