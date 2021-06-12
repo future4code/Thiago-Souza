@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { goToAdminPage, goToHomePage } from "../routes";
 import useProtectedPage from "../hooks/useProtectedPage";
 import CreateTrip from "../components/CreateTrip";
+import Navigation from "../components/Navigation";
 
 export default function CreateTripPage() {
   const history = useHistory();
@@ -13,14 +13,9 @@ export default function CreateTripPage() {
     <>
       <header>
         <p>CreateTripPage</p>
+        <Navigation history={history} homepage adminpage/>
       </header>
       <main className="home">
-        <button onClick={() => goToHomePage(history)}>
-          Página Inicial
-        </button>
-        <button onClick={() => goToAdminPage(history)}>
-          Página Do Adm
-        </button>
         <CreateTrip/>
       </main>
     </>

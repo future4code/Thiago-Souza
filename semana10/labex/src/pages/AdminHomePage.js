@@ -1,24 +1,20 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { goToHomePage, goToTripsCreate } from "../routes";
+import Navigation from "../components/Navigation";
 import useProtectedPage from "../hooks/useProtectedPage";
 import ListTripsAdmin from "../components/ListTripsAdmin";
 
 export default function AdminHomePage() {
   useProtectedPage();
   const history = useHistory();
+
   return (
     <>
       <header>
         <p>AdminHomePage</p>
+        <Navigation history={history} homepage tripscreate/>
       </header>
-      <main className="home">
-        <button onClick={() => goToHomePage(history)}>
-          Página Inicial
-        </button>
-        <button onClick={() => goToTripsCreate(history)}>
-          Criar Viagem
-        </button>
+      <main className="admin-page">
         <ListTripsAdmin/>
       </main>
     </>

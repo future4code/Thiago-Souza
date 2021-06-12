@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { tripDetail } from "../api";
+import { deciceCandidate, tripDetail } from "../api";
 import Loading from "./Loading";
 import Error from "./Error";
 import TripCard from "./TripCard";
@@ -19,6 +19,32 @@ export default function TripDetails(props) {
     setLoading(false);
   }
 
+  async function approveCandidate(candidateID) {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      await deciceCandidate(trip.id, candidateID, true, token);
+      await tripDetailFromApi();
+      alert("Candidato aprovado");
+    } catch (error) {
+      alert(`Não foi possível aprovar candidato\n${error.data.message}`);
+    }
+    setLoading(false);
+  }
+
+  async function disapproveCandidate(candidateID) {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      await deciceCandidate(trip.id, candidateID, false, token);
+      await tripDetailFromApi();
+      alert("Candidato rejeitado");
+    } catch (error) {
+      alert(`Não foi possível rejeitar candidato\n${error.data.message}`);
+    }
+    setLoading(false);
+  }
+
   /*eslint-disable-next-line react-hooks/exhaustive-deps*/
   useEffect(() => tripDetailFromApi(), []);
 
@@ -33,7 +59,7 @@ export default function TripDetails(props) {
       <TripCard trip={trip}/>
       <h3>Candidatos Pendentes</h3>
       <section className="pending">
-        { trip.candidates.lenght
+        { trip.candidates.length
           ? trip.candidates.map((candidate) => (
             <article className="candidate" key={candidate.id}>
               <h3>{candidate.name}</h3>
@@ -41,13 +67,19 @@ export default function TripDetails(props) {
               <p>{candidate.country}</p>
               <p>{candidate.profession}</p>
               <p>{candidate.applicationText}</p>
+              <button onClick={() => approveCandidate(candidate.id)}>
+                Aprovar
+              </button>
+              <button onClick={() => disapproveCandidate(candidate.id)}>
+                Rejeitar
+              </button>
             </article>
           ))
           : <Error message="Não há candidato pendente"/>}
       </section>
       <h3>Candidatos Aprovados</h3>
       <section className="approved">
-        {trip.approved.lenght
+        {trip.approved.length
           ? trip.approved.map((candidate) => (
             <article className="candidate" key={candidate.id}>
               <h3>{candidate.name}</h3>

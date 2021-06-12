@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { goToHomePage, goToTripsList } from "../routes";
 import countries from "../utils/countries.json";
 import { listTrips } from "../api";
 import ApplicationForm from "../components/ApplicationForm";
 import Loading from "../components/Loading";
+import Navigation from "../components/Navigation";
 
 export default function ApplicationFormPage() {
   const history = useHistory();
@@ -27,14 +27,9 @@ export default function ApplicationFormPage() {
     <>
       <header>
         <p>ApplicationFormPage</p>
+        <Navigation history={history} homepage tripslist/>
       </header>
       <main className="home">
-        <button onClick={() => goToHomePage(history)}>
-          Página Inicial
-        </button>
-        <button onClick={() => goToTripsList(history)}>
-          Ver Viagens Disponíveis
-        </button>
         { loading
           ? <Loading message="Carregando Sua Próxima Viagem"/>
           : <ApplicationForm countries={countries} trips={trips}/>}
