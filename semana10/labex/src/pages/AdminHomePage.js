@@ -12,7 +12,7 @@ export default function AdminHomePage() {
     <>
       <header>
         <p>AdminHomePage</p>
-        <Navigation history={history} homepage tripscreate/>
+        <Navigation history={history} homepage tripscreate logout/>
       </header>
       <main className="admin-page">
         <ListTripsAdmin/>

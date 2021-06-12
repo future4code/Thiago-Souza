@@ -13,7 +13,7 @@ export default function TripDetailsPage() {
     <>
       <header>
         <p>TripDetailsPage</p>
-        <Navigation history={history} homepage adminpage tripscreate/>
+        <Navigation history={history} homepage adminpage tripscreate logout/>
       </header>
       <main className="trip-details">
         <TripDetails id={id}/>

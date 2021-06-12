@@ -10,6 +10,12 @@ import {
 export default function Navigation(props) {
   const { history } = props;
 
+  function logout() {
+    localStorage.setItem("token", "");
+
+    goToHomePage(props.history);
+  }
+
   return (
     <nav>
       {props.homepage && (
@@ -35,6 +41,11 @@ export default function Navigation(props) {
       {props.tripscreate && (
         <button onClick={() => goToTripsCreate(history)}>
           Criar Viagem
+        </button>
+      )}
+      {props.logout && (
+        <button onClick={logout}>
+          Logout
         </button>
       )}
     </nav>

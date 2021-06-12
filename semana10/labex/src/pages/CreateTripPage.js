@@ -13,7 +13,7 @@ export default function CreateTripPage() {
     <>
       <header>
         <p>CreateTripPage</p>
-        <Navigation history={history} homepage adminpage/>
+        <Navigation history={history} homepage adminpage logout/>
       </header>
       <main className="home">
         <CreateTrip/>
