@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import Navigation from "../components/Navigation";
+import Header from "../components/Header";
 import ListTrips from "../components/ListTrips";
 
 export default function ListTripsPage() {
@@ -8,10 +8,7 @@ export default function ListTripsPage() {
 
   return (
     <>
-      <header>
-        <p>ListTripsPage</p>
-        <Navigation history={history} homepage tripsapplications/>
-      </header>
+      <Header history={history} homepage tripsapplications/>
       <main className="list-trips">
         <ListTrips/>
       </main>

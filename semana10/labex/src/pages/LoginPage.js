@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { login } from "../api";
 import { goToHomePage, goToPage } from "../routes";
 import useForm from "../hooks/useForm";
+import Header from "../components/Header";
 
 export default function LoginPage() {
   const history = useHistory();
@@ -28,9 +29,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <header>
-        <p>LoginPage</p>
-      </header>
+      <Header noNav/>
       <main className="home">
         <form onSubmit={onSubmit}>
           <label htmlFor="email">E-mail</label>

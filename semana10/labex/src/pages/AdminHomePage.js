@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import Navigation from "../components/Navigation";
+import Header from "../components/Header";
 import useProtectedPage from "../hooks/useProtectedPage";
 import ListTripsAdmin from "../components/ListTripsAdmin";
 
@@ -10,10 +10,7 @@ export default function AdminHomePage() {
 
   return (
     <>
-      <header>
-        <p>AdminHomePage</p>
-        <Navigation history={history} homepage tripscreate logout/>
-      </header>
+      <Header history={history} homepage tripscreate logout/>
       <main className="admin-page">
         <ListTripsAdmin/>
       </main>

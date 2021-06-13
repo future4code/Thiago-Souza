@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import useProtectedPage from "../hooks/useProtectedPage";
 import CreateTrip from "../components/CreateTrip";
-import Navigation from "../components/Navigation";
+import Header from "../components/Header";
 
 export default function CreateTripPage() {
   const history = useHistory();
@@ -11,10 +11,7 @@ export default function CreateTripPage() {
 
   return (
     <>
-      <header>
-        <p>CreateTripPage</p>
-        <Navigation history={history} homepage adminpage logout/>
-      </header>
+      <Header history={history} homepage adminpage logout/>
       <main className="home">
         <CreateTrip/>
       </main>

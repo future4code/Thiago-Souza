@@ -20,12 +20,12 @@ export default function Navigation(props) {
     <nav>
       {props.homepage && (
         <button onClick={() => goToHomePage(history)}>
-          Página Inicial
+          Início
         </button>
       )}
       {props.tripslist && (
         <button onClick={() => goToTripsList(history)}>
-          Ver Viagens Disponíveis
+          Viagens Disponíveis
         </button>
       )}
       {props.tripsapplications && (
@@ -35,7 +35,7 @@ export default function Navigation(props) {
       )}
       {props.adminpage && (
         <button onClick={() => goToAdminPage(history)}>
-          Página Do Adm
+          Administração
         </button>
       )}
       {props.tripscreate && (

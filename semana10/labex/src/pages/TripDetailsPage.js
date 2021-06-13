@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
 import useProtectedPage from "../hooks/useProtectedPage";
-import Navigation from "../components/Navigation";
+import Header from "../components/Header";
 import TripDetails from "../components/TripDetail";
 
 export default function TripDetailsPage() {
@@ -11,10 +11,7 @@ export default function TripDetailsPage() {
 
   return (
     <>
-      <header>
-        <p>TripDetailsPage</p>
-        <Navigation history={history} homepage adminpage tripscreate logout/>
-      </header>
+      <Header history={history} homepage adminpage tripscreate logout/>
       <main className="trip-details">
         <TripDetails id={id}/>
       </main>

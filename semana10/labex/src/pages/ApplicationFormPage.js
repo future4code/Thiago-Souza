@@ -4,7 +4,7 @@ import countries from "../utils/countries.json";
 import { listTrips } from "../api";
 import ApplicationForm from "../components/ApplicationForm";
 import Loading from "../components/Loading";
-import Navigation from "../components/Navigation";
+import Header from "../components/Header";
 
 export default function ApplicationFormPage() {
   const history = useHistory();
@@ -25,10 +25,7 @@ export default function ApplicationFormPage() {
 
   return (
     <>
-      <header>
-        <p>ApplicationFormPage</p>
-        <Navigation history={history} homepage tripslist/>
-      </header>
+      <Header history={history} homepage tripslist/>
       <main className="application-form">
         { loading
           ? <Loading message="Carregando Sua Próxima Viagem"/>
