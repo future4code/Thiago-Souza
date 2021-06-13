@@ -57,8 +57,8 @@ export default function TripDetails(props) {
   return (
     <>
       <TripCard trip={trip}/>
-      <h3>Candidatos Pendentes</h3>
       <section className="pending">
+        <h3>Candidatos Pendentes</h3>
         { trip.candidates.length
           ? trip.candidates.map((candidate) => (
             <article className="candidate" key={candidate.id}>
@@ -77,8 +77,8 @@ export default function TripDetails(props) {
           ))
           : <Error message="Não há candidato pendente"/>}
       </section>
-      <h3>Candidatos Aprovados</h3>
       <section className="approved">
+        <h3>Candidatos Aprovados</h3>
         {trip.approved.length
           ? trip.approved.map((candidate) => (
             <article className="candidate" key={candidate.id}>

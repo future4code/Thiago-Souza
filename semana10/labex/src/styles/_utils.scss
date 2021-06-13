@@ -5,8 +5,33 @@ $white: #FFFFFF;
 
 $min-screen: 300px;
 $max-screen: 1200px;
-// Mixin based of https://codepen.io/MadeByMike/pen/vNrvdZ
 
+@mixin box-shadow($offset-x: 0, $offset-y: 0, $blur-radius: 1em, 
+                  $spread-radius: 0.01em, $color: rgba(0 0 0 / 0.3)) {
+  box-shadow: $offset-x $offset-y $blur-radius $spread-radius $color;
+}
+
+@mixin card() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 17em;
+  margin: 1em;
+  padding: 1em;
+  border: 0;
+  border-radius: 2em;
+  background-color: $primary-color;
+  color: $white;
+  @include box-shadow();
+
+  * {
+    margin: 0.5em 0;
+  }
+}
+
+// Mixin based of https://codepen.io/MadeByMike/pen/vNrvdZ
 @function fluid($min-value, $max-value, $min-screen: $min-screen, $max-screen: $max-screen) {
 	$a: math.div( $max-value - $min-value, $max-screen - $min-screen );
 	$b: $min-value - $a * $min-screen; 

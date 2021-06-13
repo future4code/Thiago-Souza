@@ -1,0 +1,22 @@
+@use "../utils" as *;
+
+main.trip-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 1rem;
+
+  article.trip {
+    @include card();
+    margin: 0 auto 1em;
+  }
+
+  article.candidate {
+    @include card();
+    margin: 1em auto;
+
+    button {
+      background-color: $white;
+      color: $primary-color;
+    }
+  }
+}

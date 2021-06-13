@@ -7,23 +7,12 @@ main.admin-page section.trips {
   font-size: 1rem;
 
   article.trip {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 17em;
-    margin: 1em;
-    padding: 1em;
-    border: 0;
+    @include card();
     border-radius: 1em;
-    background-color: $primary-color;
+    width: 17em;
+    flex-direction: row;
     cursor: pointer;
-    color: white;
-    box-shadow: 0px 0px 1em 0.01em rgba(0 0 0 / 0.3);
     transition: transform 300ms;
-
-    p, button {
-      margin: 0;
-    }
 
     button {
       background-color: $white;

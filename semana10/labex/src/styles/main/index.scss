@@ -1,7 +1,8 @@
 @use "home";
 @use "list-trips";
-@use "admin-page";
 @use "application-form";
+@use "admin-page";
+@use "trip-details";
 @use "../utils" as *;
 
 main {
@@ -9,4 +10,15 @@ main {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  grid-gap: 1rem;
+  text-align: center;
+
+  article.trip {
+    grid-column: 1 / span 2;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+  }
 }

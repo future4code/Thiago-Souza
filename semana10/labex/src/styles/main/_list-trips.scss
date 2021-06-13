@@ -8,21 +8,6 @@ main.list-trips section.trips {
   font-size: 1rem;
 
   article.trip {
-    background-color: $primary-color;
-    color: $white;
-    text-align: center;
-    border-radius: 2em;
-    max-width: 16em;
-    margin: 1em;
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0px 0px 1em 0.01em rgba(0 0 0 / 0.3);
-
-
-    p, h2, h3 {
-      margin: 0.5em 0;
-    }
+    @include card();
   }
 }
