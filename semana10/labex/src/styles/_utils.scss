@@ -29,6 +29,11 @@ $max-screen: 1200px;
   * {
     margin: 0.5em 0;
   }
+
+  button {
+    background-color: $white;
+    color: $primary-color;
+  }
 }
 
 // Mixin based of https://codepen.io/MadeByMike/pen/vNrvdZ

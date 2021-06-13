@@ -5,7 +5,15 @@ main.trip-details {
   grid-template-columns: 1fr 1fr;
   font-size: 1rem;
 
+  section.loading {
+    grid-column: 1 / span 2;
+  }
+
   article.trip {
+    grid-column: 1 / span 2;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
     @include card();
     margin: 0 auto 1em;
   }
@@ -13,10 +21,17 @@ main.trip-details {
   article.candidate {
     @include card();
     margin: 1em auto;
+  }
 
-    button {
-      background-color: $white;
-      color: $primary-color;
+  @media only screen and (max-width: 500px) {
+    grid-template-columns: 1fr;  
+  
+    article.trip, section.loading {
+      grid-column: 1 / span 1;
+    }
+
+    section.approved {
+      grid-row: 2 / span 1;
     }
   }
 }

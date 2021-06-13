@@ -5,6 +5,7 @@ main.admin-page section.trips {
   justify-content: center;
   align-items: flex-start;
   font-size: 1rem;
+  flex-wrap: wrap;
 
   article.trip {
     @include card();
@@ -13,11 +14,6 @@ main.admin-page section.trips {
     flex-direction: row;
     cursor: pointer;
     transition: transform 300ms;
-
-    button {
-      background-color: $white;
-      color: $primary-color;
-    }
 
     &:hover {
       transform: translateY(0.25em);

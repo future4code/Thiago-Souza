@@ -14,11 +14,9 @@ main {
   margin: 0 auto;
   grid-gap: 1rem;
   text-align: center;
+  color: $primary-color;
 
-  article.trip {
-    grid-column: 1 / span 2;
-    max-width: 300px;
-    margin: 0 auto;
+  section.loading {
     text-align: center;
   }
 }

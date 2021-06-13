@@ -1,12 +1,31 @@
+@use "utils" as  * ;
+
+$height: 3.5rem;
+
 header {
-  padding: 1rem 0;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
-  
+  height: $height;
+  margin: 0 auto 1rem;
+  background-color: $primary-color;
+  color: $white;
+  font-weight: bold;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $height;
+    background-color: $primary-color;
+    z-index: -1;
+  }
+
   p {
     margin: 0;
   }
@@ -17,10 +36,19 @@ header {
     align-items: center;
 
     button {
-      margin: 0 0.5em;
+      margin: 0;
+      border-radius: 0;
+      border-right: 1px solid $white;
+      height: $height;
+      font-weight: bold;
+
+      &:active {
+        transform: none;
+      }
 
       &:first-child {
         margin-left: 0;
+        border-left: 1px solid $white;
       }
 
       &:last-child {

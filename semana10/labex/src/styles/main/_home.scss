@@ -1,1 +1,18 @@
+div#home {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
 
+  main.home {
+    height: 100%;
+    align-items: center;
+
+    button {
+      font-weight: bold;
+    }
+
+    @media only screen and (max-width: 450px) {
+      flex-direction: column;
+    }
+  }
+}

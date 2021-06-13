@@ -6,7 +6,7 @@ export default function HomePage() {
   const history = useHistory();
 
   return (
-    <>
+    <div id="home">
       <header>
         <p>HomePage</p>
       </header>
@@ -18,6 +18,6 @@ export default function HomePage() {
           Gerenciamento De Viagens
         </button>
       </main>
-    </>
+    </div>
   );
 }
