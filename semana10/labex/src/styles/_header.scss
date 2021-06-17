@@ -1,0 +1,83 @@
+@use "utils" as  * ;
+
+$height: 3.5rem;
+$border: 1px solid $white;
+
+header {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 75rem;
+  height: $height;
+  margin: 0 auto 1rem;
+  background-color: $primary-color;
+  color: $white;
+  font-weight: bold;
+
+  @media only screen and (max-width: 25rem) {
+    flex-direction: column;
+    justify-content: space-between;
+    height: fit-content;
+    
+    nav {
+      width: 100%;
+      button {
+        flex-grow: 1;
+        border-top: $border;
+
+        &:first-child {
+          border-left: none !important;
+        }
+
+        &:last-child {
+          border-right: none !important;
+        }
+      }
+    }
+  }
+
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $height;
+    background-color: $primary-color;
+    z-index: -1;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      margin: 0;
+      border-radius: 0;
+      border-right: $border;
+      height: $height;
+      font-weight: bold;
+
+      &:active {
+        transform: none;
+      }
+
+      &:first-child {
+        margin-left: 0;
+        border-left: $border;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@use "../utils" as *;
+
+main.list-trips section.trips {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  font-size: 1rem;
+
+  article.trip {
+    @include card();
+  }
+}

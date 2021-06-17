@@ -1,0 +1,26 @@
+@use "../utils" as *;
+
+main.admin-page section.trips {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 1rem;
+  flex-wrap: wrap;
+
+  article.trip {
+    @include card();
+    border-radius: 1em;
+    width: 17em;
+    flex-direction: row;
+    cursor: pointer;
+    transition: transform 300ms;
+
+    &:hover {
+      transform: translateY(0.25em);
+    }
+
+    &:active {
+      transform: translateY(1em);
+    }
+  }
+}

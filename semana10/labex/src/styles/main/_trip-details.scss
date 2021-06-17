@@ -1,0 +1,36 @@
+@use "../utils" as *;
+
+main.trip-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 1rem;
+
+  section.loading {
+    grid-column: 1 / span 2;
+  }
+
+  article.trip {
+    grid-column: 1 / span 2;
+    margin: 0 auto;
+    text-align: center;
+    @include card();
+    margin: 0 auto 1em;
+  }
+
+  article.candidate {
+    @include card();
+    margin: 1em auto;
+  }
+
+  @media only screen and (max-width: 31rem) {
+    grid-template-columns: 1fr;  
+  
+    article.trip, section.loading {
+      grid-column: 1 / span 1;
+    }
+
+    section.approved {
+      grid-row: 2 / span 1;
+    }
+  }
+}

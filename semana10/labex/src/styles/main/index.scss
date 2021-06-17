@@ -1,0 +1,22 @@
+@use "home";
+@use "list-trips";
+@use "application-form";
+@use "admin-page";
+@use "trip-details";
+@use "../utils" as *;
+
+main {
+  font-size: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 75rem;
+  margin: 0 auto;
+  grid-gap: 1rem;
+  text-align: center;
+  color: $primary-color;
+
+  section.loading {
+    text-align: center;
+  }
+}
