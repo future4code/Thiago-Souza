@@ -4,7 +4,7 @@ export function useCoodinator() {
   const history = useHistory();
 
   function goToLogin() {
-    history.push("/login");
+    history.push("/");
   }
 
   function goToCadastro() {

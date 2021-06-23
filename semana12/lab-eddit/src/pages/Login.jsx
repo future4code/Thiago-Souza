@@ -1,6 +1,7 @@
 import React from "react";
 import useForm from "../hooks/useForm";
 import { useCoodinator } from "../hooks/useCoordinator";
+import { loginUser } from "../api";
 
 export default function Login() {
   const { form, clearForm, handleChange } = useForm({
@@ -8,12 +9,18 @@ export default function Login() {
     password: ""
   });
 
-  const { goToCadastro } = useCoodinator();
+  const { goToCadastro, goToFeed } = useCoodinator();
 
   async function submitForm(event) {
-    event.preventDefault();
-    console.log(form);
-    clearForm();
+    try {
+      event.preventDefault();
+      const response = await loginUser(form);
+      localStorage.setItem("token", response.data.token);
+      clearForm();
+      goToFeed();
+    } catch (error) {
+      alert(`Erro ao fazer o login\n${error.response?.data}`);
+    }
   }
 
   return (

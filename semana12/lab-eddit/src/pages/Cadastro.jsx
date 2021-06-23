@@ -1,4 +1,5 @@
 import React from "react";
+import { singupUser } from "../api";
 import { useCoodinator } from "../hooks/useCoordinator";
 import useForm from "../hooks/useForm";
 
@@ -6,15 +7,21 @@ export default function Cadastro() {
   const { form, clearForm, handleChange } = useForm({
     username: "",
     email:    "",
-    passwor:  ""
+    password: ""
   });
 
-  const { goToLogin } = useCoodinator();
+  const { goToLogin, goToFeed } = useCoodinator();
 
   async function submitForm(event) {
-    event.preventDefault();
-    console.log(form);
-    clearForm();
+    try {
+      event.preventDefault();
+      const response = await singupUser(form);
+      localStorage.setItem("token", response.data.token);
+      clearForm();
+      goToFeed();
+    } catch (error) {
+      alert(`Erro ao fazer cadastro\n${error.response?.data}`);
+    }
   }
 
   return (
