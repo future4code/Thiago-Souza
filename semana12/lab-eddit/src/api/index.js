@@ -21,3 +21,11 @@ export function singupUser(user) {
 export function getPosts(token) {
   return axios.get(`${BASE_URL}/posts`, { headers: { Authorization: token } });
 }
+
+export function createPost(post, token) {
+  return axios.post(
+    `${BASE_URL}/posts`,
+    post,
+    { headers: { Authorization: token } }
+  );
+}
