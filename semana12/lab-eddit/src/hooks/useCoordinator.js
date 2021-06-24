@@ -16,7 +16,7 @@ export default function useCoodinator() {
   }
 
   function goToPost(postID) {
-    history(`/post/${postID}`);
+    history.push(`/post/${postID}`);
   }
 
   return {

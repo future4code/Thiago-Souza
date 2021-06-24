@@ -1,4 +1,5 @@
 import React from "react";
+import useCoodinator from "../hooks/useCoordinator";
 
 export default function Post(props) {
   const {
@@ -6,11 +7,13 @@ export default function Post(props) {
     title,
     username,
     commentCount,
-    voteSum
+    voteSum,
+    id
   } = props.post;
+  const { goToPost } = useCoodinator();
 
   return (
-    <article className="post">
+    <article className="post" onClick={() => goToPost(id)}>
       <header>
         <h4>{username}</h4>
         <h3>{title}</h3>

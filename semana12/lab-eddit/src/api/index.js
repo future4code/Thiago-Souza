@@ -22,6 +22,13 @@ export function getPosts(token) {
   return axios.get(`${BASE_URL}/posts`, { headers: { Authorization: token } });
 }
 
+export function getPostsComments(postID, token) {
+  return axios.get(
+    `${BASE_URL}/posts/${postID}/comments`,
+    { headers: { Authorization: token } }
+  );
+}
+
 export function createPost(post, token) {
   return axios.post(
     `${BASE_URL}/posts`,
