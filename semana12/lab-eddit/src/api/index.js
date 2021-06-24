@@ -22,17 +22,40 @@ export function getPosts(token) {
   return axios.get(`${BASE_URL}/posts`, { headers: { Authorization: token } });
 }
 
-export function getPostsComments(postID, token) {
-  return axios.get(
-    `${BASE_URL}/posts/${postID}/comments`,
-    { headers: { Authorization: token } }
-  );
-}
-
 export function createPost(post, token) {
   return axios.post(
     `${BASE_URL}/posts`,
     post,
+    { headers: { Authorization: token } }
+  );
+}
+
+export function createPostVote(direction, postID, token) {
+  return axios.post(
+    `${BASE_URL}/posts/${postID}/votes`,
+    { direction },
+    { headers: { Authorization: token } }
+  );
+}
+
+export function changePostVote(direction, postID, token) {
+  return axios.put(
+    `${BASE_URL}/posts/${postID}/votes`,
+    { direction },
+    { headers: { Authorization: token } }
+  );
+}
+
+export function deletePostVote(postID, token) {
+  return axios.delete(
+    `${BASE_URL}/posts/${postID}/votes`,
+    { headers: { Authorization: token } }
+  );
+}
+
+export function getPostsComments(postID, token) {
+  return axios.get(
+    `${BASE_URL}/posts/${postID}/comments`,
     { headers: { Authorization: token } }
   );
 }
@@ -44,3 +67,27 @@ export function createComment(comment, postID, token) {
     { headers: { Authorization: token } }
   );
 }
+
+export function createCommentVote(direction, commentID, token) {
+  return axios.post(
+    `${BASE_URL}/comments/${commentID}/votes`,
+    { direction },
+    { headers: { Authorization: token } }
+  );
+}
+
+export function changeCommentVote(direction, commentID, token) {
+  return axios.put(
+    `${BASE_URL}/comments/${commentID}/votes`,
+    { direction },
+    { headers: { Authorization: token } }
+  );
+}
+
+export function deleteCommentVote(commentID, token) {
+  return axios.delete(
+    `${BASE_URL}/comments/${commentID}/votes`,
+    { headers: { Authorization: token } }
+  );
+}
+
