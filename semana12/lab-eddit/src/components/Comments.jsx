@@ -4,6 +4,7 @@ import Comment from "./Comment";
 
 export default function Comments() {
   const { data, loading, error } = usePostStates().comments;
+
   if (loading)
     return <p>Carregando Comentários</p>;
 

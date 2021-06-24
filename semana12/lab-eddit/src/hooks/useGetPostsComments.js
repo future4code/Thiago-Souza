@@ -29,7 +29,7 @@ export default function useGetPostsComments(postID) {
     comments,
     loading,
     error,
-    getComments: getPostsCommentsFromAPI
+    getComments: () => getPostsCommentsFromAPI(postID)
   };
 }
 

@@ -36,3 +36,11 @@ export function createPost(post, token) {
     { headers: { Authorization: token } }
   );
 }
+
+export function createComment(comment, postID, token) {
+  return axios.post(
+    `${BASE_URL}/posts/${postID}/comments`,
+    comment,
+    { headers: { Authorization: token } }
+  );
+}

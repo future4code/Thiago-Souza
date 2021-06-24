@@ -6,6 +6,7 @@ export default function Comment(props) {
     username,
     voteSum
   } = props.comment;
+
   return (
     <article className="comment">
       <article>
