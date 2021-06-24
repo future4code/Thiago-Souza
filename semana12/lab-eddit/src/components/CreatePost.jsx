@@ -1,8 +1,10 @@
 import React from "react";
 import { createPost, getToken } from "../api";
 import useForm from "../hooks/useForm";
+import { useGlobalGetters } from "../global/GlobalStates";
 
 export default function CreatePost() {
+  const { getPosts } = useGlobalGetters();
   const { form, clearForm, handleChange } = useForm({
     title: "",
     body:  ""
@@ -12,8 +14,7 @@ export default function CreatePost() {
     event.preventDefault();
     try {
       await createPost(form, getToken());
-
-      //Fazer refetch dos posts
+      getPosts();
       clearForm();
     } catch (error) {
       alert(`Não foi possível fazer o post\n${error.response.data}`);
