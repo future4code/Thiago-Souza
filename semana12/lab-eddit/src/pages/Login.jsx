@@ -1,6 +1,6 @@
 import React from "react";
 import useForm from "../hooks/useForm";
-import { useCoodinator } from "../hooks/useCoordinator";
+import useCoodinator from "../hooks/useCoordinator";
 import { loginUser, setToken } from "../api";
 
 export default function Login() {

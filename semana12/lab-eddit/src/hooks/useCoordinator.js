@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 
-export function useCoodinator() {
+export default function useCoodinator() {
   const history = useHistory();
 
   function goToLogin() {

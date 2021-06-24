@@ -1,6 +1,6 @@
 import React from "react";
 import { setToken, singupUser } from "../api";
-import { useCoodinator } from "../hooks/useCoordinator";
+import useCoodinator from "../hooks/useCoordinator";
 import useForm from "../hooks/useForm";
 
 export default function Cadastro() {
