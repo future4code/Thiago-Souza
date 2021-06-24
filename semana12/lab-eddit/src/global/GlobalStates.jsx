@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useGetPosts } from "../hooks/useGetPosts";
+import useGetPosts from "../hooks/useGetPosts";
 import { GlobalContext } from "./contexts";
 
 export default function GlobalStates(props) {

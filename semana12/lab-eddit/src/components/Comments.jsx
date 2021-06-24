@@ -1,9 +1,9 @@
 import React from "react";
-import { useGetPostsComments } from "../hooks/useGetPostsComments";
+import { usePostStates } from "../global/PostStates";
 import Comment from "./Comment";
 
-export default function Comments(props) {
-  const { comments, loading, error } = useGetPostsComments(props.id);
+export default function Comments() {
+  const { data, loading, error } = usePostStates().comments;
   if (loading)
     return <p>Carregando Comentários</p>;
 
@@ -12,7 +12,7 @@ export default function Comments(props) {
 
   return (
     <section className="comments">
-      {comments.map((comment) => <Comment key={comment.id} comment={comment}/>)}
+      {data.map((comment) => <Comment key={comment.id} comment={comment}/>)}
     </section>
   );
 }

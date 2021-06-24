@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getPosts, getToken } from "../api";
 
-export function useGetPosts() {
+export default function useGetPosts() {
   const [ posts, setPosts ] = useState([]);
   const [ loading, setLoading ] = useState(true);
   const [ error, setError ] = useState("");

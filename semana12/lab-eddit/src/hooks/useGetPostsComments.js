@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getPostsComments, getToken } from "../api";
 
-export function useGetPostsComments(postID) {
+export default function useGetPostsComments(postID) {
   const [ comments, setComments ] = useState([]);
   const [ loading, setLoading ] = useState(true);
   const [ error, setError ] = useState("");
@@ -28,7 +28,8 @@ export function useGetPostsComments(postID) {
   return {
     comments,
     loading,
-    error
+    error,
+    getComments: getPostsCommentsFromAPI
   };
 }
 
