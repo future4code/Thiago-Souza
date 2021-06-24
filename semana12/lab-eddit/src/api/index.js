@@ -18,8 +18,11 @@ export function singupUser(user) {
   return axios.post(`${BASE_URL}/users/signup`, user);
 }
 
-export function getPosts(token) {
-  return axios.get(`${BASE_URL}/posts`, { headers: { Authorization: token } });
+export function getPosts(token, page = 1) {
+  return axios.get(
+    `${BASE_URL}/posts?size=60&page=${page}`,
+    { headers: { Authorization: token } }
+  );
 }
 
 export function createPost(post, token) {

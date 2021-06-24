@@ -1,41 +1,35 @@
-import { useEffect, useState } from "react";
 import { getPosts, getToken } from "../api";
+import { useInfiniteQuery } from "react-query";
 
 export default function useGetPosts() {
-  const [ posts, setPosts ] = useState([]);
-  const [ loading, setLoading ] = useState(true);
-  const [ refetch, setRefetch ] = useState(false);
-  const [ error, setError ] = useState("");
+  const {
+    data,
+    error,
+    status,
+    isFetching,
+    refetch,
+    fetchNextPage,
+    hasNextPage
+  } = useInfiniteQuery(
+    "posts",
+    async ({ pageParam = 1 }) => (await getPosts(getToken(), pageParam)).data,
+    {
+      getNextPageParam: (lastPage, pages) => {
+        if (!lastPage.length)
+          return false;
 
-  async function getPostsFromAPI() {
-    setLoading(true);
-    if (posts.length)
-      setRefetch(true);
-
-    const token = getToken();
-
-    if (!token)
-      return setLoading(false);
-
-    try {
-      const response = await getPosts(token);
-      setPosts(response.data);
-    } catch (error) {
-      setError(error.response.data || "erro fora da api");
-    } finally {
-      setRefetch(false);
-      setLoading(false);
+        return pages.length + 1;
+      }
     }
-  }
-
-  /*eslint-disable-next-line react-hooks/exhaustive-deps*/
-  useEffect(() => getPostsFromAPI(), []);
+  );
 
   return {
-    posts,
-    loading,
-    refetch,
+    posts:             data?.pages.flatMap((page) => page) || [],
+    loading:           status === "loading",
+    refetch:           status !== "loading" && isFetching,
+    fetchNextPagePost: fetchNextPage,
+    hasMorePost:       hasNextPage,
     error,
-    getPosts: getPostsFromAPI
+    getPosts:          refetch
   };
 }

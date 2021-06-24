@@ -1,22 +1,33 @@
 import React from "react";
-import { useGlobalStates } from "../global/GlobalStates";
+import { useGlobalGetters, useGlobalStates } from "../global/GlobalStates";
 import Post from "./Post";
 
 export default function Posts() {
   const {
-    posts, loading, refetch, error
+    posts, loading, refetch, error, hasMorePost
   } = useGlobalStates();
+  const { fetchNextPagePost } = useGlobalGetters();
 
-  if (loading && !refetch)
+  if (loading)
     return <p>Carregando Os Posts</p>;
 
   if (error)
     return <p>Ocorreu Um Erro Ao Pegar Os Posts</p>;
 
+  let textLoadMore = "Carregar Mais Posts";
+
+  if (refetch)
+    textLoadMore = "Carregando Posts";
+  else if (!hasMorePost)
+    textLoadMore = "Não Há Mais Posts";
+
   return (
     <section className="posts">
       {refetch && <p>Recarregando Posts</p>}
       {posts.map((post) => <Post key={post.id} post={post}/>)}
+      <button onClick={fetchNextPagePost} disabled={refetch || !hasMorePost}>
+        {textLoadMore}
+      </button>
     </section>
   );
 }

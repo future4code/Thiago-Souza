@@ -8,16 +8,22 @@ export default function GlobalStates(props) {
     loading,
     refetch,
     error,
-    getPosts
+    getPosts,
+    hasMorePost,
+    fetchNextPagePost
   } = useGetPosts();
 
   const states = {
     posts,
     loading,
+    hasMorePost,
     refetch,
     error
   };
-  const getters = { getPosts };
+  const getters = {
+    getPosts,
+    fetchNextPagePost
+  };
 
   return (
     <GlobalContext.Provider
