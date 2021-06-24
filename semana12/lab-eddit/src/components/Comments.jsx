@@ -3,9 +3,11 @@ import { usePostStates } from "../global/PostStates";
 import Comment from "./Comment";
 
 export default function Comments() {
-  const { data, loading, error } = usePostStates().comments;
+  const {
+    data, loading, refetch, error
+  } = usePostStates().comments;
 
-  if (loading)
+  if (loading && !refetch)
     return <p>Carregando Comentários</p>;
 
   if (error)
@@ -13,6 +15,7 @@ export default function Comments() {
 
   return (
     <section className="comments">
+      {refetch && <p>Recarregando Comentários</p>}
       {data.map((comment) => <Comment key={comment.id} comment={comment}/>)}
     </section>
   );

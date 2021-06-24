@@ -4,10 +4,14 @@ import { getPostsComments, getToken } from "../api";
 export default function useGetPostsComments(postID) {
   const [ comments, setComments ] = useState([]);
   const [ loading, setLoading ] = useState(true);
+  const [ refetch, setRefetch ] = useState(false);
   const [ error, setError ] = useState("");
 
-  async function getPostsCommentsFromAPI(postID) {
+  async function getPostsCommentsFromAPI() {
     setLoading(true);
+    if (comments.length)
+      setRefetch(true);
+
     const token = getToken();
 
     if (!token)
@@ -19,17 +23,20 @@ export default function useGetPostsComments(postID) {
     } catch (error) {
       setError(error.response.data || "erro fora da api");
     } finally {
+      setRefetch(false);
       setLoading(false);
     }
   }
 
-  useEffect(() => getPostsCommentsFromAPI(postID), [ postID ]);
+  /*eslint-disable-next-line react-hooks/exhaustive-deps*/
+  useEffect(() => getPostsCommentsFromAPI(), []);
 
   return {
     comments,
     loading,
+    refetch,
     error,
-    getComments: () => getPostsCommentsFromAPI(postID)
+    getComments: getPostsCommentsFromAPI
   };
 }
 

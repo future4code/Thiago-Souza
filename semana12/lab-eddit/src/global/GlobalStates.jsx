@@ -6,6 +6,7 @@ export default function GlobalStates(props) {
   const {
     posts,
     loading,
+    refetch,
     error,
     getPosts
   } = useGetPosts();
@@ -13,6 +14,7 @@ export default function GlobalStates(props) {
   const states = {
     posts,
     loading,
+    refetch,
     error
   };
   const getters = { getPosts };

@@ -3,9 +3,11 @@ import { useGlobalStates } from "../global/GlobalStates";
 import Post from "./Post";
 
 export default function Posts() {
-  const { posts, loading, error } = useGlobalStates();
+  const {
+    posts, loading, refetch, error
+  } = useGlobalStates();
 
-  if (loading)
+  if (loading && !refetch)
     return <p>Carregando Os Posts</p>;
 
   if (error)
@@ -13,6 +15,7 @@ export default function Posts() {
 
   return (
     <section className="posts">
+      {refetch && <p>Recarregando Posts</p>}
       {posts.map((post) => <Post key={post.id} post={post}/>)}
     </section>
   );

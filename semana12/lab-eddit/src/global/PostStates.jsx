@@ -7,6 +7,7 @@ export default function PostStates(props) {
   const {
     comments,
     loading: loadingComments,
+    refetch: refetchComments,
     error: errorComments,
     getComments
   } = useGetPostsComments(props.id);
@@ -14,6 +15,7 @@ export default function PostStates(props) {
   const {
     posts,
     loading: loadingPost,
+    refetch: refetchPost,
     error: errorPost,
     getPosts
   } = useGlobalStates();
@@ -25,11 +27,13 @@ export default function PostStates(props) {
     post:   {
       data:    post,
       loading: loadingPost,
+      refetch: refetchPost,
       error:   errorPost
     },
     comments: {
       data:    comments,
       loading: loadingComments,
+      refetch: refetchComments,
       error:   errorComments
     }
   };
