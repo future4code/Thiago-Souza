@@ -6,6 +6,7 @@ import Comments from "../components/Comments";
 import CreatePost from "../components/CreateComment";
 import PostStates, { usePostStates } from "../global/PostStates";
 import Logout from "../components/Logout";
+import useCoodinator from "../hooks/useCoordinator";
 
 function ShowPost() {
   const { data, loading, error } = usePostStates().post;
@@ -20,11 +21,15 @@ function ShowPost() {
 
 export default function PostComments() {
   useProtectedPage();
+  const { goToFeed } = useCoodinator();
   const { id } = useParams();
 
   return (
     <>
       <header>
+        <button onClick={goToFeed}>
+          Feed
+        </button>
         <h1>Post</h1>
         <Logout/>
       </header>
