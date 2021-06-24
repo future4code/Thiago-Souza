@@ -5,6 +5,7 @@ import Post from "../components/Post";
 import Comments from "../components/Comments";
 import CreatePost from "../components/CreateComment";
 import PostStates, { usePostStates } from "../global/PostStates";
+import Logout from "../components/Logout";
 
 function ShowPost() {
   const { data, loading, error } = usePostStates().post;
@@ -24,7 +25,8 @@ export default function PostComments() {
   return (
     <>
       <header>
-        Post
+        <h1>Post</h1>
+        <Logout/>
       </header>
       <PostStates id={id}>
         <main className="Post">
