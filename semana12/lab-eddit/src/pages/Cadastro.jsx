@@ -1,5 +1,5 @@
 import React from "react";
-import { singupUser } from "../api";
+import { setToken, singupUser } from "../api";
 import { useCoodinator } from "../hooks/useCoordinator";
 import useForm from "../hooks/useForm";
 
@@ -16,7 +16,7 @@ export default function Cadastro() {
     try {
       event.preventDefault();
       const response = await singupUser(form);
-      localStorage.setItem("token", response.data.token);
+      setToken(response.data.token);
       clearForm();
       goToFeed();
     } catch (error) {

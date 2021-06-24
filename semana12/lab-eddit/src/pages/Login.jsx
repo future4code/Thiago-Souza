@@ -1,7 +1,7 @@
 import React from "react";
 import useForm from "../hooks/useForm";
 import { useCoodinator } from "../hooks/useCoordinator";
-import { loginUser } from "../api";
+import { loginUser, setToken } from "../api";
 
 export default function Login() {
   const { form, clearForm, handleChange } = useForm({
@@ -15,7 +15,7 @@ export default function Login() {
     try {
       event.preventDefault();
       const response = await loginUser(form);
-      localStorage.setItem("token", response.data.token);
+      setToken(response.data.token);
       clearForm();
       goToFeed();
     } catch (error) {

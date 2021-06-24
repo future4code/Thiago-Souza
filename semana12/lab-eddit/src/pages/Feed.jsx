@@ -1,15 +1,14 @@
 import React from "react";
+import Posts from "../components/Posts";
 
 export default function Feed() {
-  console.log(localStorage.getItem("token"));
-
   return (
     <>
       <header>
         Feed
       </header>
       <main className="Feed">
-        Feed
+        <Posts/>
       </main>
     </>
   );
