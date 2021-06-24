@@ -7,9 +7,14 @@ export function useGetPosts() {
   const [ error, setError ] = useState("");
 
   async function getPostsFromAPI() {
+    setLoading(true);
+    const token = getToken();
+
+    if (!token)
+      return setLoading(false);
+
     try {
-      setLoading(true);
-      const response = await getPosts(getToken());
+      const response = await getPosts(token);
       setPosts(response.data);
     } catch (error) {
       setError(error.response.data || "erro fora da api");
@@ -23,6 +28,7 @@ export function useGetPosts() {
   return {
     posts,
     loading,
-    error
+    error,
+    getPosts: getPostsFromAPI
   };
 }

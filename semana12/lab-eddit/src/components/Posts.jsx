@@ -1,9 +1,9 @@
 import React from "react";
-import { useGetPosts } from "../hooks/useGetPosts";
+import { useGlobalStates } from "../global/GlobalStates";
 import Post from "./Post";
 
 export default function Posts() {
-  const { posts, loading, error } = useGetPosts();
+  const { posts, loading, error } = useGlobalStates();
 
   if (loading)
     return <p>Carregando Os Posts</p>;
