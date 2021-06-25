@@ -1,45 +1,37 @@
 import React, { useContext } from "react";
-import useGetPostsComments from "../hooks/useGetPostsComments";
+import useGetPostComments from "../hooks/useGetPostComments";
 import { PostContext } from "./contexts";
-import { useGlobalStates } from "./GlobalStates";
+import { useGlobalGetters, useGlobalStates } from "./GlobalStates";
 
 export default function PostStates(props) {
   const {
+    getComments,
+    fetchNextPageComments,
     comments,
-    loading: loadingComments,
-    refetch: refetchComments,
-    error: errorComments,
-    getComments
-  } = useGetPostsComments(props.id);
+    ...restComments
+  } = useGetPostComments(props.id);
 
-  const {
-    posts,
-    loading: loadingPost,
-    refetch: refetchPost,
-    error: errorPost,
-    getPosts
-  } = useGlobalStates();
+  const { posts, ...restPosts } = useGlobalStates();
+  const gettersPosts = useGlobalGetters();
 
   const post = posts.find((post) => post.id === props.id);
 
   const states = {
     postID: props.id,
     post:   {
-      data:    post,
-      loading: loadingPost,
-      refetch: refetchPost,
-      error:   errorPost
+      data: post,
+      ...restPosts
     },
     comments: {
-      data:    comments,
-      loading: loadingComments,
-      refetch: refetchComments,
-      error:   errorComments
+      data: comments,
+      ...restComments
     }
   };
+
   const getters = {
     getComments,
-    getPosts
+    fetchNextPageComments,
+    ...gettersPosts
   };
 
   return (

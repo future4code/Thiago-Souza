@@ -20,7 +20,7 @@ export function singupUser(user) {
 
 export function getPosts(token, page = 1) {
   return axios.get(
-    `${BASE_URL}/posts?size=60&page=${page}`,
+    `${BASE_URL}/posts?page=${page}`,
     { headers: { Authorization: token } }
   );
 }
@@ -56,9 +56,9 @@ export function deletePostVote(postID, token) {
   );
 }
 
-export function getPostsComments(postID, token) {
+export function getPostComments(postID, token, page) {
   return axios.get(
-    `${BASE_URL}/posts/${postID}/comments`,
+    `${BASE_URL}/posts/${postID}/comments?page=${page}`,
     { headers: { Authorization: token } }
   );
 }

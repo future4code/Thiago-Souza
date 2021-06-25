@@ -28,7 +28,7 @@ export default function useGetPosts() {
     loading:           status === "loading",
     refetch:           status !== "loading" && isFetching,
     fetchNextPagePost: fetchNextPage,
-    hasMorePost:       hasNextPage,
+    hasMorePosts:      hasNextPage,
     error,
     getPosts:          refetch
   };

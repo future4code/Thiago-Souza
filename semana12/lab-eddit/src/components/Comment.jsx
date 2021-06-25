@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  changeCommentVote, createCommentVote, deleteCommentVote, getToken
-} from "../api";
-import { usePostGetters } from "../global/PostStates";
+import useUpdateVoteComment from "../hooks/useUpdateVoteComment";
 
 export default function Comment(props) {
   const {
@@ -10,28 +7,10 @@ export default function Comment(props) {
     username,
     voteSum,
     userVote,
-    id
+    id,
+    postId
   } = props.comment;
-  const { getComments } = usePostGetters();
-
-  async function vote(direction) {
-    try {
-      const token = getToken();
-
-      if (userVote === direction)
-        await deleteCommentVote(id, token);
-
-      else if (userVote)
-        await changeCommentVote(direction, id, token);
-
-      else
-        await createCommentVote(direction, id, token);
-
-      getComments();
-    } catch (error) {
-      alert(`Erro ao fazer o voto\n${error.response.dataa}`);
-    }
-  }
+  const { updateVote } = useUpdateVoteComment(id, postId, userVote);
 
   return (
     <article className="comment">
@@ -41,9 +20,9 @@ export default function Comment(props) {
       <footer>
         <h4>{username}</h4>
         <div className="vote" onClick={(event) => event.stopPropagation()}>
-          <p onClick={() => vote(1)}>UP</p>
+          <p onClick={() => updateVote(1)}>UP</p>
           <p>{voteSum || 0}</p>
-          <p onClick={() => vote(-1)}>DOWN</p>
+          <p onClick={() => updateVote(-1)}>DOWN</p>
         </div>
       </footer>
     </article>

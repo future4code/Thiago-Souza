@@ -1,23 +1,12 @@
 import React from "react";
-import { createComment, getToken } from "../api";
-import useForm from "../hooks/useForm";
-import { usePostGetters, usePostStates } from "../global/PostStates";
+import { usePostStates } from "../global/PostStates";
+import useCreateComment from "../hooks/useCreateComment";
 
 export default function CreatePost() {
-  const { getComments } = usePostGetters();
   const { postID } = usePostStates();
-  const { form, clearForm, handleChange } = useForm({ body: "" });
-
-  async function submitForm(event) {
-    event.preventDefault();
-    try {
-      await createComment(form, postID, getToken());
-      getComments();
-      clearForm();
-    } catch (error) {
-      alert(`Não foi possível fazer o comentário\n${error.response.data}`);
-    }
-  }
+  const {
+    submitForm, form, handleChange, sending
+  } = useCreateComment(postID);
 
   return (
     <form onSubmit={submitForm}>
@@ -30,6 +19,7 @@ export default function CreatePost() {
         required
       />
       <button>Postar</button>
+      <p>{sending && "Criando Comentário"}</p>
     </form>
   );
 }
