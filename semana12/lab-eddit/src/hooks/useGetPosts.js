@@ -1,4 +1,4 @@
-import { getPosts, getToken } from "../api";
+import { getPosts, getToken, sizePagePosts } from "../api";
 import { useInfiniteQuery } from "react-query";
 
 export default function useGetPosts() {
@@ -15,7 +15,7 @@ export default function useGetPosts() {
     async ({ pageParam = 1 }) => (await getPosts(getToken(), pageParam)).data,
     {
       getNextPageParam: (lastPage, pages) => {
-        if (!lastPage.length)
+        if (lastPage.length < sizePagePosts)
           return false;
 
         return pages.length + 1;

@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "react-query";
-import { getPostComments, getToken } from "../api";
+import { getPostComments, getToken, sizePageComments } from "../api";
 
 export default function useGetPostComments(id) {
   const {
@@ -15,7 +15,7 @@ export default function useGetPostComments(id) {
     async ({ pageParam }) => (await getPostComments(id, getToken(), pageParam)).data,
     {
       getNextPageParam: (lastPage, pages) => {
-        if (!lastPage.length)
+        if (lastPage.length < sizePageComments)
           return false;
 
         return pages.length + 1;

@@ -9,14 +9,14 @@ export default function GlobalStates(props) {
     refetch,
     error,
     getPosts,
-    hasMorePost,
+    hasMorePosts,
     fetchNextPagePost
   } = useGetPosts();
 
   const states = {
     posts,
     loading,
-    hasMorePost,
+    hasMorePosts,
     refetch,
     error
   };

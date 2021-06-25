@@ -1,6 +1,8 @@
 import axios from "axios";
 
 const BASE_URL = "https://labeddit.herokuapp.com";
+export const sizePagePosts = 10;
+export const sizePageComments = 10;
 
 export function setToken(newToken) {
   return localStorage.setItem("token", newToken);
@@ -20,7 +22,7 @@ export function singupUser(user) {
 
 export function getPosts(token, page = 1) {
   return axios.get(
-    `${BASE_URL}/posts?page=${page}`,
+    `${BASE_URL}/posts?size=${sizePagePosts}&page=${page}`,
     { headers: { Authorization: token } }
   );
 }
@@ -58,7 +60,7 @@ export function deletePostVote(postID, token) {
 
 export function getPostComments(postID, token, page) {
   return axios.get(
-    `${BASE_URL}/posts/${postID}/comments?page=${page}`,
+    `${BASE_URL}/posts/${postID}/comments?size=${sizePageComments}&page=${page}`,
     { headers: { Authorization: token } }
   );
 }
