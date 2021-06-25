@@ -1,25 +1,10 @@
 import React from "react";
-import { createPost, getToken } from "../api";
-import useForm from "../hooks/useForm";
-import { useGlobalGetters } from "../global/GlobalStates";
+import useCreatePost from "../hooks/useCreatePost";
 
 export default function CreatePost() {
-  const { getPosts } = useGlobalGetters();
-  const { form, clearForm, handleChange } = useForm({
-    title: "",
-    body:  ""
-  });
-
-  async function submitForm(event) {
-    event.preventDefault();
-    try {
-      await createPost(form, getToken());
-      getPosts();
-      clearForm();
-    } catch (error) {
-      alert(`Não foi possível fazer o post\n${error.response.data}`);
-    }
-  }
+  const {
+    submitForm, form, handleChange, sending
+  } = useCreatePost();
 
   return (
     <form onSubmit={submitForm}>
@@ -40,6 +25,7 @@ export default function CreatePost() {
         required
       />
       <button>Postar</button>
+      <p>{sending && "Criando Post"}</p>
     </form>
   );
 }
