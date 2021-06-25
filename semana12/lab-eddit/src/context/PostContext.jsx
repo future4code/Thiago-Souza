@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { createContext, useContext } from "react";
 import useGetPostComments from "../hooks/useGetPostComments";
-import { PostContext } from "./contexts";
-import { useGlobalGetters, useGlobalStates } from "./GlobalStates";
+import { useGlobalGetters, useGlobalStates } from "./GlobalContext";
 
-export default function PostStates(props) {
+export const Context = createContext();
+
+export default function PostContext(props) {
   const {
     getComments,
     fetchNextPageComments,
@@ -35,19 +36,19 @@ export default function PostStates(props) {
   };
 
   return (
-    <PostContext.Provider
+    <Context.Provider
       value={{
         states,
         getters
       }}
     >
       {props.children}
-    </PostContext.Provider>
+    </Context.Provider>
   );
 }
 
 export function usePost() {
-  return useContext(PostContext);
+  return useContext(Context);
 }
 
 export function usePostStates() {

@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { createContext, useContext } from "react";
 import useGetPosts from "../hooks/useGetPosts";
-import { GlobalContext } from "./contexts";
 
-export default function GlobalStates(props) {
+export const Context = createContext();
+
+export default function GlobalContext(props) {
   const {
     posts,
     loading,
@@ -26,19 +27,19 @@ export default function GlobalStates(props) {
   };
 
   return (
-    <GlobalContext.Provider
+    <Context.Provider
       value={{
         states,
         getters
       }}
     >
       {props.children}
-    </GlobalContext.Provider>
+    </Context.Provider>
   );
 }
 
 export function useGlobal() {
-  return useContext(GlobalContext);
+  return useContext(Context);
 }
 
 export function useGlobalStates() {

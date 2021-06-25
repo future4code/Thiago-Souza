@@ -1,5 +1,5 @@
 import React from "react";
-import { useGlobalGetters, useGlobalStates } from "../global/GlobalStates";
+import { useGlobalGetters, useGlobalStates } from "../context/GlobalContext";
 import Post from "./Post";
 
 export default function Posts() {

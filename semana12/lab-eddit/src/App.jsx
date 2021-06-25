@@ -1,6 +1,6 @@
 import React from "react";
 import Router from "./routes/Router";
-import GlobalStates from "./global/GlobalStates";
+import GlobalContext from "./context/GlobalContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
@@ -8,9 +8,9 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalStates>
+      <GlobalContext>
         <Router/>
-      </GlobalStates>
+      </GlobalContext>
     </QueryClientProvider>
   );
 }

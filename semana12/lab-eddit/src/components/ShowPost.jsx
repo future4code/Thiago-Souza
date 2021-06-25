@@ -1,5 +1,5 @@
 import React from "react";
-import { usePostStates } from "../global/PostStates";
+import { usePostStates } from "../context/PostContext";
 import Post from "./Post";
 
 export default function ShowPost() {

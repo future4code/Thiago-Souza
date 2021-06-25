@@ -1,5 +1,5 @@
 import React from "react";
-import { usePostGetters, usePostStates } from "../global/PostStates";
+import { usePostGetters, usePostStates } from "../context/PostContext";
 import Comment from "./Comment";
 
 export default function Comments() {

@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { getToken } from "../api";
-import { useGlobalGetters } from "../global/GlobalStates";
+import { useGlobalGetters } from "../context/GlobalContext";
 import useCoodinator from "../hooks/useCoordinator";
 
 export default function useProtectedPage() {
