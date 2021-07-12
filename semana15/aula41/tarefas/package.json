@@ -1,0 +1,16 @@
+{
+  "name": "tarefas",
+  "version": "1.0.0",
+  "description": "Um exemplo de como usar nodejs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "keywords": [
+    "npm",
+    "node",
+    "lanebu"
+  ],
+  "author": "Thiago Felipe",
+  "license": "ISC"
+}
