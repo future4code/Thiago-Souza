@@ -1,0 +1,9 @@
+## Exercício 1
+- 1. Eu usaria o método GET
+- 2. A entidade seria __users__
+
+## Exercício 2
+- 1. Passar o parâmetro como uma query string, poderia usar uma path param
+
+## Exercício 3
+- 1. Pode utilizar um query param
