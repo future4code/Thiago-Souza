@@ -108,9 +108,12 @@ export function createAccount(request: Request, response: Response): void {
 }
 
 export function getAllAccounts(_request: Request, response: Response): void {
-  const accountsResponse = accounts.map(({ id, name, balance }) => ({
+  const accountsResponse = accounts.map(({
+    id, name, cpf, balance
+  }) => ({
     id,
     name,
+    cpf,
     balance
   }));
 
@@ -182,9 +185,9 @@ export function getStaments(_request: Request, response: Response): void {
 }
 
 export function makeDeposit(request: Request, response: Response): void {
-  const { value, name } = request.body;
-  if (!value || !name) {
-    response.status(400).send(errors.requiredFields([ "value", "name" ]));
+  const { value } = request.body;
+  if (!value) {
+    response.status(400).send(errors.requiredFields([ "value" ]));
     return;
   }
 
@@ -208,19 +211,13 @@ export function makeDeposit(request: Request, response: Response): void {
     description: "Depósito de dinheiro"
   });
 
-  response.send(201).send("The deposit was made");
+  response.status(201).send("The deposit was made");
 }
 
 export function makePaymentScheduling(request: Request, response: Response): void {
-  const {
-    date, value, name, description
-  } = request.body;
-  if (!value || !name || !description) {
-    const fields = [
-      "value",
-      "name",
-      "description"
-    ];
+  const { date, value, description } = request.body;
+  if (!value || !description) {
+    const fields = [ "value", "description" ];
     response.status(400).send(errors.requiredFields(fields));
     return;
   }
@@ -231,14 +228,16 @@ export function makePaymentScheduling(request: Request, response: Response): voi
     return;
   }
 
-  const timestamp = Date.parse(date);
-  if (date && isNaN(timestamp)) {
+  const timestamp = date ? Date.parse(date) : undefined;
+  if (timestamp && isNaN(timestamp)) {
     response.status(400).send(errors.invalidDate);
     return;
   }
 
-  const datePayment = new Date(date ? timestamp : "");
   const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  const datePayment = timestamp ? new Date(timestamp) : today;
+  datePayment.setUTCHours(0, 0, 0, 0);
   if (datePayment.getTime() < today.getTime()) {
     response.status(400).send(errors.dateLessToday);
     return;
@@ -248,7 +247,7 @@ export function makePaymentScheduling(request: Request, response: Response): voi
   const index = response.locals.accountIndex as number;
 
   if (datePayment === today) {
-    if (payment < account.balance) {
+    if (payment > account.balance) {
       response.status(400).send(errors.paymentGreateBalance);
       return;
     }
@@ -261,6 +260,8 @@ export function makePaymentScheduling(request: Request, response: Response): voi
     value: -value,
     description
   });
+
+  response.status(201).send("The payment was scheduled");
 }
 
 export function makeTransfer(request: Request, response: Response): void {
