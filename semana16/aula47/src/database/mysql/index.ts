@@ -1,5 +1,5 @@
 import { knex } from "knex";
-import { Actor } from "../../@types";
+import { Actor, Gender } from "../../@types";
 
 const connection = knex({
   client:     process.env.DATABASE_TYPE,
@@ -18,4 +18,12 @@ export async function searchActorByName(name: string): Promise<Actor|undefined> 
     .select("*")
     .where("name", name)
     .first();
+}
+
+export async function countByGender(gender: Gender): Promise<{count: number}> {
+  const result = await connection("Actor")
+    .count("*", { as: "count" })//eslint-disable-line id-length
+    .where({ gender })
+    .first();
+  return result as {count: number};
 }
