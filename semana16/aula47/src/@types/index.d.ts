@@ -1,9 +1,10 @@
 import { Knex } from "knex";
 
+export type ID = string;
 export type Gender = "male" | "female";
 
 export interface Actor {
-  id: string;
+  id: ID;
   name: string;
   salary: number;
   birth_date: Date;

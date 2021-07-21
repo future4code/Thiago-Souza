@@ -1,7 +1,7 @@
 import "./env";
 import express from "express";
 import cors from "cors";
-import { countByGender, searchActorByName } from "./handlers/actor";
+import { countByGender, searchActorByName, updateSalary } from "./handlers/actor";
 
 const serverPort = process.env.NODE_PORT || 3003;
 
@@ -11,6 +11,7 @@ server.use(cors());
 
 server.get("/actors/name/:name", searchActorByName);
 server.get("/actors/gender/:gender", countByGender);
+server.put("/actors/salary/:id", updateSalary);
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)

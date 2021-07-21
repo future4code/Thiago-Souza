@@ -1,5 +1,5 @@
 import { knex } from "knex";
-import { Actor, Gender } from "../../@types";
+import { Actor, Gender, ID } from "../../@types";
 
 const connection = knex({
   client:     process.env.DATABASE_TYPE,
@@ -13,17 +13,26 @@ const connection = knex({
   }
 });
 
-export async function searchActorByName(name: string): Promise<Actor|undefined> {
+export async function searchActorByName(name: string): Promise<Actor[]> {
   return await connection("Actor")
     .select("*")
-    .where("name", name)
-    .first();
+    .where({ name });
 }
 
-export async function countByGender(gender: Gender): Promise<{count: number}> {
-  const result = await connection("Actor")
-    .count("*", { as: "count" })//eslint-disable-line id-length
+export async function countByGender(gender: Gender)
+: Promise<{count: number|string}> {
+  return await connection("Actor")
+    .count("gender", { as: "count" })//eslint-disable-line id-length
     .where({ gender })
-    .first();
-  return result as {count: number};
+    .first() || { count: 0 };
 }
+
+export async function updateSalary(id: ID, salary: number): Promise<number> {
+  return await connection("Actor")
+    .update({ salary })
+    .where({ id });
+}
+
+/*
+SELECT * from Actor;
+*/
