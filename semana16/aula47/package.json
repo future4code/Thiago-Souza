@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx tsc && node build/index.js"
+    "start": "npx tsc && node build/index.js",
+    "lint": "npx eslint --fix ./src"
   },
   "keywords": [],
   "author": "",
