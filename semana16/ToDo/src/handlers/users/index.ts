@@ -1,11 +1,17 @@
 import { Request, Response } from "express";
 import { UserSchmeaWithoutId } from "../../validate";
-import { createUser as createUserDatabase } from "../../database/mysql";
+import {
+  createUser as createUserDatabase,
+  getUserByID as getUserByIDDatabase
+} from "../../database/mysql";
+import { validate as uuidValidate } from "uuid";
 
 /*eslint-disable max-len*/
 const errors = {
   unexpected:                "Unexpect error",
-  alreadyExistNicknameEmail: "Nickname or email already exist"
+  alreadyExistNicknameEmail: "Nickname or email already exist",
+  invalidID:                 "The ID must be a valid ID",
+  userNotFound:              "User not found"
 };
 
 export async function createUser(request: Request, response: Response)
@@ -37,5 +43,29 @@ export async function createUser(request: Request, response: Response)
     }
 
     response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function getUserByID(request: Request, response: Response)
+:Promise<void> {
+  const { id } = request.params;
+  if (!id || !uuidValidate(id)) {
+    response.status(400).send(errors.invalidID);
+    return;
+  }
+
+  try {
+    const user = await getUserByIDDatabase(id);
+    if (!user) {
+      response.status(404).send(errors.userNotFound);
+      return;
+    }
+
+    response.send({
+      id:       user.id,
+      nickname: user.nickname
+    });
+  } catch (error) {
+    response.send(500).send(errors.unexpected);
   }
 }

@@ -1,6 +1,6 @@
 import { v1 as uuidv1 } from "uuid";
 import knex from "knex";
-import { User } from "../../@types";
+import { ID, User } from "../../@types";
 
 const connection = knex({
   client:     process.env.DATABASE_TYPE,
@@ -23,4 +23,11 @@ export async function createUser(user: Omit<User, "id">): Promise<User> {
   await connection("TodoListUser").insert(newUser);
 
   return newUser;
+}
+
+export async function getUserByID(id: ID): Promise<User|undefined> {
+  return await connection("TodoListUser")
+    .select("*")
+    .where({ id })
+    .first();
 }

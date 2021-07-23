@@ -1,7 +1,7 @@
 import "./env";
 import express from "express";
 import cors from "cors";
-import { createUser } from "./handlers/users";
+import { createUser, getUserByID } from "./handlers/users";
 
 const serverPort = process.env.NODE_PORT || "3003";
 
@@ -10,6 +10,7 @@ server.use(cors());
 server.use(express.json());
 
 server.post("/user", createUser);
+server.get("/user/:id", getUserByID);
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)
