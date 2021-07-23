@@ -1,6 +1,6 @@
 import { v1 as uuidv1 } from "uuid";
 import knex from "knex";
-import { ID, User } from "../../@types";
+import { ID, Task, User } from "../../@types";
 
 const connection = knex({
   client:     process.env.DATABASE_TYPE,
@@ -16,8 +16,8 @@ const connection = knex({
 
 export async function createUser(user: Omit<User, "id">): Promise<User> {
   const newUser = {
-    id: uuidv1(),
-    ...user
+    ...user,
+    id: uuidv1()
   };
 
   await connection("TodoListUser").insert(newUser);
@@ -39,4 +39,16 @@ export async function updateUser(user: Omit<User, "email">): Promise<number> {
       nickname: user.nickname
     })
     .where({ id: user.id });
+}
+
+export async function createTask(task: Omit<Task, "id">): Promise<Task> {
+  const newTask = {
+    ...task,
+    id:     uuidv1(),
+    status: task.status || "to_do"
+  };
+
+  await connection("TodoListTask").insert(newTask);
+
+  return newTask;
 }

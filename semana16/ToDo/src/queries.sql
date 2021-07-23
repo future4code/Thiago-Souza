@@ -38,3 +38,5 @@ DROP TABLE TodoListTask;
 DROP TABLE TodoListResponsibleUserTaskRelation;
 
 SELECT * FROM TodoListUser;
+
+SELECT * FROM TodoListTask;

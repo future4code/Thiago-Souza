@@ -7,6 +7,7 @@ import {
   updateUser,
   validateID
 } from "./handlers/users";
+import { createTask } from "./handlers/task";
 
 const serverPort = process.env.NODE_PORT || "3003";
 
@@ -17,6 +18,8 @@ server.use(express.json());
 server.post("/user", createUser);
 server.get("/user/:id", validateID, getUserByID);
 server.put("/user/edit/:id", validateID, updateUser);
+
+server.post("/task", createTask);
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)
