@@ -8,7 +8,11 @@ import {
   updateUser,
   validateID
 } from "./handlers/user";
-import { createTask, getTaskByID } from "./handlers/task";
+import {
+  createTask,
+  getTaskByID,
+  getTasksByUserID
+} from "./handlers/task";
 
 const serverPort = process.env.NODE_PORT || "3003";
 
@@ -22,6 +26,7 @@ server.get("/user/:id", validateID, getUserByID);
 server.put("/user/edit/:id", validateID, updateUser);
 
 server.post("/task", createTask);
+server.get("/task", getTasksByUserID);
 server.get("/task/:id", validateID, getTaskByID);
 
 const serverListener = server.listen(serverPort, () => {

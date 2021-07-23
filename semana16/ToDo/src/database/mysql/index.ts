@@ -86,7 +86,7 @@ export async function getTaskByID(id: ID): Promise<TaskWithUser|undefined> {
     .first() as TaskWithUser | undefined;
 }
 
-export async function getTasksByUser(userID: ID): Promise<TaskWithUser[]> {
+export async function getTasksByUserID(userID: ID): Promise<TaskWithUser[]> {
   return await connection("TodoListTask")
     .join("TodoListUser", { "TodoListUser.id": "TodoListTask.creator_user_id" })
     .select(

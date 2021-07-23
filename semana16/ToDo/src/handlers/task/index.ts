@@ -2,14 +2,17 @@ import { Request, Response } from "express";
 import { TaskSchemaWithoutID } from "../../validate";
 import {
   createTask as createTaskDatabase,
-  getTaskByID as getTaskByIDDatabase
+  getTaskByID as getTaskByIDDatabase,
+  getTasksByUserID as getTasksByUserIDDatabase
 } from "../../database/mysql";
+import { validate as uuidValidate } from "uuid";
 
 /*eslint-disable max-len*/
 const errors = {
-  unexpected:   "Unexpect error",
-  taskNotFound: "Task not found",
-  userNotFound: "User not found"
+  unexpected:           "Unexpect error",
+  invalidCreatorUserID: "The creatorUserId must be a valid User ID",
+  taskNotFound:         "Task not found",
+  userNotFound:         "User not found"
 };
 
 export async function createTask(request: Request, response: Response)
@@ -64,7 +67,32 @@ export async function getTaskByID(request: Request, response: Response)
       return;
     }
 
-    response.send(task);
+    response.send({
+      ...task,
+      limitDate: new Date(task.limitDate).toLocaleDateString("pt-BR")
+    });
+  } catch (error) {
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function getTasksByUserID(request: Request, response: Response)
+: Promise<void> {
+  const { creatorUserID } = request.query;
+  if (!creatorUserID || typeof creatorUserID !== "string" || !uuidValidate(creatorUserID)) {
+    response.status(400).send(errors.invalidCreatorUserID);
+    return;
+  }
+
+  try {
+    const tasks = await getTasksByUserIDDatabase(creatorUserID);
+
+    response.send({
+      tasks: tasks.map((task) => ({
+        ...task,
+        limitDate: new Date(task.limitDate).toLocaleDateString("pt-BR")
+      }))
+    });
   } catch (error) {
     response.status(500).send(errors.unexpected);
   }
