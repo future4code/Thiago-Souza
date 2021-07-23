@@ -41,4 +41,6 @@ SELECT * FROM TodoListUser;
 
 SELECT * FROM TodoListTask;
 
+SELECT * FROM TodoListResponsibleUserTaskRelation;
+
 select TodoListTask.id as taskId, TodoListUser.nickname as userNickname from `TodoListTask` inner join `TodoListUser` on `TodoListUser`.`id` = `TodoListTask`.`creator_user_id` where `TodoListUser`.`id` = '99960540-eb57-11eb-940b-0f041ed21a9c' limit 1;

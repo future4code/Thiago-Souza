@@ -24,7 +24,7 @@ export interface TaskDatase extends Omit<Task, "limitDate"| "creatorUserID"> {
   creator_user_id: ID;
 }
 
-interface TaskWithUser {
+export interface TaskWithUser {
   taskId: ID,
   title: string,
   description: string;
@@ -32,6 +32,16 @@ interface TaskWithUser {
   status: Status;
   creatorUserId: ID;
   creatorUserNickname: string;
+}
+
+export interface TaskResponsible {
+  taskID: ID;
+  responsibleUserID: ID;
+}
+
+export interface TaskResponsibleDatabase {
+  task_id: ID;
+  responsible_user_id: ID;
 }
 
 //Veja https://knexjs.org/#typescript-support
@@ -48,6 +58,12 @@ declare module "knex/types/tables" {
       TaskDatase,
       Omit<TaskDatase, "id" | "creator_user_id">,
       Partial<Omit<TaskDatase, "id" | "creator_user_id">>
+    >;
+    TodoListResponsibleUserTaskRelation: TaskResponsibleDatabase;
+    TodoListResponsibleUserTaskRelation_composite: Knex.CompositeTableType<
+      TaskResponsibleDatabase,
+      TaskResponsibleDatabase,
+      TaskResponsibleDatabase
     >;
   }
 }

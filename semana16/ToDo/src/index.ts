@@ -6,6 +6,7 @@ import {
   getAllUsers,
   getUserByID,
   searchUser,
+  taskResponsible,
   updateUser,
   validateID
 } from "./handlers/user";
@@ -29,6 +30,7 @@ server.put("/user/edit/:id", validateID, updateUser);
 
 server.get("/task", getTasksByUserID);
 server.post("/task", createTask);
+server.post("/task/responsible", taskResponsible);
 server.get("/task/:id", validateID, getTaskByID);
 
 const serverListener = server.listen(serverPort, () => {

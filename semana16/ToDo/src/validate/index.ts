@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { User, Task } from "../@types";
+import { User, Task, TaskResponsible } from "../@types";
 
 const minLength = 6;
 const maxLength = 255;
@@ -56,3 +56,12 @@ export const TaskSchema: yup.SchemaOf<Task> = yup.object({
 
 export const TaskSchemaWithoutID: yup.SchemaOf<Omit<Task, "id">>
   = TaskSchema.omit([ "id" ]);
+
+export const TaskResponsibleSchema: yup.SchemaOf<TaskResponsible> = yup.object({
+  taskID: yup.string()
+    .uuid()
+    .defined(),
+  responsibleUserID: yup.string()
+    .uuid()
+    .defined()
+});

@@ -3,6 +3,7 @@ import knex from "knex";
 import {
   ID,
   Task,
+  TaskResponsible,
   TaskWithUser,
   User
 } from "../../@types";
@@ -105,5 +106,16 @@ export async function getTasksByUserID(userID: ID): Promise<TaskWithUser[]> {
       "TodoListUser.nickname as creatorUserNickname"
     )
     .where("TodoListUser.id", userID);
+}
+
+export async function taskResponsible(responsible: TaskResponsible)
+: Promise<unknown> {
+  await connection("TodoListResponsibleUserTaskRelation")
+    .insert({
+      task_id:             responsible.taskID,
+      responsible_user_id: responsible.responsibleUserID
+    });
+
+  return responsible;
 }
 

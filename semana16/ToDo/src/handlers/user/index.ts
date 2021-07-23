@@ -1,11 +1,16 @@
 import { NextFunction, Request, Response } from "express";
-import { UserNameNickname, UserSchemaWithoutId } from "../../validate";
+import {
+  TaskResponsibleSchema,
+  UserNameNickname,
+  UserSchemaWithoutId
+} from "../../validate";
 import {
   searchUser as searchUserDatabase,
   createUser as createUserDatabase,
   getUserByID as getUserByIDDatabase,
   getAllUsers as getAllUsersDatabase,
-  updateUser as updateUserDatabase
+  updateUser as updateUserDatabase,
+  taskResponsible as taskResponsibleDatabase
 } from "../../database/mysql";
 import { validate as uuidValidate } from "uuid";
 
@@ -16,7 +21,8 @@ const errors = {
   alreadyExistNickname:      "Nickname already exist",
   invalidID:                 "The ID must be a valid ID",
   userNotFound:              "User not found",
-  invalidQuery:              "The query must be a string"
+  invalidQuery:              "The query must be a string",
+  taskUserNotFound:          "Task ID or user ID not found"
 };
 
 export async function searchUser(request: Request, response: Response)
@@ -151,6 +157,36 @@ export async function updateUser(request: Request, response: Response)
 
     if (error.code === "ER_DUP_ENTRY") {
       response.status(409).send(errors.alreadyExistNickname);
+      return;
+    }
+
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function taskResponsible(request: Request, response: Response)
+: Promise<void> {
+  const { taskID, responsibleUserID } = request.body;
+  try {
+    await TaskResponsibleSchema.validate({
+      taskID,
+      responsibleUserID
+    }, { abortEarly: false });
+
+    await taskResponsibleDatabase({
+      taskID,
+      responsibleUserID
+    });
+
+    response.send("Responsible task created");
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      response.status(400).send(error.errors);
+      return;
+    }
+
+    if (error.code.includes("ER_NO_REFERENCED_ROW")) {
+      response.status(404).send(errors.taskUserNotFound);
       return;
     }
 
