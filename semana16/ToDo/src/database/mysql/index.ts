@@ -19,6 +19,12 @@ const connection = knex({
   }
 });
 
+export async function searchUser(query: string): Promise<User[]> {
+  return await connection("TodoListUser")
+    .where("name", "like", `%${query}%`)
+    .orWhere("nickname", "like", `%${query}%`);
+}
+
 export async function createUser(user: Omit<User, "id">): Promise<User> {
   const newUser = {
     ...user,

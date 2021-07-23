@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { UserNameNickname, UserSchemaWithoutId } from "../../validate";
 import {
+  searchUser as searchUserDatabase,
   createUser as createUserDatabase,
   getUserByID as getUserByIDDatabase,
   getAllUsers as getAllUsersDatabase,
@@ -14,8 +15,31 @@ const errors = {
   alreadyExistNicknameEmail: "Nickname or email already exist",
   alreadyExistNickname:      "Nickname already exist",
   invalidID:                 "The ID must be a valid ID",
-  userNotFound:              "User not found"
+  userNotFound:              "User not found",
+  invalidQuery:              "The query must be a string"
 };
+
+export async function searchUser(request: Request, response: Response)
+: Promise<void> {
+  const { query } = request.query;
+  if (!query || typeof query !== "string") {
+    response.status(400).send(errors.invalidQuery);
+    return;
+  }
+
+  try {
+    const users = await searchUserDatabase(query);
+
+    response.send({
+      users: users.map(({ id, nickname }) => ({
+        id,
+        nickname
+      }))
+    });
+  } catch (error) {
+    response.status(500).send(errors.unexpected);
+  }
+}
 
 export async function createUser(request: Request, response: Response)
 : Promise<void> {

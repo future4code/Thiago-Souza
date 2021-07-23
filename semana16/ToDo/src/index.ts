@@ -5,6 +5,7 @@ import {
   createUser,
   getAllUsers,
   getUserByID,
+  searchUser,
   updateUser,
   validateID
 } from "./handlers/user";
@@ -20,13 +21,14 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
+server.get("/user", searchUser);
 server.post("/user", createUser);
 server.get("/user/all", getAllUsers);
 server.get("/user/:id", validateID, getUserByID);
 server.put("/user/edit/:id", validateID, updateUser);
 
-server.post("/task", createTask);
 server.get("/task", getTasksByUserID);
+server.post("/task", createTask);
 server.get("/task/:id", validateID, getTaskByID);
 
 const serverListener = server.listen(serverPort, () => {
