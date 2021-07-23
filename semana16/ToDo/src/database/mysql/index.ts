@@ -1,7 +1,10 @@
 import { v1 as uuidv1 } from "uuid";
 import knex from "knex";
 import {
-  ID, Task, TaskWithUser, User
+  ID,
+  Task,
+  TaskWithUser,
+  User
 } from "../../@types";
 
 const connection = knex({
@@ -32,6 +35,11 @@ export async function getUserByID(id: ID): Promise<User|undefined> {
     .select("*")
     .where({ id })
     .first();
+}
+
+export async function getAllUsers(): Promise<User[]> {
+  return await connection("TodoListUser")
+    .select("*");
 }
 
 export async function updateUser(user: Omit<User, "email">): Promise<number> {
@@ -76,5 +84,20 @@ export async function getTaskByID(id: ID): Promise<TaskWithUser|undefined> {
     )
     .where("TodoListTask.id", id)
     .first() as TaskWithUser | undefined;
+}
+
+export async function getTasksByUser(userID: ID): Promise<TaskWithUser[]> {
+  return await connection("TodoListTask")
+    .join("TodoListUser", { "TodoListUser.id": "TodoListTask.creator_user_id" })
+    .select(
+      "TodoListTask.id as taskId",
+      "TodoListTask.title as title",
+      "TodoListTask.description as description",
+      "TodoListTask.limit_date as limitDate",
+      "TodoListTask.status as status",
+      "TodoListUser.id as creatorUserId",
+      "TodoListUser.nickname as creatorUserNickname"
+    )
+    .where("TodoListUser.id", userID);
 }
 

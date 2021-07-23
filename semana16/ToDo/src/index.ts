@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import {
   createUser,
+  getAllUsers,
   getUserByID,
   updateUser,
   validateID
@@ -16,6 +17,7 @@ server.use(cors());
 server.use(express.json());
 
 server.post("/user", createUser);
+server.get("/user/all", getAllUsers);
 server.get("/user/:id", validateID, getUserByID);
 server.put("/user/edit/:id", validateID, updateUser);
 

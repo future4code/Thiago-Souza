@@ -3,6 +3,7 @@ import { UserNameNickname, UserSchemaWithoutId } from "../../validate";
 import {
   createUser as createUserDatabase,
   getUserByID as getUserByIDDatabase,
+  getAllUsers as getAllUsersDatabase,
   updateUser as updateUserDatabase
 } from "../../database/mysql";
 import { validate as uuidValidate } from "uuid";
@@ -73,6 +74,22 @@ export async function getUserByID(request: Request, response: Response)
     response.send({
       id:       user.id,
       nickname: user.nickname
+    });
+  } catch (error) {
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function getAllUsers(_request: Request, response: Response)
+: Promise<void> {
+  try {
+    const users = await getAllUsersDatabase();
+
+    response.send({
+      users: users.map(({ nickname, id }) => ({
+        id,
+        nickname
+      }))
     });
   } catch (error) {
     response.status(500).send(errors.unexpected);
