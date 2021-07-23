@@ -75,7 +75,7 @@ export async function getUserByID(request: Request, response: Response)
       nickname: user.nickname
     });
   } catch (error) {
-    response.send(500).send(errors.unexpected);
+    response.status(500).send(errors.unexpected);
   }
 }
 

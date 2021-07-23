@@ -1,10 +1,14 @@
 import { Request, Response } from "express";
 import { TaskSchemaWithoutID } from "../../validate";
-import { createTask as createTaskDatabase } from "../../database/mysql";
+import {
+  createTask as createTaskDatabase,
+  getTaskByID as getTaskByIDDatabase
+} from "../../database/mysql";
 
 /*eslint-disable max-len*/
 const errors = {
   unexpected:   "Unexpect error",
+  taskNotFound: "Task not found",
   userNotFound: "User not found"
 };
 
@@ -45,6 +49,23 @@ export async function createTask(request: Request, response: Response)
       return;
     }
 
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function getTaskByID(request: Request, response: Response)
+: Promise<void> {
+  const { id } = request.params;
+
+  try {
+    const task = await getTaskByIDDatabase(id);
+    if (!task) {
+      response.status(404).send(errors.taskNotFound);
+      return;
+    }
+
+    response.send(task);
+  } catch (error) {
     response.status(500).send(errors.unexpected);
   }
 }

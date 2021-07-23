@@ -1,6 +1,8 @@
 import { v1 as uuidv1 } from "uuid";
 import knex from "knex";
-import { ID, Task, User } from "../../@types";
+import {
+  ID, Task, TaskWithUser, User
+} from "../../@types";
 
 const connection = knex({
   client:     process.env.DATABASE_TYPE,
@@ -52,3 +54,20 @@ export async function createTask(task: Omit<Task, "id">): Promise<Task> {
 
   return newTask;
 }
+
+export async function getTaskByID(id: ID): Promise<TaskWithUser|undefined> {
+  return await connection("TodoListTask")
+    .join("TodoListUser", { "TodoListUser.id": "TodoListTask.creator_user_id" })
+    .select(
+      "TodoListTask.id as taskId",
+      "TodoListTask.title as title",
+      "TodoListTask.description as description",
+      "TodoListTask.limit_date as limitDate",
+      "TodoListTask.status as status",
+      "TodoListUser.id as creatorUserId",
+      "TodoListUser.nickname as creatorUserNickname"
+    )
+    .where("TodoListTask.id", id)
+    .first() as TaskWithUser | undefined;
+}
+

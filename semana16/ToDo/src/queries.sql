@@ -40,3 +40,5 @@ DROP TABLE TodoListResponsibleUserTaskRelation;
 SELECT * FROM TodoListUser;
 
 SELECT * FROM TodoListTask;
+
+select TodoListTask.id as taskId, TodoListUser.nickname as userNickname from `TodoListTask` inner join `TodoListUser` on `TodoListUser`.`id` = `TodoListTask`.`creator_user_id` where `TodoListTask`.`id` = '4f3de9a0-ebce-11eb-9e19-4738b8ad2821' limit 1;

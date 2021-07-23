@@ -18,6 +18,16 @@ export interface Task {
   creator_user_id: ID;
 }
 
+interface TaskWithUser {
+  taskId: ID,
+  title: string,
+  description: string;
+  limitDate: Date;
+  status: "to_do" | "doing" | "done";
+  creatorUserId: ID;
+  creatorUserNickname: string;
+}
+
 //Veja https://knexjs.org/#typescript-support
 declare module "knex/types/tables" {
   interface Tables {
