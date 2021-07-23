@@ -4,6 +4,7 @@ import cors from "cors";
 import {
   createUser,
   getAllUsers,
+  getResponsibleUsers,
   getUserByID,
   searchUser,
   taskResponsible,
@@ -32,6 +33,7 @@ server.get("/task", getTasksByUserID);
 server.post("/task", createTask);
 server.post("/task/responsible", taskResponsible);
 server.get("/task/:id", validateID, getTaskByID);
+server.get("/task/:id/responsible", validateID, getResponsibleUsers);
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)

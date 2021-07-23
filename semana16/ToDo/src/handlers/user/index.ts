@@ -10,7 +10,8 @@ import {
   getUserByID as getUserByIDDatabase,
   getAllUsers as getAllUsersDatabase,
   updateUser as updateUserDatabase,
-  taskResponsible as taskResponsibleDatabase
+  taskResponsible as taskResponsibleDatabase,
+  getResponsibleUsers as getResponsibleUsersDatabase
 } from "../../database/mysql";
 import { validate as uuidValidate } from "uuid";
 
@@ -36,12 +37,7 @@ export async function searchUser(request: Request, response: Response)
   try {
     const users = await searchUserDatabase(query);
 
-    response.send({
-      users: users.map(({ id, nickname }) => ({
-        id,
-        nickname
-      }))
-    });
+    response.send({ users });
   } catch (error) {
     response.status(500).send(errors.unexpected);
   }
@@ -101,10 +97,7 @@ export async function getUserByID(request: Request, response: Response)
       return;
     }
 
-    response.send({
-      id:       user.id,
-      nickname: user.nickname
-    });
+    response.send(user);
   } catch (error) {
     response.status(500).send(errors.unexpected);
   }
@@ -115,12 +108,7 @@ export async function getAllUsers(_request: Request, response: Response)
   try {
     const users = await getAllUsersDatabase();
 
-    response.send({
-      users: users.map(({ nickname, id }) => ({
-        id,
-        nickname
-      }))
-    });
+    response.send({ users });
   } catch (error) {
     response.status(500).send(errors.unexpected);
   }
@@ -167,6 +155,7 @@ export async function updateUser(request: Request, response: Response)
 export async function taskResponsible(request: Request, response: Response)
 : Promise<void> {
   const { taskID, responsibleUserID } = request.body;
+
   try {
     await TaskResponsibleSchema.validate({
       taskID,
@@ -190,6 +179,19 @@ export async function taskResponsible(request: Request, response: Response)
       return;
     }
 
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function getResponsibleUsers(request: Request, response: Response)
+: Promise<void> {
+  const { id } = request.params;
+
+  try {
+    const users = await getResponsibleUsersDatabase(id);
+
+    response.send({ users });
+  } catch (error) {
     response.status(500).send(errors.unexpected);
   }
 }

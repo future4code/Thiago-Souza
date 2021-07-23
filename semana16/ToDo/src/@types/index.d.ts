@@ -10,6 +10,8 @@ export interface User {
   email: string;
 }
 
+export type UserResponse = Pick<User, "id" | "nickname">;
+
 export interface Task {
   id: ID;
   title: string;

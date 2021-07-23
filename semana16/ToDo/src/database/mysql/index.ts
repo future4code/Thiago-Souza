@@ -5,7 +5,8 @@ import {
   Task,
   TaskResponsible,
   TaskWithUser,
-  User
+  User,
+  UserResponse
 } from "../../@types";
 
 const connection = knex({
@@ -20,8 +21,9 @@ const connection = knex({
   }
 });
 
-export async function searchUser(query: string): Promise<User[]> {
+export async function searchUser(query: string): Promise<UserResponse[]> {
   return await connection("TodoListUser")
+    .select("id", "nickname")
     .where("name", "like", `%${query}%`)
     .orWhere("nickname", "like", `%${query}%`);
 }
@@ -37,16 +39,16 @@ export async function createUser(user: Omit<User, "id">): Promise<User> {
   return newUser;
 }
 
-export async function getUserByID(id: ID): Promise<User|undefined> {
+export async function getUserByID(id: ID): Promise<UserResponse|undefined> {
   return await connection("TodoListUser")
-    .select("*")
+    .select("id", "nickname")
     .where({ id })
     .first();
 }
 
-export async function getAllUsers(): Promise<User[]> {
+export async function getAllUsers(): Promise<UserResponse[]> {
   return await connection("TodoListUser")
-    .select("*");
+    .select("id", "nickname");
 }
 
 export async function updateUser(user: Omit<User, "email">): Promise<number> {
@@ -109,7 +111,7 @@ export async function getTasksByUserID(userID: ID): Promise<TaskWithUser[]> {
 }
 
 export async function taskResponsible(responsible: TaskResponsible)
-: Promise<unknown> {
+: Promise<TaskResponsible> {
   await connection("TodoListResponsibleUserTaskRelation")
     .insert({
       task_id:             responsible.taskID,
@@ -117,5 +119,19 @@ export async function taskResponsible(responsible: TaskResponsible)
     });
 
   return responsible;
+}
+
+export async function getResponsibleUsers(taskID: ID): Promise<UserResponse[]> {
+  return await connection("TodoListResponsibleUserTaskRelation")
+    .join(
+      "TodoListUser",
+      "TodoListUser.id",
+      "TodoListResponsibleUserTaskRelation.responsible_user_id"
+    )
+    .select(
+      "TodoListUser.id as id",
+      "TodoListUser.nickname as nickname"
+    )
+    .where("TodoListResponsibleUserTaskRelation.task_id", taskID);
 }
 
