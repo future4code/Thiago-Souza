@@ -31,3 +31,12 @@ export async function getUserByID(id: ID): Promise<User|undefined> {
     .where({ id })
     .first();
 }
+
+export async function updateUser(user: Omit<User, "email">): Promise<number> {
+  return await connection("TodoListUser")
+    .update({
+      name:     user.name,
+      nickname: user.nickname
+    })
+    .where({ id: user.id });
+}

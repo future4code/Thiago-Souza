@@ -4,7 +4,10 @@ import { User } from "../@types";
 const minLength = 6;
 const maxLength = 255;
 
-export const UserSchmeaWithoutId: yup.SchemaOf<Omit<User, "id">> = yup.object({
+export const UserSchema: yup.SchemaOf<User> = yup.object({
+  id: yup.string()
+    .uuid()
+    .defined(),
   name: yup.string()
     .min(minLength)
     .max(maxLength)
@@ -19,3 +22,9 @@ export const UserSchmeaWithoutId: yup.SchemaOf<Omit<User, "id">> = yup.object({
     .max(maxLength)
     .defined()
 });
+
+export const UserSchemaWithoutId: yup.SchemaOf<Omit<User, "id">>
+ = UserSchema.omit([ "id" ]);
+
+export const UserNameNickname: yup.SchemaOf<Pick<User, "nickname" | "name">>
+ = UserSchema.pick([ "nickname", "name" ]);

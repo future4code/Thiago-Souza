@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
-import { UserSchmeaWithoutId } from "../../validate";
+import { NextFunction, Request, Response } from "express";
+import { UserNameNickname, UserSchemaWithoutId } from "../../validate";
 import {
   createUser as createUserDatabase,
-  getUserByID as getUserByIDDatabase
+  getUserByID as getUserByIDDatabase,
+  updateUser as updateUserDatabase
 } from "../../database/mysql";
 import { validate as uuidValidate } from "uuid";
 
@@ -10,6 +11,7 @@ import { validate as uuidValidate } from "uuid";
 const errors = {
   unexpected:                "Unexpect error",
   alreadyExistNicknameEmail: "Nickname or email already exist",
+  alreadyExistNickname:      "Nickname already exist",
   invalidID:                 "The ID must be a valid ID",
   userNotFound:              "User not found"
 };
@@ -24,7 +26,7 @@ export async function createUser(request: Request, response: Response)
   };
 
   try {
-    await UserSchmeaWithoutId.validate(user, { abortEarly: false });
+    await UserSchemaWithoutId.validate(user, { abortEarly: false });
     const newUser = await createUserDatabase(user);
 
     response.status(201).send({
@@ -46,13 +48,20 @@ export async function createUser(request: Request, response: Response)
   }
 }
 
-export async function getUserByID(request: Request, response: Response)
-:Promise<void> {
+export function validateID(request: Request, response: Response, next: NextFunction)
+:void {
   const { id } = request.params;
   if (!id || !uuidValidate(id)) {
     response.status(400).send(errors.invalidID);
     return;
   }
+
+  next();
+}
+
+export async function getUserByID(request: Request, response: Response)
+:Promise<void> {
+  const { id } = request.params;
 
   try {
     const user = await getUserByIDDatabase(id);
@@ -69,3 +78,42 @@ export async function getUserByID(request: Request, response: Response)
     response.send(500).send(errors.unexpected);
   }
 }
+
+export async function updateUser(request: Request, response: Response)
+:Promise<void> {
+  const { id } = request.params;
+  const { name, nickname } = request.body;
+
+  try {
+    await UserNameNickname.validate({
+      name,
+      nickname
+    }, { abortEarly: false });
+
+    const updatedUser = await updateUserDatabase({
+      id,
+      name,
+      nickname
+    });
+
+    if (!updatedUser) {
+      response.status(404).send(errors.userNotFound);
+      return;
+    }
+
+    response.send("Updated user");
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      response.status(400).send(error.errors);
+      return;
+    }
+
+    if (error.code === "ER_DUP_ENTRY") {
+      response.status(409).send(errors.alreadyExistNickname);
+      return;
+    }
+
+    response.status(500).send(errors.unexpected);
+  }
+}
+
