@@ -6,7 +6,7 @@ import {
   getUserByID,
   updateUser,
   validateID
-} from "./handlers/users";
+} from "./handlers/user";
 import { createTask, getTaskByID } from "./handlers/task";
 
 const serverPort = process.env.NODE_PORT || "3003";

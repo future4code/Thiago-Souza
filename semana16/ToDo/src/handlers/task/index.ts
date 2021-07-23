@@ -16,18 +16,18 @@ export async function createTask(request: Request, response: Response)
 : Promise<void> {
   const {
     title,
-    limit_date,
+    limitDate,
     status,
     description,
-    creator_user_id
+    creatorUserID
   } = request.body;
 
   const task = {
     title,
-    limit_date: new Date(limit_date.split("/").reverse().join("-")),
+    limitDate: new Date(limitDate?.split("/").reverse().join("-")),
     status,
     description,
-    creator_user_id
+    creatorUserID
   };
 
   try {

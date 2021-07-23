@@ -38,7 +38,7 @@ export const TaskSchema: yup.SchemaOf<Task> = yup.object({
     .min(minLength)
     .max(maxLength)
     .defined(),
-  limit_date: yup.date()
+  limitDate: yup.date()
     .required(),
   status: yup.mixed<Task["status"]>()
     .oneOf([
@@ -49,7 +49,7 @@ export const TaskSchema: yup.SchemaOf<Task> = yup.object({
   description: yup.string()
     .min(minLength)
     .defined(),
-  creator_user_id: yup.string()
+  creatorUserID: yup.string()
     .uuid()
     .defined()
 }).defined();

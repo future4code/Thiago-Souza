@@ -1,6 +1,7 @@
 import { Knex } from "knex";
 
 export type ID = string;
+export type Status = "to_do" | "doing" | "done";
 
 export interface User {
   id: ID;
@@ -13,7 +14,12 @@ export interface Task {
   id: ID;
   title: string;
   description: string;
-  status: "to_do" | "doing" | "done";
+  status: Status;
+  limitDate: Date;
+  creatorUserID: ID;
+}
+
+export interface TaskDatase extends Omit<Task, "limitDate"| "creatorUserID"> {
   limit_date: Date;
   creator_user_id: ID;
 }
@@ -23,7 +29,7 @@ interface TaskWithUser {
   title: string,
   description: string;
   limitDate: Date;
-  status: "to_do" | "doing" | "done";
+  status: Status;
   creatorUserId: ID;
   creatorUserNickname: string;
 }
@@ -37,11 +43,11 @@ declare module "knex/types/tables" {
       Omit<User, "id">,
       Partial<Omit<User, "id">>
     >;
-    TodoListTask: Task;
+    TodoListTask: TaskDatase;
     TodoListTask_composite: Knex.CompositeTableType<
-      Task,
-      Omit<Task, "id" | "creator_user_id">,
-      Partial<Omit<Task, "id" | "creator_user_id">>
+      TaskDatase,
+      Omit<TaskDatase, "id" | "creator_user_id">,
+      Partial<Omit<TaskDatase, "id" | "creator_user_id">>
     >;
   }
 }

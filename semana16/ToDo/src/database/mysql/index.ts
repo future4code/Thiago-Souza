@@ -50,7 +50,14 @@ export async function createTask(task: Omit<Task, "id">): Promise<Task> {
     status: task.status || "to_do"
   };
 
-  await connection("TodoListTask").insert(newTask);
+  await connection("TodoListTask").insert({
+    id:              newTask.id,
+    title:           newTask.title,
+    description:     newTask.description,
+    status:          newTask.status,
+    limit_date:      newTask.limitDate,
+    creator_user_id: newTask.creatorUserID
+  });
 
   return newTask;
 }
