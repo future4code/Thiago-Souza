@@ -70,7 +70,7 @@
     "block-spacing": "warn",
     "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
     "capitalized-comments": "warn",
-    "camelcase": "warn",
+    "camelcase": "off",
     "comma-dangle": ["warn", "never"],
     "comma-spacing": ["warn", { "before": false, "after": true }],
     "comma-style": ["warn", "last"],

@@ -1,0 +1,7 @@
+# POST sem nada
+POST http://localhost:3000/users
+
+{
+    "nickname": "teste",
+    "name": "teste"
+}
