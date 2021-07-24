@@ -54,7 +54,20 @@ export const TaskSchema: yup.SchemaOf<Task> = yup.object({
   creatorUserID: yup.string()
     .uuid()
     .defined()
-}).defined();
+});
+
+/*eslint-disable id-length*/
+export const GetTaskSchema
+: yup.SchemaOf<Partial<Pick<Task, "status" | "creatorUserID">>> = yup.object({
+  creatorUserID: yup.string()
+    .uuid(),
+  status: yup.mixed<Status>()
+    .oneOf([
+      "to_do",
+      "doing",
+      "done"
+    ])
+});
 
 export const TaskSchemaWithoutID: yup.SchemaOf<Omit<Task, "id">>
   = TaskSchema.omit([ "id" ]);

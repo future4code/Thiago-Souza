@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+  GetTaskSchema,
   StatusSchema,
   TaskResponsibleSchema,
   TaskSchemaWithoutID
@@ -7,12 +8,12 @@ import {
 import {
   createTask as createTaskDatabase,
   getTaskByID as getTaskByIDDatabase,
-  getTasksByUserID as getTasksByUserIDDatabase,
+  getTasks as getTasksDatabase,
   taskResponsible as taskResponsibleDatabase,
   getResponsibleUsers as getResponsibleUsersDatabase,
   updateTaskStatus as updateTaskStatusDatabase
 } from "../../database/mysql";
-import { validate as uuidValidate } from "uuid";
+import { ID, Status } from "../../@types";
 
 /*eslint-disable max-len*/
 const errors = {
@@ -20,7 +21,8 @@ const errors = {
   invalidCreatorUserID: "The creatorUserId must be a valid User ID",
   taskNotFound:         "Task not found",
   userNotFound:         "User not found",
-  taskUserNotFound:     "Task ID or user ID not found"
+  taskUserNotFound:     "Task ID or user ID not found",
+  notFilter:            "Must be declared a filter for creatorUserID or status"
 };
 
 export async function createTask(request: Request, response: Response)
@@ -86,16 +88,24 @@ export async function getTaskByID(request: Request, response: Response)
   }
 }
 
-export async function getTasksByUserID(request: Request, response: Response)
+export async function getTasks(request: Request, response: Response)
 : Promise<void> {
-  const { creatorUserID } = request.query;
-  if (!creatorUserID || typeof creatorUserID !== "string" || !uuidValidate(creatorUserID)) {
-    response.status(400).send(errors.invalidCreatorUserID);
+  const { creatorUserID, status } = request.query;
+  if (!creatorUserID && !status) {
+    response.status(400).send(errors.notFilter);
     return;
   }
 
   try {
-    const tasks = await getTasksByUserIDDatabase(creatorUserID);
+    await GetTaskSchema.validate({
+      creatorUserID,
+      status
+    });
+
+    const tasks = await getTasksDatabase({
+      creatorUserID: creatorUserID as ID,
+      status:        status as Status
+    });
 
     response.send({
       tasks: tasks.map((task) => ({
@@ -104,6 +114,11 @@ export async function getTasksByUserID(request: Request, response: Response)
       }))
     });
   } catch (error) {
+    if (error.name === "ValidationError") {
+      response.status(400).send(error.errors);
+      return;
+    }
+
     response.status(500).send(errors.unexpected);
   }
 }

@@ -96,7 +96,16 @@ export async function getTaskByID(id: ID): Promise<TaskWithUser|undefined> {
     .first() as TaskWithUser | undefined;
 }
 
-export async function getTasksByUserID(userID: ID): Promise<TaskWithUser[]> {
+export async function getTasks(filter: Pick<Task, "creatorUserID" | "status">)
+: Promise<TaskWithUser[]> {
+  const filterFields: {[key: string]: string} = {};
+
+  if (filter.creatorUserID)
+    filterFields["TodoListUser.id"] = filter.creatorUserID;
+
+  if (filter.status)
+    filterFields["TodoListTask.status"] = filter.status;
+
   return await connection("TodoListTask")
     .join("TodoListUser", { "TodoListUser.id": "TodoListTask.creator_user_id" })
     .select(
@@ -108,7 +117,7 @@ export async function getTasksByUserID(userID: ID): Promise<TaskWithUser[]> {
       "TodoListUser.id as creatorUserId",
       "TodoListUser.nickname as creatorUserNickname"
     )
-    .where("TodoListUser.id", userID);
+    .where(filterFields);
 }
 
 export async function taskResponsible(responsible: TaskResponsible)

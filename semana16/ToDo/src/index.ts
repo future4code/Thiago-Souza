@@ -10,7 +10,7 @@ import {
   updateUser
 } from "./handlers/user";
 import {
-  getTasksByUserID,
+  getTasks,
   createTask,
   taskResponsible,
   getTaskByID,
@@ -30,7 +30,7 @@ server.get("/user/all", getAllUsers);
 server.get("/user/:id", validateID, getUserByID);
 server.put("/user/edit/:id", validateID, updateUser);
 
-server.get("/task", getTasksByUserID);
+server.get("/task", getTasks);
 server.post("/task", createTask);
 server.post("/task/responsible", taskResponsible);
 server.get("/task/:id", validateID, getTaskByID);
