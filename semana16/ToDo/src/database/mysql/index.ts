@@ -167,10 +167,10 @@ export async function getResponsibleUsers(taskID: ID): Promise<UserResponse[]> {
     .where("TodoListResponsibleUserTaskRelation.task_id", taskID);
 }
 
-export async function updateTaskStatus(id: ID, status: Status): Promise<number> {
+export async function updateTaskStatus(ids: ID[], status: Status): Promise<number> {
   return await connection("TodoListTask")
     .update({ status })
-    .where({ id });
+    .whereIn("id", ids);
 }
 
 export async function deleteTaskResponsible(taskID: ID, responsibleUserID: ID)

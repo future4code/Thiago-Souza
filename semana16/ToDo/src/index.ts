@@ -17,7 +17,8 @@ import {
   deleteTaskResponsible,
   getTaskByID,
   getResponsibleUsers,
-  updateTaskStatus
+  updateTaskStatus,
+  updateMultipleTaskStatus
 } from "./handlers/task";
 
 const serverPort = process.env.NODE_PORT || "3003";
@@ -36,6 +37,7 @@ server.get("/task", getTasks);
 server.get("/task/delayed", getDelayedTasks);
 server.post("/task", createTask);
 server.post("/task/responsible", taskResponsible);
+server.put("/task/status", updateMultipleTaskStatus);
 server.get("/task/:id", validateID, getTaskByID);
 server.get("/task/:id/responsible", validateID, getResponsibleUsers);
 server.delete(

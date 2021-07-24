@@ -27,7 +27,8 @@ const errors = {
   taskUserNotFound:              "Task ID or user ID not found",
   notFilter:                     "Must be declared a filter for creatorUserID or status",
   responsibleUserID:             "The responsibleUserID must be a valid User ID",
-  deleteTaskResponsibleNotFound: "Task or responsible user not found"
+  deleteTaskResponsibleNotFound: "Task or responsible user not found",
+  invalidIds:                    "The ids must be a array of valid Task id"
 };
 
 export async function createTask(request: Request, response: Response)
@@ -219,7 +220,45 @@ export async function updateTaskStatus(request: Request, response: Response)
   try {
     await StatusSchema.validate({ status });
 
-    const updatedStatus = await updateTaskStatusDatabase(id, status);
+    const updatedStatus = await updateTaskStatusDatabase([ id ], status);
+
+    if (!updatedStatus) {
+      response.status(404).send(errors.taskNotFound);
+      return;
+    }
+
+    response.send("Updated status");
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      response.status(400).send(error.errors);
+      return;
+    }
+
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function updateMultipleTaskStatus(request: Request, response: Response)
+: Promise<void> {
+  const { status, ids } = request.body;
+
+  if (!ids) {
+    response.status(400).send(errors.invalidIds);
+    return;
+  }
+
+  try {
+    await StatusSchema.validate({
+      status,
+      ids
+    });
+
+    if (!ids.length) {
+      response.status(400).send(errors.invalidIds);
+      return;
+    }
+
+    const updatedStatus = await updateTaskStatusDatabase(ids, status);
 
     if (!updatedStatus) {
       response.status(404).send(errors.taskNotFound);
