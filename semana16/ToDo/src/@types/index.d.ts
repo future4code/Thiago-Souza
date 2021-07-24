@@ -38,7 +38,7 @@ export interface TaskWithUser {
 
 export interface TaskResponsible {
   taskID: ID;
-  responsibleUserID: ID;
+  responsibleUserIDs: ID[];
 }
 
 export interface TaskResponsibleDatabase {

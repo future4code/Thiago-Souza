@@ -145,17 +145,17 @@ export async function getDelayedTasks(_request: Request, response: Response)
 
 export async function taskResponsible(request: Request, response: Response)
 : Promise<void> {
-  const { taskID, responsibleUserID } = request.body;
+  const { taskID, responsibleUserIDs } = request.body;
 
   try {
     await TaskResponsibleSchema.validate({
       taskID,
-      responsibleUserID
+      responsibleUserIDs
     }, { abortEarly: false });
 
     await taskResponsibleDatabase({
       taskID,
-      responsibleUserID
+      responsibleUserIDs
     });
 
     response.send("Responsible task created");

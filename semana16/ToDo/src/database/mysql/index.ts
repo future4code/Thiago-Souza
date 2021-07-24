@@ -5,6 +5,7 @@ import {
   Status,
   Task,
   TaskResponsible,
+  TaskResponsibleDatabase,
   TaskWithUser,
   User,
   UserResponse
@@ -141,11 +142,13 @@ export async function getDelayedTasks(): Promise<TaskWithUser[]> {
 
 export async function taskResponsible(responsible: TaskResponsible)
 : Promise<TaskResponsible> {
-  await connection("TodoListResponsibleUserTaskRelation")
-    .insert({
+  const insertRows: TaskResponsibleDatabase[] = responsible.responsibleUserIDs
+    .map((responsibleUserID) => ({
       task_id:             responsible.taskID,
-      responsible_user_id: responsible.responsibleUserID
-    });
+      responsible_user_id: responsibleUserID
+    }));
+
+  await connection("TodoListResponsibleUserTaskRelation").insert(insertRows);
 
   return responsible;
 }

@@ -76,9 +76,9 @@ export const TaskResponsibleSchema: yup.SchemaOf<TaskResponsible> = yup.object({
   taskID: yup.string()
     .uuid()
     .defined(),
-  responsibleUserID: yup.string()
+  responsibleUserIDs: yup.array(yup.string()
     .uuid()
-    .defined()
+    .defined()).defined()
 });
 
 export const StatusSchema: yup.SchemaOf<Pick<Task, "status">> = yup.object({
