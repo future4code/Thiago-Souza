@@ -14,6 +14,7 @@ import {
   getDelayedTasks,
   createTask,
   taskResponsible,
+  deleteTaskResponsible,
   getTaskByID,
   getResponsibleUsers,
   updateTaskStatus
@@ -37,6 +38,11 @@ server.post("/task", createTask);
 server.post("/task/responsible", taskResponsible);
 server.get("/task/:id", validateID, getTaskByID);
 server.get("/task/:id/responsible", validateID, getResponsibleUsers);
+server.delete(
+  "/task/:id/responsible/:responsibleUserID",
+  validateID,
+  deleteTaskResponsible
+);
 server.put("/task/:id/status", validateID, updateTaskStatus);
 
 const serverListener = server.listen(serverPort, () => {

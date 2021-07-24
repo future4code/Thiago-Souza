@@ -12,18 +12,22 @@ import {
   taskResponsible as taskResponsibleDatabase,
   getResponsibleUsers as getResponsibleUsersDatabase,
   updateTaskStatus as updateTaskStatusDatabase,
-  getDelayedTasks as getDelayedTasksDatabase
+  getDelayedTasks as getDelayedTasksDatabase,
+  deleteTaskResponsible as deleteTaskResponsibleDatabase
 } from "../../database/mysql";
 import { ID, Status } from "../../@types";
+import { validate as uuidValidate } from "uuid";
 
 /*eslint-disable max-len*/
 const errors = {
-  unexpected:           "Unexpect error",
-  invalidCreatorUserID: "The creatorUserId must be a valid User ID",
-  taskNotFound:         "Task not found",
-  userNotFound:         "User not found",
-  taskUserNotFound:     "Task ID or user ID not found",
-  notFilter:            "Must be declared a filter for creatorUserID or status"
+  unexpected:                    "Unexpect error",
+  invalidCreatorUserID:          "The creatorUserId must be a valid User ID",
+  taskNotFound:                  "Task not found",
+  userNotFound:                  "User not found",
+  taskUserNotFound:              "Task ID or user ID not found",
+  notFilter:                     "Must be declared a filter for creatorUserID or status",
+  responsibleUserID:             "The responsibleUserID must be a valid User ID",
+  deleteTaskResponsibleNotFound: "Task or responsible user not found"
 };
 
 export async function createTask(request: Request, response: Response)
@@ -166,6 +170,30 @@ export async function taskResponsible(request: Request, response: Response)
       return;
     }
 
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function deleteTaskResponsible(request: Request, response: Response)
+: Promise<void> {
+  const { id: taskID,  responsibleUserID } = request.params;
+
+  if (typeof responsibleUserID !== "string" || !uuidValidate(responsibleUserID)) {
+    response.status(400).send(errors.responsibleUserID);
+    return;
+  }
+
+  try {
+    const numberDeletes
+      = await deleteTaskResponsibleDatabase(taskID, responsibleUserID);
+
+    if (!numberDeletes) {
+      response.status(404).send(errors.deleteTaskResponsibleNotFound);
+      return;
+    }
+
+    response.send("Responsible user deleted");
+  } catch (error) {
     response.status(500).send(errors.unexpected);
   }
 }
