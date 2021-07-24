@@ -11,6 +11,7 @@ import {
 } from "./handlers/user";
 import {
   getTasks,
+  getDelayedTasks,
   createTask,
   taskResponsible,
   getTaskByID,
@@ -31,6 +32,7 @@ server.get("/user/:id", validateID, getUserByID);
 server.put("/user/edit/:id", validateID, updateUser);
 
 server.get("/task", getTasks);
+server.get("/task/delayed", getDelayedTasks);
 server.post("/task", createTask);
 server.post("/task/responsible", taskResponsible);
 server.get("/task/:id", validateID, getTaskByID);

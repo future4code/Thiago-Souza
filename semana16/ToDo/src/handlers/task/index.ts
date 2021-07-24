@@ -11,7 +11,8 @@ import {
   getTasks as getTasksDatabase,
   taskResponsible as taskResponsibleDatabase,
   getResponsibleUsers as getResponsibleUsersDatabase,
-  updateTaskStatus as updateTaskStatusDatabase
+  updateTaskStatus as updateTaskStatusDatabase,
+  getDelayedTasks as getDelayedTasksDatabase
 } from "../../database/mysql";
 import { ID, Status } from "../../@types";
 
@@ -119,6 +120,21 @@ export async function getTasks(request: Request, response: Response)
       return;
     }
 
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function getDelayedTasks(_request: Request, response: Response)
+: Promise<void> {
+  try {
+    const tasks = await getDelayedTasksDatabase();
+    response.send({
+      tasks: tasks.map((task) => ({
+        ...task,
+        limitDate: new Date(task.limitDate).toLocaleDateString("pt-BR")
+      }))
+    });
+  } catch (error) {
     response.status(500).send(errors.unexpected);
   }
 }

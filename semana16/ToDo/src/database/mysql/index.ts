@@ -120,6 +120,25 @@ export async function getTasks(filter: Pick<Task, "creatorUserID" | "status">)
     .where(filterFields);
 }
 
+export async function getDelayedTasks(): Promise<TaskWithUser[]> {
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+
+  return await connection("TodoListTask")
+    .join("TodoListUser", { "TodoListUser.id": "TodoListTask.creator_user_id" })
+    .select(
+      "TodoListTask.id as taskId",
+      "TodoListTask.title as title",
+      "TodoListTask.description as description",
+      "TodoListTask.limit_date as limitDate",
+      "TodoListTask.status as status",
+      "TodoListUser.id as creatorUserId",
+      "TodoListUser.nickname as creatorUserNickname"
+    )
+    .where("TodoListTask.limit_date", "<", today)
+    .andWhereNot("TodoListTask.status", "=", "done");
+}
+
 export async function taskResponsible(responsible: TaskResponsible)
 : Promise<TaskResponsible> {
   await connection("TodoListResponsibleUserTaskRelation")
