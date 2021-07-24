@@ -69,10 +69,12 @@ export async function getTaskByID(request: Request, response: Response)
       response.status(404).send(errors.taskNotFound);
       return;
     }
+    const responsibleUsers = await getResponsibleUsersDatabase(id);
 
     response.send({
       ...task,
-      limitDate: new Date(task.limitDate).toLocaleDateString("pt-BR")
+      limitDate: new Date(task.limitDate).toLocaleDateString("pt-BR"),
+      responsibleUsers
     });
   } catch (error) {
     response.status(500).send(errors.unexpected);
