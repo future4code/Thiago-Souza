@@ -1,5 +1,7 @@
 import * as yup from "yup";
-import { User, Task, TaskResponsible } from "../@types";
+import {
+  User, Task, TaskResponsible, Status
+} from "../@types";
 
 const minLength = 6;
 const maxLength = 255;
@@ -64,4 +66,13 @@ export const TaskResponsibleSchema: yup.SchemaOf<TaskResponsible> = yup.object({
   responsibleUserID: yup.string()
     .uuid()
     .defined()
+});
+
+export const StatusSchema: yup.SchemaOf<Pick<Task, "status">> = yup.object({
+  status: yup.mixed<Status>()
+    .oneOf([
+      "to_do",
+      "doing",
+      "done"
+    ]).defined()
 });

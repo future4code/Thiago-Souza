@@ -1,11 +1,16 @@
 import { Request, Response } from "express";
-import { TaskResponsibleSchema, TaskSchemaWithoutID } from "../../validate";
+import {
+  StatusSchema,
+  TaskResponsibleSchema,
+  TaskSchemaWithoutID
+} from "../../validate";
 import {
   createTask as createTaskDatabase,
   getTaskByID as getTaskByIDDatabase,
   getTasksByUserID as getTasksByUserIDDatabase,
   taskResponsible as taskResponsibleDatabase,
-  getResponsibleUsers as getResponsibleUsersDatabase
+  getResponsibleUsers as getResponsibleUsersDatabase,
+  updateTaskStatus as updateTaskStatusDatabase
 } from "../../database/mysql";
 import { validate as uuidValidate } from "uuid";
 
@@ -143,6 +148,32 @@ export async function getResponsibleUsers(request: Request, response: Response)
 
     response.send({ users });
   } catch (error) {
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function updateTaskStatus(request: Request, response: Response)
+: Promise<void> {
+  const { id } = request.params;
+  const { status } = request.body;
+
+  try {
+    await StatusSchema.validate({ status });
+
+    const updatedStatus = await updateTaskStatusDatabase(id, status);
+
+    if (!updatedStatus) {
+      response.status(404).send(errors.taskNotFound);
+      return;
+    }
+
+    response.send("Updated status");
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      response.status(400).send(error.errors);
+      return;
+    }
+
     response.status(500).send(errors.unexpected);
   }
 }

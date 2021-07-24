@@ -14,7 +14,8 @@ import {
   createTask,
   taskResponsible,
   getTaskByID,
-  getResponsibleUsers
+  getResponsibleUsers,
+  updateTaskStatus
 } from "./handlers/task";
 
 const serverPort = process.env.NODE_PORT || "3003";
@@ -34,6 +35,7 @@ server.post("/task", createTask);
 server.post("/task/responsible", taskResponsible);
 server.get("/task/:id", validateID, getTaskByID);
 server.get("/task/:id/responsible", validateID, getResponsibleUsers);
+server.put("/task/:id/status", validateID, updateTaskStatus);
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)

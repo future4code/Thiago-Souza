@@ -2,6 +2,7 @@ import { v1 as uuidv1 } from "uuid";
 import knex from "knex";
 import {
   ID,
+  Status,
   Task,
   TaskResponsible,
   TaskWithUser,
@@ -133,5 +134,11 @@ export async function getResponsibleUsers(taskID: ID): Promise<UserResponse[]> {
       "TodoListUser.nickname as nickname"
     )
     .where("TodoListResponsibleUserTaskRelation.task_id", taskID);
+}
+
+export async function updateTaskStatus(id: ID, status: Status): Promise<number> {
+  return await connection("TodoListTask")
+    .update({ status })
+    .where({ id });
 }
 
