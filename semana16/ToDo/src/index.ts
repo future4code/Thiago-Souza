@@ -1,20 +1,20 @@
 import "./env";
 import express from "express";
 import cors from "cors";
+import { validateID } from "./handlers";
 import {
+  searchUser,
   createUser,
   getAllUsers,
-  getResponsibleUsers,
   getUserByID,
-  searchUser,
-  taskResponsible,
-  updateUser,
-  validateID
+  updateUser
 } from "./handlers/user";
 import {
+  getTasksByUserID,
   createTask,
+  taskResponsible,
   getTaskByID,
-  getTasksByUserID
+  getResponsibleUsers
 } from "./handlers/task";
 
 const serverPort = process.env.NODE_PORT || "3003";

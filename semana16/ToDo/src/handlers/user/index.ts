@@ -1,6 +1,5 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import {
-  TaskResponsibleSchema,
   UserNameNickname,
   UserSchemaWithoutId
 } from "../../validate";
@@ -9,21 +8,17 @@ import {
   createUser as createUserDatabase,
   getUserByID as getUserByIDDatabase,
   getAllUsers as getAllUsersDatabase,
-  updateUser as updateUserDatabase,
-  taskResponsible as taskResponsibleDatabase,
-  getResponsibleUsers as getResponsibleUsersDatabase
+  updateUser as updateUserDatabase
 } from "../../database/mysql";
-import { validate as uuidValidate } from "uuid";
 
 /*eslint-disable max-len*/
 const errors = {
   unexpected:                "Unexpect error",
   alreadyExistNicknameEmail: "Nickname or email already exist",
   alreadyExistNickname:      "Nickname already exist",
-  invalidID:                 "The ID must be a valid ID",
   userNotFound:              "User not found",
-  invalidQuery:              "The query must be a string",
-  taskUserNotFound:          "Task ID or user ID not found"
+  invalidQuery:              "The query must be a string"
+
 };
 
 export async function searchUser(request: Request, response: Response)
@@ -73,17 +68,6 @@ export async function createUser(request: Request, response: Response)
 
     response.status(500).send(errors.unexpected);
   }
-}
-
-export function validateID(request: Request, response: Response, next: NextFunction)
-:void {
-  const { id } = request.params;
-  if (!id || !uuidValidate(id)) {
-    response.status(400).send(errors.invalidID);
-    return;
-  }
-
-  next();
 }
 
 export async function getUserByID(request: Request, response: Response)
@@ -148,50 +132,6 @@ export async function updateUser(request: Request, response: Response)
       return;
     }
 
-    response.status(500).send(errors.unexpected);
-  }
-}
-
-export async function taskResponsible(request: Request, response: Response)
-: Promise<void> {
-  const { taskID, responsibleUserID } = request.body;
-
-  try {
-    await TaskResponsibleSchema.validate({
-      taskID,
-      responsibleUserID
-    }, { abortEarly: false });
-
-    await taskResponsibleDatabase({
-      taskID,
-      responsibleUserID
-    });
-
-    response.send("Responsible task created");
-  } catch (error) {
-    if (error.name === "ValidationError") {
-      response.status(400).send(error.errors);
-      return;
-    }
-
-    if (error.code.includes("ER_NO_REFERENCED_ROW")) {
-      response.status(404).send(errors.taskUserNotFound);
-      return;
-    }
-
-    response.status(500).send(errors.unexpected);
-  }
-}
-
-export async function getResponsibleUsers(request: Request, response: Response)
-: Promise<void> {
-  const { id } = request.params;
-
-  try {
-    const users = await getResponsibleUsersDatabase(id);
-
-    response.send({ users });
-  } catch (error) {
     response.status(500).send(errors.unexpected);
   }
 }

@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
-import { TaskSchemaWithoutID } from "../../validate";
+import { TaskResponsibleSchema, TaskSchemaWithoutID } from "../../validate";
 import {
   createTask as createTaskDatabase,
   getTaskByID as getTaskByIDDatabase,
-  getTasksByUserID as getTasksByUserIDDatabase
+  getTasksByUserID as getTasksByUserIDDatabase,
+  taskResponsible as taskResponsibleDatabase,
+  getResponsibleUsers as getResponsibleUsersDatabase
 } from "../../database/mysql";
 import { validate as uuidValidate } from "uuid";
 
@@ -12,7 +14,8 @@ const errors = {
   unexpected:           "Unexpect error",
   invalidCreatorUserID: "The creatorUserId must be a valid User ID",
   taskNotFound:         "Task not found",
-  userNotFound:         "User not found"
+  userNotFound:         "User not found",
+  taskUserNotFound:     "Task ID or user ID not found"
 };
 
 export async function createTask(request: Request, response: Response)
@@ -93,6 +96,50 @@ export async function getTasksByUserID(request: Request, response: Response)
         limitDate: new Date(task.limitDate).toLocaleDateString("pt-BR")
       }))
     });
+  } catch (error) {
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function taskResponsible(request: Request, response: Response)
+: Promise<void> {
+  const { taskID, responsibleUserID } = request.body;
+
+  try {
+    await TaskResponsibleSchema.validate({
+      taskID,
+      responsibleUserID
+    }, { abortEarly: false });
+
+    await taskResponsibleDatabase({
+      taskID,
+      responsibleUserID
+    });
+
+    response.send("Responsible task created");
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      response.status(400).send(error.errors);
+      return;
+    }
+
+    if (error.code.includes("ER_NO_REFERENCED_ROW")) {
+      response.status(404).send(errors.taskUserNotFound);
+      return;
+    }
+
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function getResponsibleUsers(request: Request, response: Response)
+: Promise<void> {
+  const { id } = request.params;
+
+  try {
+    const users = await getResponsibleUsersDatabase(id);
+
+    response.send({ users });
   } catch (error) {
     response.status(500).send(errors.unexpected);
   }
