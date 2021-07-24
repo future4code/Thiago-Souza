@@ -13,7 +13,8 @@ import {
   getResponsibleUsers as getResponsibleUsersDatabase,
   updateTaskStatus as updateTaskStatusDatabase,
   getDelayedTasks as getDelayedTasksDatabase,
-  deleteTaskResponsible as deleteTaskResponsibleDatabase
+  deleteTaskResponsible as deleteTaskResponsibleDatabase,
+  deleteTask as deleteTaskDatabase
 } from "../../database/mysql";
 import { ID, Status } from "../../@types";
 import { validate as uuidValidate } from "uuid";
@@ -272,6 +273,22 @@ export async function updateMultipleTaskStatus(request: Request, response: Respo
       return;
     }
 
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function deleteTask(request: Request, response: Response)
+: Promise<void> {
+  const { id } = request.params;
+  try {
+    const deleteRows = await deleteTaskDatabase(id);
+    if (!deleteRows) {
+      response.status(404).send(errors.taskNotFound);
+      return;
+    }
+
+    response.send("Deleted task");
+  } catch (error) {
     response.status(500).send(errors.unexpected);
   }
 }

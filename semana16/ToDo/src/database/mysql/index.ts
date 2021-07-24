@@ -183,3 +183,13 @@ export async function deleteTaskResponsible(taskID: ID, responsibleUserID: ID)
     .delete();
 }
 
+export async function deleteTask(id: ID): Promise<number> {
+  await connection("TodoListResponsibleUserTaskRelation")
+    .where({ task_id: id })
+    .delete();
+
+  return await connection("TodoListTask")
+    .where({ id })
+    .delete();
+}
+
