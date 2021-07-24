@@ -7,7 +7,8 @@ import {
   createUser,
   getAllUsers,
   getUserByID,
-  updateUser
+  updateUser,
+  deleteUser
 } from "./handlers/user";
 import {
   getTasks,
@@ -32,6 +33,7 @@ server.get("/user", searchUser);
 server.post("/user", createUser);
 server.get("/user/all", getAllUsers);
 server.get("/user/:id", validateID, getUserByID);
+server.delete("/user/:id", validateID, deleteUser);
 server.put("/user/edit/:id", validateID, updateUser);
 
 server.get("/task", getTasks);

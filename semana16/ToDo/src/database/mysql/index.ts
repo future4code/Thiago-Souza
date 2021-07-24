@@ -62,6 +62,26 @@ export async function updateUser(user: Omit<User, "email">): Promise<number> {
     .where({ id: user.id });
 }
 
+export async function deleteUser(id: ID): Promise<number> {
+  const taskIDs = (await connection("TodoListTask")
+    .select("id")
+    .where({ creator_user_id: id }))
+    .map(({ id }) => id);
+
+  await connection("TodoListResponsibleUserTaskRelation")
+    .where({ responsible_user_id: id })
+    .orWhereIn("task_id", taskIDs)
+    .delete();
+
+  await connection("TodoListTask")
+    .where({ creator_user_id: id })
+    .delete();
+
+  return await connection("TodoListUser")
+    .where({ id })
+    .delete();
+}
+
 export async function createTask(task: Omit<Task, "id">): Promise<Task> {
   const newTask = {
     ...task,

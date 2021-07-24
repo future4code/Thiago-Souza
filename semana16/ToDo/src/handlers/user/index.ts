@@ -8,7 +8,8 @@ import {
   createUser as createUserDatabase,
   getUserByID as getUserByIDDatabase,
   getAllUsers as getAllUsersDatabase,
-  updateUser as updateUserDatabase
+  updateUser as updateUserDatabase,
+  deleteUser as deleteUserDatabase
 } from "../../database/mysql";
 
 /*eslint-disable max-len*/
@@ -132,6 +133,22 @@ export async function updateUser(request: Request, response: Response)
       return;
     }
 
+    response.status(500).send(errors.unexpected);
+  }
+}
+
+export async function deleteUser(request: Request, response: Response)
+: Promise<void> {
+  const { id } = request.params;
+  try {
+    const deleteRows = await deleteUserDatabase(id);
+    if (!deleteRows) {
+      response.status(404).send(errors.userNotFound);
+      return;
+    }
+
+    response.send("Deleted user");
+  } catch (error) {
     response.status(500).send(errors.unexpected);
   }
 }
