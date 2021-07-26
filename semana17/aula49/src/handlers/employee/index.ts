@@ -14,10 +14,13 @@ const errors = {
 export async function getEmploeeys(request: Request, response: Response)
 : Promise<void> {
   const { query } = request;
-  const { filter: defaultFilter, order: defaultOrder } = DEFAULT_OPTIONS;
+  const {
+    filter: defaultFilter,
+    order: defaultOrder,
+    page: defaultPage
+  } = DEFAULT_OPTIONS;
   console.log(request.query); //eslint-disable-line no-console
   const options = {
-    ...DEFAULT_OPTIONS,
     filter: {
       name:  query.name  || defaultFilter.name,
       type:  query.type  || defaultFilter.type,
@@ -26,6 +29,10 @@ export async function getEmploeeys(request: Request, response: Response)
     order: {
       by:        query.order          || defaultOrder.by,
       direction: query.orderDirection || defaultOrder.direction
+    },
+    page: {
+      current:           query.page || defaultPage.current,
+      numberOfEmployees: query.employeesPerPage || defaultPage.numberOfEmployees
     }
   };
 
@@ -33,7 +40,7 @@ export async function getEmploeeys(request: Request, response: Response)
     await OptionsSchema.validate(options);
 
     const employees = await getEmploeeysDatabase(options as Options);
-    if (!employees) {
+    if (!employees.length) {
       response.status(404).send(errors.employeeNotFound);
       return;
     }

@@ -57,10 +57,12 @@ export const DEFAULT_OPTIONS: Options = {
 
 export async function getEmploeeys(options: Options): Promise<Employee[]> {
   console.log(options); //eslint-disable-line no-console
-  const { filter, order } = options;
+  const { filter, order, page } = options;
   return await connection("aula48_exercicio").select("*")
     .whereIn("type", filter.type)
     .andWhere("name", "like", `%${filter.name}%`)
     .andWhere("email", "like", `%${filter.email}%`)
-    .orderBy(order.by, order.direction === "crescent" ? "asc" : "desc");
+    .orderBy(order.by, order.direction === "crescent" ? "asc" : "desc")
+    .limit(page.numberOfEmployees)
+    .offset((page.current - 1) * page.numberOfEmployees);
 }
