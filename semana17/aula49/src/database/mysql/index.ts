@@ -57,9 +57,10 @@ export const DEFAULT_OPTIONS: Options = {
 
 export async function getEmploeeys(options: Options): Promise<Employee[]> {
   console.log(options); //eslint-disable-line no-console
-  const { filter } = options;
+  const { filter, order } = options;
   return await connection("aula48_exercicio").select("*")
     .whereIn("type", filter.type)
     .andWhere("name", "like", `%${filter.name}%`)
-    .andWhere("email", "like", `%${filter.email}%`);
+    .andWhere("email", "like", `%${filter.email}%`)
+    .orderBy(order.by, order.direction === "crescent" ? "asc" : "desc");
 }

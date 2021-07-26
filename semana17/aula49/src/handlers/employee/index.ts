@@ -14,7 +14,7 @@ const errors = {
 export async function getEmploeeys(request: Request, response: Response)
 : Promise<void> {
   const { query } = request;
-  const { filter: defaultFilter } = DEFAULT_OPTIONS;
+  const { filter: defaultFilter, order: defaultOrder } = DEFAULT_OPTIONS;
   console.log(request.query); //eslint-disable-line no-console
   const options = {
     ...DEFAULT_OPTIONS,
@@ -22,6 +22,10 @@ export async function getEmploeeys(request: Request, response: Response)
       name:  query.name  || defaultFilter.name,
       type:  query.type  || defaultFilter.type,
       email: query.email || defaultFilter.email
+    },
+    order: {
+      by:        query.order          || defaultOrder.by,
+      direction: query.orderDirection || defaultOrder.direction
     }
   };
 
