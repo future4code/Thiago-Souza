@@ -29,22 +29,13 @@ interface Page {
   current: number;
 }
 
-interface Options {
+export interface Options {
   filter: Filter;
   order: Order;
   page: Page;
 }
 
 export const DEFAULT_OPTIONS: Options = {
-  filter: {
-    email: "%",
-    type:  [
-      "CX",
-      "Teacher",
-      "Operations"
-    ],
-    name: "%"
-  },
   page: {
     current:           1,
     numberOfEmployees: 10
@@ -52,10 +43,23 @@ export const DEFAULT_OPTIONS: Options = {
   order: {
     direction: "crescent",
     by:        "name"
+  },
+  filter: {
+    email: "",
+    name:  "",
+    type:  [
+      "CX",
+      "Teacher",
+      "Operations"
+    ]
   }
 };
 
 export async function getEmploeeys(options: Options): Promise<Employee[]> {
   console.log(options); //eslint-disable-line no-console
-  return await connection("aula48_exercicio").select("*");
+  const { filter } = options;
+  return await connection("aula48_exercicio").select("*")
+    .whereIn("type", filter.type)
+    .andWhere("name", "like", `%${filter.name}%`)
+    .andWhere("email", "like", `%${filter.email}%`);
 }

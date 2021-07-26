@@ -1,28 +1,47 @@
 import { Request, Response } from "express";
 import {
   DEFAULT_OPTIONS,
-  getEmploeeys as getEmploeeysDatabase
+  getEmploeeys as getEmploeeysDatabase,
+  Options
 } from "../../database/mysql";
+import { OptionsSchema } from "./validate";
 
 const errors = {
   employeeNotFound: "Employees not found",
   unexpected:       "Unexpected error"
 };
 
-export async function getEmploeeys(_request: Request, reponse: Response)
+export async function getEmploeeys(request: Request, response: Response)
 : Promise<void> {
-  const options = DEFAULT_OPTIONS;
+  const { query } = request;
+  const { filter: defaultFilter } = DEFAULT_OPTIONS;
+  console.log(request.query); //eslint-disable-line no-console
+  const options = {
+    ...DEFAULT_OPTIONS,
+    filter: {
+      name:  query.name  || defaultFilter.name,
+      type:  query.type  || defaultFilter.type,
+      email: query.email || defaultFilter.email
+    }
+  };
 
   try {
-    const employees = await getEmploeeysDatabase(options);
+    await OptionsSchema.validate(options);
+
+    const employees = await getEmploeeysDatabase(options as Options);
     if (!employees) {
-      reponse.status(404).send(errors.employeeNotFound);
+      response.status(404).send(errors.employeeNotFound);
       return;
     }
 
-    reponse.send(employees);
+    response.send(employees);
   } catch (error) {
     console.log(error); //eslint-disable-line no-console
-    reponse.status(500).send(errors.unexpected);
+    if (error.name === "ValidationError") {
+      response.status(400).send(error.errors);
+      return;
+    }
+
+    response.status(500).send(errors.unexpected);
   }
 }
