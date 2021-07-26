@@ -1,16 +1,19 @@
+import "./env";
 import express from "express";
 import cors from "cors";
-import { AddressInfo } from "net";
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+const serverPort = process.env.NODE_PORT || 3003;
 
-const server = app.listen(process.env["PORT"] || 3003, () => {
-  if (server) {
-    const address = server.address() as AddressInfo;
-    console.log(`Server is running in http://localhost: ${address.port}`);
-  } else {
+const server = express();
+server.use(express.json());
+server.use(cors());
+
+const serverListener = server.listen(serverPort, () => {
+  if (serverListener)
+    //eslint-disable-next-line no-console
+    console.log(`Server is running in http://localhost:${serverPort}`);
+  else
+    //eslint-disable-next-line no-console
     console.error("Failure upon starting server.");
-  }
 });
+
