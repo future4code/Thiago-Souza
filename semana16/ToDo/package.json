@@ -1,0 +1,36 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "A simple To Do list on nodejs with express and mysql",
+  "main": "index.ts",
+  "scripts": {
+    "start": "npx tsc && node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typescript",
+    "ts",
+    "mysql",
+    "nodejs",
+    "node",
+    "express",
+    "knex",
+    "knex.js"
+  ],
+  "author": "Thiago Felipe",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "knex": "^0.95.7",
+    "mysql": "^2.18.1",
+    "uuid": "^8.3.2",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/uuid": "^8.3.1"
+  }
+}
