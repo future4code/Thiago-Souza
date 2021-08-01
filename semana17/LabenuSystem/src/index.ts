@@ -2,6 +2,7 @@ import "./env";
 import express from "express";
 import cors from "cors";
 import { estudanteRouter, turmaRouter } from "./handlers";
+import { professorRouter } from "./handlers/professor";
 
 const serverPort = process.env.NODE_PORT || 3003;
 
@@ -11,6 +12,7 @@ server.use(cors());
 
 server.use("/turma", turmaRouter);
 server.use("/estudante", estudanteRouter);
+server.use("/professor", professorRouter);
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)

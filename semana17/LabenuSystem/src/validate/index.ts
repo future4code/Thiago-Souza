@@ -41,6 +41,11 @@ export const estudanteSchema: yup.SchemaOf<Estudante> = yup.object({
 export const criarEstudanteSchema: yup.SchemaOf<Omit<Turma, "id">>
   = estudanteSchema.omit([ "id" ]).shape({ turmaID: yup.string().uuid() });
 
+export const professorAdicionarTurmaSchema = yup.object({
+  turmaID:     yup.string().uuid().defined(),
+  professorID: yup.string().uuid().defined()
+});
+
 //@ts-expect-error issue an yup  https://github.com/jquense/yup/issues/1183
 export const professorSchema: yup.SchemaOf<Professor> = yup.object({
   id:   yup.string().uuid().defined(),
@@ -55,4 +60,9 @@ export const professorSchema: yup.SchemaOf<Professor> = yup.object({
 
 export const criarProfessorSchema: yup.SchemaOf<Omit<Professor, "id">>
   = professorSchema.omit([ "id" ]).shape({ turmaID: yup.string().uuid() });
+
+export const estudanteAdicionarTurmaSchema = yup.object({
+  turmaID:     yup.string().uuid().defined(),
+  estudanteID: yup.string().uuid().defined()
+});
 
