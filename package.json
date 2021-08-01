@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "cd semana17/LabenuSystem && npm install && npm start",
     "lint": "tsc && eslint ."
   },
   "devDependencies": {
