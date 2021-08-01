@@ -9,6 +9,10 @@ SELECT TABLE_NAME, COLUMN_NAME, COLUMN_DEFAULT, COLUMN_TYPE, COLUMN_KEY FROM inf
 
 SELECT * FROM LabenuSystem_Turma;
 
+SELECT * FROM LabenuSystem_Estudante;
+
+SELECT * FROM LabenuSystem_Professor;
+
 INSERT INTO LabenuSystem_Turma (id, nome, data_inicio, data_final, modulo, tipo)
 VALUES ("00000000-0000-0000-0000-000000000000", "Turma Zero", "2017-01-01", "9999-12-31", "0", "Integral");
 

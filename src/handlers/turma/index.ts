@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { turmaSchemaWithoutID } from "../../validate";
+import { criarTurmaSchema } from "../../validate";
 import { criarTurma as criarTurmaDatabase } from "../../database/mysql";
 
 const erros = {
@@ -10,6 +10,8 @@ const erros = {
 export const turmaRouter = express.Router();
 
 turmaRouter.post("/", criarTurma);
+
+export const TURMA_ZERO_ID = "00000000-0000-0000-0000-000000000000";
 
 const PADRAO_TIPO = "Integral";
 
@@ -31,7 +33,7 @@ async function criarTurma(request: Request, response: Response): Promise<void> {
   };
 
   try {
-    await turmaSchemaWithoutID.validate(turma, { abortEarly: false });
+    await criarTurmaSchema.validate(turma, { abortEarly: false });
 
     const turmaNova = await criarTurmaDatabase(turma);
 
