@@ -1,12 +1,15 @@
 import "./env";
 import express from "express";
 import cors from "cors";
+import { turmaRouter } from "./handlers/turma";
 
 const serverPort = process.env.NODE_PORT || 3003;
 
 const server = express();
 server.use(express.json());
 server.use(cors());
+
+server.use("/turma", turmaRouter);
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)

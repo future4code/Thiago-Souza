@@ -5,17 +5,19 @@ export type ID = string;
 export interface Turma {
   id: ID;
   nome: string;
+  modulo: number;
   dataInicio: Date;
   dataFinal: Date;
-  modulo: number;
+  tipo: "Integral" | "Noturno";
 }
 
 export interface TurmaDatabase {
   id: ID;
   nome: string;
+  modulo: number;
   data_inicio: Date;
   data_final: Date;
-  modulo: number;
+  tipo: "Integral" | "Noturno";
 }
 
 export interface Estudante {

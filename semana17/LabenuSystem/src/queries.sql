@@ -7,6 +7,11 @@ SELECT * FROM information_schema.columns WHERE TABLE_NAME LIKE "LabenuSystem%";
 
 SELECT TABLE_NAME, COLUMN_NAME, COLUMN_DEFAULT, COLUMN_TYPE, COLUMN_KEY FROM information_schema.columns WHERE TABLE_NAME LIKE "LabenuSystem%";
 
+SELECT * FROM LabenuSystem_Turma;
+
+INSERT INTO LabenuSystem_Turma (id, nome, data_inicio, data_final, modulo, tipo)
+VALUES ("00000000-0000-0000-0000-000000000000", "Turma Zero", "2017-01-01", "9999-12-31", "0", "Integral");
+
 DROP TABLE LabenuSystem_Professor_Especialidade;
 
 DROP TABLE LabenuSystem_Estudante_Passatempo;
