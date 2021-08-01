@@ -7,6 +7,7 @@ import {
 } from "../../database/mysql";
 import { TURMA_ZERO_ID } from "../turma";
 import { validate as validarUUID } from "uuid";
+import { connection } from "../../database/mysql/connection";
 
 const erros = {
   inesperado:            "Aconteceu um erro inesperado",
@@ -105,6 +106,7 @@ export async function verTurma(request: Request, response: Response): Promise<vo
     });
   } catch (erro) {
     console.log(erro);
+    console.log(process.env);
     response.status(500).send(erros.inesperado);
   }
 }
