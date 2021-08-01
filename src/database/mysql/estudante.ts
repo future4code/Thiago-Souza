@@ -1,5 +1,5 @@
 import { v1 as uuidV1 } from "uuid";
-import { Estudante, EstudanteDatabase } from "../../@types";
+import { Estudante, EstudanteDatabase, ID } from "../../@types";
 import { connection } from "./connection";
 
 export async function criarEstudante(estudante: Omit<Estudante, "id">)
@@ -19,3 +19,11 @@ export async function criarEstudante(estudante: Omit<Estudante, "id">)
     id: estudanteNovo.id
   };
 }
+
+export async function adicionarEstudanteNaTurma(estudanteID: ID, turmaID: ID)
+: Promise<number> {
+  return connection("LabenuSystem_Estudante")
+    .update({ turma_id: turmaID })
+    .where({ id: estudanteID });
+}
+
