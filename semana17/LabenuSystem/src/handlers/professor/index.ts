@@ -104,6 +104,7 @@ export async function verTurma(request: Request, response: Response): Promise<vo
       professores
     });
   } catch (erro) {
+    console.log(erro);
     response.status(500).send(erros.inesperado);
   }
 }
