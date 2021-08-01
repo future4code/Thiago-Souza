@@ -2,21 +2,25 @@ import express, { Request, Response } from "express";
 import { criarEstudanteSchema, estudanteAdicionarTurmaSchema } from "../../validate";
 import {
   adicionarEstudanteNaTurma,
-  criarEstudante as criarEstudanteDatabase
+  criarEstudante as criarEstudanteDatabase,
+  verEstudantesNaTurma
 } from "../../database/mysql";
 import { TURMA_ZERO_ID } from "../turma";
+import { validate as validarUUID } from "uuid";
 
 const erros = {
   inesperado:            "Aconteceu um erro inesperado",
   emailExiste:           "Email já existe",
   estudanteNaoEcontrada: "Estudante não econtrada",
-  turmaNaoEcontrada:     "Turma não econtrada"
+  turmaNaoEcontrada:     "Turma não econtrada",
+  turmaIDInvalido:       "O turmaID precisa ser um id válido"
 };
 
 export const estudanteRouter = express.Router();
 
 estudanteRouter.post("/", criarEstudante);
 estudanteRouter.put("/turma", adicionarTurma);
+estudanteRouter.get("/turma/:turmaID", verTurma);
 
 async function criarEstudante(request: Request, response: Response): Promise<void> {
   const {
@@ -82,6 +86,24 @@ async function adicionarTurma(request: Request, response: Response)
       return;
     }
 
+    response.status(500).send(erros.inesperado);
+  }
+}
+
+export async function verTurma(request: Request, response: Response): Promise<void> {
+  const { turmaID } = request.params;
+  if (!validarUUID(turmaID)) {
+    response.status(400).send(erros.turmaIDInvalido);
+    return;
+  }
+
+  try {
+    const estudantes = await verEstudantesNaTurma(turmaID);
+    response.send({
+      quantidate: estudantes.length,
+      estudantes
+    });
+  } catch (erro) {
     response.status(500).send(erros.inesperado);
   }
 }
