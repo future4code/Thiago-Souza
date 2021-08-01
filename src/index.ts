@@ -4,7 +4,7 @@ import cors from "cors";
 import { estudanteRouter, turmaRouter } from "./handlers";
 import { professorRouter } from "./handlers/professor";
 
-const serverPort = process.env.NODE_PORT || 3003;
+const serverPort = process.env.PORT || process.env.NODE_PORT || 3003;
 
 const server = express();
 server.use(express.json());
