@@ -7,7 +7,6 @@ import {
 } from "../../database/mysql";
 import { TURMA_ZERO_ID } from "../turma";
 import { validate as validarUUID } from "uuid";
-import { connection } from "../../database/mysql/connection";
 
 const erros = {
   inesperado:            "Aconteceu um erro inesperado",
