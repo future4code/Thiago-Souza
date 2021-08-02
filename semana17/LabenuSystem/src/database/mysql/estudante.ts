@@ -67,3 +67,13 @@ export async function removerEstudanteDaTurma(id: ID): Promise<number> {
     .where({ id });
 }
 
+export async function removerEstudante(id: ID): Promise<number> {
+  connection("LabenuSystem_Estudante_Passatempo")
+    .del()
+    .where({ estudante_id: id });
+
+  return connection("LabenuSystem_Estudante")
+    .del()
+    .where({ id });
+}
+

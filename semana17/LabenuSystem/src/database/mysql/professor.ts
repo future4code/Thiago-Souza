@@ -67,3 +67,13 @@ export async function removerProfessorDaTurma(id: ID): Promise<number> {
     .where({ id });
 }
 
+export async function removerProfessor(id: ID): Promise<number> {
+  connection("LabenuSystem_Professor_Especialidade")
+    .del()
+    .where({ professor_id: id });
+
+  return connection("LabenuSystem_Professor")
+    .del()
+    .where({ id });
+}
+

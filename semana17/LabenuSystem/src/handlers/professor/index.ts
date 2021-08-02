@@ -5,7 +5,8 @@ import {
   criarProfessor as criarProfessorDatabase,
   verProfessoresNaTurma,
   verProfessor as verProfessorDatabase,
-  removerProfessorDaTurma
+  removerProfessorDaTurma,
+  removerProfessor as removerProfessorDatabase
 } from "../../database/mysql";
 import { TURMA_ZERO_ID } from "../turma";
 import { validate as validarUUID } from "uuid";
@@ -25,6 +26,7 @@ professorRouter.post("/", criarProfessor);
 professorRouter.put("/turma", adicionarTurma);
 professorRouter.get("/turma/:turmaID", verTurma);
 professorRouter.get("/:id", verProfessor);
+professorRouter.delete("/:id", removerProfessor);
 professorRouter.delete("/:id/turma", removerDaTurma);
 
 async function criarProfessor(request: Request, response: Response): Promise<void> {
@@ -152,3 +154,23 @@ async function removerDaTurma(request: Request, response: Response): Promise<voi
   }
 }
 
+async function removerProfessor(request: Request, response: Response)
+: Promise<void> {
+  const { id } = request.params;
+  if (!validarUUID(id)) {
+    response.status(400).send(erros.IDInvalido);
+    return;
+  }
+
+  try {
+    const professor = await removerProfessorDatabase(id);
+    if (!professor) {
+      response.status(404).send(erros.professorNaoEcontrada);
+      return;
+    }
+
+    response.send("Professor removido");
+  } catch (erro) {
+    response.status(500).send(erros.inesperado);
+  }
+}
