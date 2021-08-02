@@ -1,5 +1,6 @@
 import { v1 as uuidV1 } from "uuid";
 import { ID, Professor, ProfessorDatabase } from "../../@types";
+import { TURMA_ZERO_ID } from "../../handlers";
 import { connection } from "./connection";
 
 export async function criarProfessor(professor: Omit<Professor, "id">)
@@ -58,5 +59,11 @@ export async function adicionarProfessorNaTurma(professorID: ID, turmaID: ID)
   return connection("LabenuSystem_Professor")
     .update({ turma_id: turmaID })
     .where({ id: professorID });
+}
+
+export async function removerProfessorDaTurma(id: ID): Promise<number> {
+  return connection("LabenuSystem_Professor")
+    .update({ turma_id: TURMA_ZERO_ID })
+    .where({ id });
 }
 

@@ -4,7 +4,8 @@ import {
   adicionarEstudanteNaTurma,
   criarEstudante as criarEstudanteDatabase,
   verEstudantesNaTurma,
-  verEstudante as verEstudanteDatabase
+  verEstudante as verEstudanteDatabase,
+  removerEstudanteDaTurma
 } from "../../database/mysql";
 import { TURMA_ZERO_ID } from "../turma";
 import { validate as validarUUID } from "uuid";
@@ -24,6 +25,7 @@ estudanteRouter.post("/", criarEstudante);
 estudanteRouter.put("/turma", adicionarTurma);
 estudanteRouter.get("/turma/:turmaID", verTurma);
 estudanteRouter.get("/:id", verEstudante);
+estudanteRouter.delete("/:id/turma", removerDaTurma);
 
 async function criarEstudante(request: Request, response: Response): Promise<void> {
   const {
@@ -130,3 +132,24 @@ async function verEstudante(request: Request, response: Response): Promise<void>
     response.status(500).send(erros.inesperado);
   }
 }
+
+async function removerDaTurma(request: Request, response: Response): Promise<void> {
+  const { id } = request.params;
+  if (!validarUUID(id)) {
+    response.status(400).send(erros.IDInvalido);
+    return;
+  }
+
+  try {
+    const professor = await removerEstudanteDaTurma(id);
+    if (!professor) {
+      response.status(404).send(erros.estudanteNaoEcontrada);
+      return;
+    }
+
+    response.send("Estudante removido da turma");
+  } catch (erro) {
+    response.status(500).send(erros.inesperado);
+  }
+}
+
