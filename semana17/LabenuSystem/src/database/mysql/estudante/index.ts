@@ -1,7 +1,7 @@
 import { v1 as uuidV1 } from "uuid";
-import { Estudante, EstudanteDatabase, ID } from "../../@types";
-import { TURMA_ZERO_ID } from "../../handlers";
-import { connection } from "./connection";
+import { Estudante, EstudanteDatabase, ID } from "../../../@types";
+import { TURMA_ZERO_ID } from "../../../handlers";
+import { connection } from "../connection";
 
 export async function criarEstudante(estudante: Omit<Estudante, "id">)
 : Promise<Estudante> {

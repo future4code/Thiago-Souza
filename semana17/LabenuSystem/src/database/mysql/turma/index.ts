@@ -1,6 +1,6 @@
 import { v1 as uuidV1 } from "uuid";
-import { connection } from "./connection";
-import { ID, Turma, TurmaDatabase } from "../../@types";
+import { connection } from "../connection";
+import { ID, Turma, TurmaDatabase } from "../../../@types";
 
 export async function criarTurma(turma: Omit<Turma, "id">): Promise<Turma> {
   const turmaNova: TurmaDatabase = {
