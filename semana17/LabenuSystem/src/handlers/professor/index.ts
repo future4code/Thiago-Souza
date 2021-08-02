@@ -3,7 +3,8 @@ import { criarProfessorSchema, professorAdicionarTurmaSchema } from "../../valid
 import {
   adicionarProfessorNaTurma,
   criarProfessor as criarProfessorDatabase,
-  verProfessoresNaTurma
+  verProfessoresNaTurma,
+  verProfessor as verProfessorDatabase
 } from "../../database/mysql";
 import { TURMA_ZERO_ID } from "../turma";
 import { validate as validarUUID } from "uuid";
@@ -13,7 +14,8 @@ const erros = {
   emailExiste:           "Email já existe",
   professorNaoEcontrada: "Professor não econtrada",
   turmaNaoEcontrada:     "Turma não econtrada",
-  turmaIDInvalido:       "O turmaID precisa ser um id válido"
+  turmaIDInvalido:       "O turmaID precisa ser um id válido",
+  IDInvalido:            "O professorID precisa ser um id válido"
 };
 
 export const professorRouter = express.Router();
@@ -21,6 +23,7 @@ export const professorRouter = express.Router();
 professorRouter.post("/", criarProfessor);
 professorRouter.put("/turma", adicionarTurma);
 professorRouter.get("/turma/:turmaID", verTurma);
+professorRouter.get("/:id", verProfessor);
 
 async function criarProfessor(request: Request, response: Response): Promise<void> {
   const {
@@ -58,8 +61,7 @@ async function criarProfessor(request: Request, response: Response): Promise<voi
   }
 }
 
-async function adicionarTurma(request: Request, response: Response)
-: Promise<void> {
+async function adicionarTurma(request: Request, response: Response): Promise<void> {
   const { turmaID, professorID } = request.body;
 
   try {
@@ -90,7 +92,7 @@ async function adicionarTurma(request: Request, response: Response)
   }
 }
 
-export async function verTurma(request: Request, response: Response): Promise<void> {
+async function verTurma(request: Request, response: Response): Promise<void> {
   const { turmaID } = request.params;
   if (!validarUUID(turmaID)) {
     response.status(400).send(erros.turmaIDInvalido);
@@ -103,6 +105,26 @@ export async function verTurma(request: Request, response: Response): Promise<vo
       quantidate: professores.length,
       professores
     });
+  } catch (erro) {
+    response.status(500).send(erros.inesperado);
+  }
+}
+
+async function verProfessor(request: Request, response: Response): Promise<void> {
+  const { id } = request.params;
+  if (!validarUUID(id)) {
+    response.status(400).send(erros.IDInvalido);
+    return;
+  }
+
+  try {
+    const professor = await verProfessorDatabase(id);
+    if (!professor) {
+      response.status(404).send(erros.professorNaoEcontrada);
+      return;
+    }
+
+    response.send(professor);
   } catch (erro) {
     response.status(500).send(erros.inesperado);
   }

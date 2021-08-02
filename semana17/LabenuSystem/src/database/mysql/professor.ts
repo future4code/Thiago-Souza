@@ -20,6 +20,23 @@ export async function criarProfessor(professor: Omit<Professor, "id">)
   };
 }
 
+export async function verProfessor(id: ID): Promise<Professor|undefined> {
+  const database =  await connection("LabenuSystem_Professor")
+    .select("*")
+    .where({ id })
+    .first();
+
+  return database
+    ? {
+        id:               database.id,
+        nome:             database.nome,
+        email:            database.email,
+        dataDeNascimento: database.data_de_nascimento,
+        turmaID:          database.turma_id
+      }
+    : undefined;
+}
+
 export async function verProfessoresNaTurma(turmaID: ID)
 : Promise<Omit<Professor, "turmaID">[]> {
   const database = await connection("LabenuSystem_Professor")

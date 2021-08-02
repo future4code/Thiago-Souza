@@ -20,6 +20,23 @@ export async function criarEstudante(estudante: Omit<Estudante, "id">)
   };
 }
 
+export async function verEstudante(id: ID): Promise<Estudante|undefined> {
+  const database =  await connection("LabenuSystem_Estudante")
+    .select("*")
+    .where({ id })
+    .first();
+
+  return database
+    ? {
+        id:               database.id,
+        nome:             database.nome,
+        email:            database.email,
+        dataDeNascimento: database.data_de_nascimento,
+        turmaID:          database.turma_id
+      }
+    : undefined;
+}
+
 export async function verEstudantesNaTurma(turmaID: ID)
 : Promise<Omit<Estudante, "turmaID">[]> {
   const database = await connection("LabenuSystem_Estudante")

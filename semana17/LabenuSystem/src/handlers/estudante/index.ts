@@ -3,7 +3,8 @@ import { criarEstudanteSchema, estudanteAdicionarTurmaSchema } from "../../valid
 import {
   adicionarEstudanteNaTurma,
   criarEstudante as criarEstudanteDatabase,
-  verEstudantesNaTurma
+  verEstudantesNaTurma,
+  verEstudante as verEstudanteDatabase
 } from "../../database/mysql";
 import { TURMA_ZERO_ID } from "../turma";
 import { validate as validarUUID } from "uuid";
@@ -13,7 +14,8 @@ const erros = {
   emailExiste:           "Email já existe",
   estudanteNaoEcontrada: "Estudante não econtrada",
   turmaNaoEcontrada:     "Turma não econtrada",
-  turmaIDInvalido:       "O turmaID precisa ser um id válido"
+  turmaIDInvalido:       "O turmaID precisa ser um id válido",
+  IDInvalido:            "O estudanteID precisa ser um id válido"
 };
 
 export const estudanteRouter = express.Router();
@@ -21,6 +23,7 @@ export const estudanteRouter = express.Router();
 estudanteRouter.post("/", criarEstudante);
 estudanteRouter.put("/turma", adicionarTurma);
 estudanteRouter.get("/turma/:turmaID", verTurma);
+estudanteRouter.get("/:id", verEstudante);
 
 async function criarEstudante(request: Request, response: Response): Promise<void> {
   const {
@@ -90,7 +93,7 @@ async function adicionarTurma(request: Request, response: Response)
   }
 }
 
-export async function verTurma(request: Request, response: Response): Promise<void> {
+async function verTurma(request: Request, response: Response): Promise<void> {
   const { turmaID } = request.params;
   if (!validarUUID(turmaID)) {
     response.status(400).send(erros.turmaIDInvalido);
@@ -103,6 +106,26 @@ export async function verTurma(request: Request, response: Response): Promise<vo
       quantidate: estudantes.length,
       estudantes
     });
+  } catch (erro) {
+    response.status(500).send(erros.inesperado);
+  }
+}
+
+async function verEstudante(request: Request, response: Response): Promise<void> {
+  const { id } = request.params;
+  if (!validarUUID(id)) {
+    response.status(400).send(erros.IDInvalido);
+    return;
+  }
+
+  try {
+    const professor = await verEstudanteDatabase(id);
+    if (!professor) {
+      response.status(404).send(erros.estudanteNaoEcontrada);
+      return;
+    }
+
+    response.send(professor);
   } catch (erro) {
     response.status(500).send(erros.inesperado);
   }
