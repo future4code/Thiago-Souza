@@ -1,12 +1,15 @@
 import "./env";
 import express from "express";
 import cors from "cors";
+import { getEmploeeys } from "./handlers/employee";
 
 const serverPort = process.env.NODE_PORT || 3003;
 
 const server = express();
 server.use(express.json());
 server.use(cors());
+
+server.get("/employee", getEmploeeys);
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)
