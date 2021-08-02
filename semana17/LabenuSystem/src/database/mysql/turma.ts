@@ -1,6 +1,6 @@
 import { v1 as uuidV1 } from "uuid";
 import { connection } from "./connection";
-import { Turma, TurmaDatabase } from "../../@types";
+import { ID, Turma, TurmaDatabase } from "../../@types";
 
 export async function criarTurma(turma: Omit<Turma, "id">): Promise<Turma> {
   const turmaNova: TurmaDatabase = {
@@ -18,4 +18,8 @@ export async function criarTurma(turma: Omit<Turma, "id">): Promise<Turma> {
     ...turma,
     id: turmaNova.id
   };
+}
+
+export async function mudarModulo(id: ID, modulo:Turma["modulo"]): Promise<number> {
+  return connection("LabenuSystem_Turma").update({ modulo }).where({ id });
 }

@@ -26,6 +26,9 @@ export const turmaSchema: yup.SchemaOf<Turma> = yup.object({
 export const criarTurmaSchema: yup.SchemaOf<Omit<Turma, "id">>
   = turmaSchema.omit([ "id" ]);
 
+export const mudarModuloSchema: yup.SchemaOf<Pick<Turma, "id" | "modulo">>
+  = turmaSchema.pick([ "id", "modulo" ]);
+
 //@ts-expect-error issue an yup  https://github.com/jquense/yup/issues/1183
 export const estudanteSchema: yup.SchemaOf<Estudante> = yup.object({
   id:   yup.string().uuid().defined(),

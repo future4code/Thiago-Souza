@@ -49,7 +49,7 @@ async function criarProfessor(request: Request, response: Response): Promise<voi
 
     const professorNova = await criarProfessorDatabase(professor);
 
-    response.send(professorNova);
+    response.status(201).send(professorNova);
   } catch (erro) {
     if (erro.name === "ValidationError") {
       response.status(400).send(erro.errors);

@@ -49,14 +49,14 @@ async function criarEstudante(request: Request, response: Response): Promise<voi
 
     const estudanteNova = await criarEstudanteDatabase(estudante);
 
-    response.send(estudanteNova);
-  } catch (error) {
-    if (error.name === "ValidationError") {
-      response.status(400).send(error.errors);
+    response.status(201).send(estudanteNova);
+  } catch (erro) {
+    if (erro.name === "ValidationError") {
+      response.status(400).send(erro.errors);
       return;
     }
 
-    if (error.code === "ER_DUP_ENTRY") {
+    if (erro.code === "ER_DUP_ENTRY") {
       response.status(409).send(erros.emailExiste);
       return;
     }
