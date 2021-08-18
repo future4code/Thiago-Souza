@@ -1,4 +1,4 @@
-export type ID = string; 
+export type ID = string;
 
 export type Token = string;
 
@@ -11,4 +11,4 @@ export interface ApplicationErrorInterface {
 
 export interface HttpErrorInterface extends ApplicationErrorInterface {
   httpStatus: number;
-} 
+}

@@ -10,4 +10,4 @@ export const databaseConnection = knex({
     password:           process.env.DATABASE_PASSWORD,
     multipleStatements: true
   }
-})
+});

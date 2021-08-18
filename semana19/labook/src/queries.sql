@@ -1,0 +1,40 @@
+
+SHOW TABLES;
+
+DESCRIBE LaBook_User;
+
+DESCRIBE LaBook_Post;
+
+DESCRIBE LaBook_Like;
+
+DROP TABLE LaBook_Like;
+
+DROP TABLE LaBook_Post;
+
+DROP TABLE LaBook_User;
+
+CREATE TABLE LaBook_User (
+  id CHAR(36) UNIQUE NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE LaBook_Post (
+  id CHAR(36) UNIQUE NOT NULL,
+  author_id CHAR(36) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  potho_url VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  type_of ENUM("NORMAL", "EVENT") NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (id) REFERENCES LaBook_User(id)
+);
+
+CREATE TABLE LaBook_Like (
+  user_id CHAR(36) NOT NULL, 
+  post_id CHAR(36) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES LaBook_User(id),
+  FOREIGN KEY (post_id) REFERENCES LaBook_Post(id)
+);
