@@ -1,6 +1,8 @@
 import knex from "knex";
+import { UserData } from "../@types";
+import { UserDatabaseSQL } from "./databaseSQL";
 
-export const databaseConnection = knex({
+const databaseConnection = knex({
   client:     process.env.DATABASE_TYPE,
   connection: {
     host:               process.env.DATABASE_HOST,
@@ -11,3 +13,5 @@ export const databaseConnection = knex({
     multipleStatements: true
   }
 });
+
+export const userData: UserData = new UserDatabaseSQL(databaseConnection);

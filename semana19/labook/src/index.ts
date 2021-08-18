@@ -14,7 +14,7 @@ server.get("/ping", (_request: Request, response: Response): void => {
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)
-    console.log(`Server is running in http://localhost:${serverPort}`);
+    console.info(`Server is running in http://localhost:${serverPort}`);
   else
     console.error("Failure upon starting server.");
 });

@@ -5,12 +5,12 @@ export class ApplicationError implements ApplicationErrorInterface {
 
   message: string;
 
-  initialError: string;
+  initialError: unknown;
 
   constructor(
     name: string,
     message: string,
-    initialError?: string
+    initialError?: unknown
   ) {
     this.name = name;
     this.message = message;
@@ -29,13 +29,13 @@ export class HttpError implements HttpErrorInterface {
 
   httpStatus: number;
 
-  initialError: string;
+  initialError: unknown;
 
   constructor(
     name: string,
     message: string,
     httpStatus: number,
-    initialError?: string
+    initialError?: unknown
   ) {
     this.name = name;
     this.message = message;
