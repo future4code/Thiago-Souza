@@ -1,6 +1,9 @@
 import { Knex } from "knex";
 import { ID, User, UserData } from "../../@types";
-import { userNotFound } from "../../errors";
+import {
+  applicationErrorUserEmailAlreadyExist,
+  applicationErrorUserNotFound
+} from "../../errors";
 
 export class UserDatabaseSQL implements UserData {
   #connection: Knex;
@@ -16,7 +19,7 @@ export class UserDatabaseSQL implements UserData {
       .first();
 
     if (!result)
-      throw userNotFound();
+      throw applicationErrorUserNotFound();
 
     return result;
   }
@@ -26,7 +29,14 @@ export class UserDatabaseSQL implements UserData {
   }
 
   async insert(user: User): Promise<void> {
-    await this.#connection("LaBook_User").insert(user);
+    try {
+      await this.#connection("LaBook_User").insert(user);
+    } catch (error) {
+      if (error.code === "ER_DUP_ENTRY")
+        throw applicationErrorUserEmailAlreadyExist(error);
+
+      throw error;
+    }
   }
 
   async update(userID: ID, user: User): Promise<void> {
@@ -35,7 +45,7 @@ export class UserDatabaseSQL implements UserData {
       .where({ id: userID });
 
     if (!result)
-      throw userNotFound();
+      throw applicationErrorUserNotFound();
   }
 
   async delete(userID: ID): Promise<void> {
@@ -44,6 +54,6 @@ export class UserDatabaseSQL implements UserData {
       .where({ id: userID });
 
     if (!result)
-      throw userNotFound();
+      throw applicationErrorUserNotFound();
   }
 }

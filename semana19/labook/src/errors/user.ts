@@ -1,5 +1,31 @@
-/*eslint-disable implicit-arrow-linebreak*/
-import { ApplicationError } from "./commons";
+import { ApplicationError, errorName, HttpError } from "./commons";
 
-export const userNotFound = (initialError?: unknown): ApplicationError =>
-  new ApplicationError("NotFoundUser", "User not found", initialError);
+export function applicationErrorUserNotFound(initialError?: unknown)
+: ApplicationError {
+  return new ApplicationError(
+    errorName.userNotFound,
+    "User not found",
+    initialError
+  );
+}
+
+export function applicationErrorUserEmailAlreadyExist(initialError?: unknown)
+: ApplicationError {
+  return new ApplicationError(
+    errorName.userEmailAlreadyExist,
+    "User email already exist",
+    initialError
+  );
+}
+
+export function httpErrorUserEmailAlreadyExist(initialError?: unknown)
+: HttpError {
+  const aplicationError = applicationErrorUserEmailAlreadyExist(initialError);
+
+  return new HttpError(
+    aplicationError.name,
+    aplicationError.message,
+    409,
+    initialError
+  );
+}

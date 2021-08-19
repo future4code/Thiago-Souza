@@ -1,5 +1,12 @@
 import { ApplicationErrorInterface, HttpErrorInterface } from "../@types";
 
+export const errorName = {
+  unexpected:            "UnexpectError",
+  validate:              "ValidateError",
+  userNotFound:          "UserNotFound",
+  userEmailAlreadyExist: "UserEmailAlreadyExist"
+};
+
 export class ApplicationError implements ApplicationErrorInterface {
   name: string;
 
@@ -48,14 +55,44 @@ export class HttpError implements HttpErrorInterface {
   }
 }
 
-export class UnexpectApplicationError extends ApplicationError {
-  constructor(initialError?: string) {
-    super("unexpected", "An unexpected error has occurred", initialError);
-  }
+export function applicationErrorUnexpect(initialError?: unknown): ApplicationError {
+  return new ApplicationError(
+    errorName.unexpected,
+    "An unexpected error has occurred",
+    initialError
+  );
 }
 
-export class UnexpectHttpError extends HttpError {
-  constructor(initialError?: string) {
-    super("unexpected", "An unexpected error has occurred", 500, initialError);
-  }
+export function httpErrorUnexpect(initialError?: unknown): HttpError {
+  const aplicationError = applicationErrorUnexpect();
+
+  return new HttpError(
+    aplicationError.name,
+    aplicationError.message,
+    500,
+    initialError
+  );
+}
+
+//eslint-disable-next-line
+export function aplicationErrorValidate(initialError?: any): ApplicationError {
+  let message = "";
+
+  if (Array.isArray(initialError.errors))
+    message = `\n  ${initialError.errors.join("\n  ")}`;
+  else
+    message = initialError.message || "Validation error";
+
+  return new ApplicationError(errorName.validate, message, initialError);
+}
+
+export function httpErrorValidate(initialError?: unknown): HttpError {
+  const aplicationError = aplicationErrorValidate(initialError);
+
+  return new HttpError(
+    aplicationError.name,
+    aplicationError.message,
+    500,
+    initialError
+  );
 }
