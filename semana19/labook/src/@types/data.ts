@@ -5,6 +5,7 @@ import { User } from "./user";
 
 export interface UserData {
   getById: (userID: ID) => Promise<User>;
+  getByEmail: (email: string) => Promise<User>;
   getAll: () => Promise<User[]>
   insert: (user: User) => Promise<void>;
   update: (userID: ID, user: User) => Promise<void>;

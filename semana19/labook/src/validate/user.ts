@@ -19,3 +19,6 @@ export const UserSchema: yup.SchemaOf<User> = yup.object({
 
 export const CreateUserSchema: yup.SchemaOf<Omit<User, "id">>
   = UserSchema.omit([ "id" ]);
+
+export const LoginUserSchema: yup.SchemaOf<Pick<User, "email" | "password">>
+  = UserSchema.pick([ "email", "password" ]);

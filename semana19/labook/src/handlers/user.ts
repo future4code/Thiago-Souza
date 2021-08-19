@@ -1,27 +1,9 @@
 import express, { Request, Response } from "express";
 import { UserBusiness } from "../business";
 import { userData } from "../data";
-import {
-  errorName,
-  HttpError,
-  httpErrorUnexpect,
-  httpErrorUserEmailAlreadyExist,
-  httpErrorValidate
-} from "../errors";
-import { CreateUserSchema } from "../validate/user";
+import { sendError } from "../errors";
 
 export const userRouter = express.Router();
-
-async function validateBodyCreateUser(user: unknown): Promise<void> {
-  try {
-    await CreateUserSchema.validate(user, { abortEarly: false });
-  } catch (error) {
-    if (error.name === "ValidationError")
-      throw httpErrorValidate(error);
-
-    throw httpErrorUnexpect(error);
-  }
-}
 
 class UserRouter {
   #userBusiness: UserBusiness
@@ -30,7 +12,7 @@ class UserRouter {
     this.#userBusiness = userBusiness;
   }
 
-  async createUser(request: Request, response: Response): Promise<void>  {
+  async create(request: Request, response: Response): Promise<void>  {
     try {
       const { name, email, password } = request.body;
 
@@ -40,8 +22,6 @@ class UserRouter {
         password
       };
 
-      await validateBodyCreateUser(user);
-
       const token = await this.#userBusiness.create(user);
 
       response.status(201).send({
@@ -49,35 +29,33 @@ class UserRouter {
         token
       });
     } catch (error) {
-      if (error.name === errorName.validate) {
-        const finalError = error instanceof HttpError
-          ? error
-          : httpErrorValidate(error);
+      sendError(response, error);
+    }
+  }
 
-        response.status(finalError.httpStatus).send(finalError.getMessage());
+  async login(request: Request, response: Response): Promise<void>  {
+    try {
+      const { email, password } = request.body;
 
-        return;
-      }
+      const user = {
+        email,
+        password
+      };
 
-      if (error.name === errorName.userEmailAlreadyExist) {
-        const finalError = error instanceof HttpError
-          ? error
-          : httpErrorUserEmailAlreadyExist(error);
+      const token = await this.#userBusiness.login(user);
 
-        response.status(finalError.httpStatus).send(finalError.getMessage());
-
-        return;
-      }
-
-      console.error(error);
-
-      const finalError = httpErrorUnexpect(error);
-      response.status(finalError.httpStatus).send(finalError.getMessage());
+      response.send({
+        message: "User login done successfully",
+        token
+      });
+    } catch (error) {
+      sendError(response, error);
     }
   }
 }
 
 const routes = new UserRouter(new UserBusiness(userData));
 
-userRouter.post("/signup", (req, res) => routes.createUser(req, res));
+userRouter.post("/signup", (req, res) => routes.create(req, res));
+userRouter.post("/login", (req, res) => routes.login(req, res));
 

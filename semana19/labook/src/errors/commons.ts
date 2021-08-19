@@ -4,7 +4,8 @@ export const errorName = {
   unexpected:            "UnexpectError",
   validate:              "ValidateError",
   userNotFound:          "UserNotFound",
-  userEmailAlreadyExist: "UserEmailAlreadyExist"
+  userEmailAlreadyExist: "UserEmailAlreadyExist",
+  invalidPassword:       "InvalidPassword"
 };
 
 export class ApplicationError implements ApplicationErrorInterface {
@@ -75,7 +76,7 @@ export function httpErrorUnexpect(initialError?: unknown): HttpError {
 }
 
 //eslint-disable-next-line
-export function aplicationErrorValidate(initialError?: any): ApplicationError {
+export function applicationErrorValidate(initialError?: any): ApplicationError {
   let message = "";
 
   if (Array.isArray(initialError.errors))
@@ -87,7 +88,7 @@ export function aplicationErrorValidate(initialError?: any): ApplicationError {
 }
 
 export function httpErrorValidate(initialError?: unknown): HttpError {
-  const aplicationError = aplicationErrorValidate(initialError);
+  const aplicationError = applicationErrorValidate(initialError);
 
   return new HttpError(
     aplicationError.name,

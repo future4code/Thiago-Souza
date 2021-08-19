@@ -24,6 +24,18 @@ export class UserDatabaseSQL implements UserData {
     return result;
   }
 
+  async getByEmail(email: string): Promise<User> {
+    const result = await this.#connection("LaBook_User")
+      .select("*")
+      .where({ email })
+      .first();
+
+    if (!result)
+      throw applicationErrorUserNotFound();
+
+    return result;
+  }
+
   async getAll(): Promise<User[]> {
     return await this.#connection("LaBook_User").select("*");
   }
