@@ -63,3 +63,24 @@ export function httpErrorInvalidPassword(initialError?: unknown)
   );
 }
 
+export function applicationErrorInvalidToken(initialError?: unknown)
+: ApplicationError {
+  return new ApplicationError(
+    errorName.invalidToken,
+    "Invalid token",
+    initialError
+  );
+}
+
+export function httpErrorInvalidToken(initialError?: unknown)
+: HttpError {
+  const aplicationError = applicationErrorInvalidToken(initialError);
+
+  return new HttpError(
+    aplicationError.name,
+    aplicationError.message,
+    401,
+    initialError
+  );
+}
+

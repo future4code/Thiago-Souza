@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { User } from "../@types";
+import { User, UserTokenData } from "../@types";
 
 const MIN_CHARACTER = 6;
 const MAX_CHARACTER = 255;
@@ -22,3 +22,6 @@ export const CreateUserSchema: yup.SchemaOf<Omit<User, "id">>
 
 export const LoginUserSchema: yup.SchemaOf<Pick<User, "email" | "password">>
   = UserSchema.pick([ "email", "password" ]);
+
+export const UserTokenDataSchema: yup.SchemaOf<UserTokenData>
+  = UserSchema.pick([ "id" ]);

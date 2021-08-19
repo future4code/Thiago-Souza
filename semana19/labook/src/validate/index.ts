@@ -5,6 +5,7 @@ import {
 } from "../errors";
 
 export * from "./user";
+export * from "./post";
 
 export async function validate(schema: AnySchema, data: unknown): Promise<void> {
   try {

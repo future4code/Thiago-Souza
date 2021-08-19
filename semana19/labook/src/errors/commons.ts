@@ -5,7 +5,9 @@ export const errorName = {
   validate:              "ValidateError",
   userNotFound:          "UserNotFound",
   userEmailAlreadyExist: "UserEmailAlreadyExist",
-  invalidPassword:       "InvalidPassword"
+  invalidPassword:       "InvalidPassword",
+  postNotFound:          "PostNotFound",
+  invalidToken:          "InvalidToken"
 };
 
 export class ApplicationError implements ApplicationErrorInterface {

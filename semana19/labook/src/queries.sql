@@ -13,6 +13,14 @@ DROP TABLE LaBook_Post;
 
 DROP TABLE LaBook_User;
 
+SELECT * FROM LaBook_User;
+
+SELECT * FROM LaBook_Post;
+
+SHOW CHARACTER SET;
+
+SHOW COLLATION;
+
 CREATE TABLE LaBook_User (
   id CHAR(36) UNIQUE NOT NULL,
   name VARCHAR(255) NOT NULL,
@@ -29,7 +37,7 @@ CREATE TABLE LaBook_Post (
   description VARCHAR(255) NOT NULL,
   type_of ENUM("NORMAL", "EVENT") NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (id) REFERENCES LaBook_User(id)
+  FOREIGN KEY (author_id) REFERENCES LaBook_User(id)
 );
 
 CREATE TABLE LaBook_Like (

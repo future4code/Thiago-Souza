@@ -5,8 +5,10 @@ import {
   httpErrorUnexpect,
   httpErrorValidate
 } from "./commons";
+import { httpErrorPostNotFound } from "./post";
 import {
   httpErrorInvalidPassword,
+  httpErrorInvalidToken,
   httpErrorUserEmailAlreadyExist,
   httpErrorUserNotFound
 } from "./user";
@@ -35,6 +37,12 @@ export function sendError(response: Response, error: any): void {
       break;
     case errorName.invalidPassword:
       sendKnowError(response, error, httpErrorInvalidPassword);
+      break;
+    case errorName.postNotFound:
+      sendKnowError(response, error, httpErrorPostNotFound);
+      break;
+    case errorName.invalidToken:
+      sendKnowError(response, error, httpErrorInvalidToken);
       break;
     default: {
       console.error(error);
