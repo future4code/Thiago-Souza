@@ -10,6 +10,7 @@ import {
   httpErrorFriendsNotFound,
   httpErrorUsersNotFriends
 } from "./friend";
+import { httpErrorUsersIsAlredyDislike, httpErrorUsersIsAlredyLike } from "./like";
 import { httpErrorInvalidType, httpErrorPostNotFound } from "./post";
 import {
   httpErrorInvalidPassword,
@@ -60,6 +61,12 @@ export function sendError(response: Response, error: any): void {
       break;
     case errorName.invalidType:
       sendKnowError(response, error, httpErrorInvalidType);
+      break;
+    case errorName.isAlreadyLike:
+      sendKnowError(response, error, httpErrorUsersIsAlredyLike);
+      break;
+    case errorName.isAlreadyDislike:
+      sendKnowError(response, error, httpErrorUsersIsAlredyDislike);
       break;
     default: {
       console.error(error);

@@ -11,7 +11,9 @@ export const errorName = {
   alreadyFriends:        "AlreadyFriends",
   friendsNotFound:       "FriendsNotFound",
   usersNotFriends:       "UsersNotFriends",
-  invalidType:           "InvalidType"
+  invalidType:           "InvalidType",
+  isAlreadyLike:         "IsAlredyLike",
+  isAlreadyDislike:      "IsAlredyDislike"
 };
 
 export class ApplicationError implements ApplicationErrorInterface {

@@ -5,7 +5,8 @@ import {
   postRouter,
   userRouter,
   feedRouter,
-  friendRouter
+  friendRouter,
+  likeRouter
 } from "./handlers";
 
 const serverPort = process.env.NODE_PORT || 3003;
@@ -18,6 +19,7 @@ server.use("/user", userRouter);
 server.use("/post", postRouter);
 server.use("/friend", friendRouter);
 server.use("/feed", feedRouter);
+server.use("/like", likeRouter);
 
 server.get("/ping", (_request: Request, response: Response): void => {
   response.send("pong");

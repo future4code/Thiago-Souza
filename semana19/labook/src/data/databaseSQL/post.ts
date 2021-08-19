@@ -55,6 +55,10 @@ export class PostDatabaseSQL implements PostData {
       .map(databaseToData);
   }
 
+  async isPost(postID: ID): Promise<boolean> {
+    return !!await this.getById(postID);
+  }
+
   async insert(post: Post): Promise<void> {
     const date = post.createdAt.toISOString().split("T");
     const timestamp =  `${date[0]} ${date[1].split(".")[0]}`;

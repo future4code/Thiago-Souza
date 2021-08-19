@@ -19,6 +19,7 @@ export interface PostData {
   getByAuthorIDs: (authorID: ID[]) => Promise<Post[]>;
   getByType: (type: PostType) => Promise<Post[]>;
   getAll: () => Promise<Post[]>;
+  isPost: (postID: ID) => Promise<boolean>;
   insert: (post: Post) => Promise<void>;
   update: (postID: ID, post: Post) => Promise<void>;
   delete: (postID: ID) => Promise<void>;

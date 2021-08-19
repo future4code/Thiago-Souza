@@ -23,6 +23,8 @@ SELECT * FROM LaBook_Post;
 
 SELECT * FROM LaBook_Friend;
 
+SELECT * FROM LaBook_Like;
+
 INSERT INTO LaBook_Friend (user1, user2)
 VALUES
 ('00562f80-0098-11ec-8561-977ba7128b14', '4a9eab90-00a1-11ec-aa03-e58e4275381e'),
