@@ -10,7 +10,7 @@ import {
   httpErrorFriendsNotFound,
   httpErrorUsersNotFriends
 } from "./friend";
-import { httpErrorPostNotFound } from "./post";
+import { httpErrorInvalidType, httpErrorPostNotFound } from "./post";
 import {
   httpErrorInvalidPassword,
   httpErrorInvalidToken,
@@ -57,6 +57,9 @@ export function sendError(response: Response, error: any): void {
       break;
     case errorName.usersNotFriends:
       sendKnowError(response, error, httpErrorUsersNotFriends);
+      break;
+    case errorName.invalidType:
+      sendKnowError(response, error, httpErrorInvalidType);
       break;
     default: {
       console.error(error);

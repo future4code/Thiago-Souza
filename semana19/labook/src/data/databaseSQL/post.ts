@@ -3,7 +3,8 @@ import {
   ID,
   Post,
   PostData,
-  PostDatabase
+  PostDatabase,
+  PostType
 } from "../../@types";
 
 function databaseToData(post: PostDatabase): Post {
@@ -33,10 +34,19 @@ export class PostDatabaseSQL implements PostData {
     return result && databaseToData(result);
   }
 
-  async getByAuthorID(authorID: ID): Promise<Post[]> {
+  async getByAuthorIDs(authorIDs: ID[]): Promise<Post[]> {
     return (await this.#connection("LaBook_Post")
       .select("*")
-      .where({ author_id: authorID }))
+      .where("author_id", authorIDs)
+      .orderBy("created_at", "desc"))
+      .map(databaseToData);
+  }
+
+  async getByType(type: PostType): Promise<Post[]> {
+    return (await this.#connection("LaBook_Post")
+      .select("*")
+      .where({ type_of: type })
+      .orderBy("created_at", "desc"))
       .map(databaseToData);
   }
 

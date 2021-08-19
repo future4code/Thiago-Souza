@@ -1,6 +1,6 @@
 import { ID } from "./commons";
 import { Like } from "./like";
-import { Post } from "./post";
+import { Post, PostType } from "./post";
 import { UserView, User } from "./user";
 
 export interface UserData {
@@ -16,7 +16,8 @@ export interface UserData {
 
 export interface PostData {
   getById: (postID: ID) => Promise<Post|undefined>;
-  getByAuthorID: (authorID: ID) => Promise<Post[]>;
+  getByAuthorIDs: (authorID: ID[]) => Promise<Post[]>;
+  getByType: (type: PostType) => Promise<Post[]>;
   getAll: () => Promise<Post[]>;
   insert: (post: Post) => Promise<void>;
   update: (postID: ID, post: Post) => Promise<void>;

@@ -20,3 +20,25 @@ export function httpErrorPostNotFound(initialError?: unknown)
     initialError
   );
 }
+
+export function applicationErrorInvalidType(initialError?: unknown)
+: ApplicationError {
+  return new ApplicationError(
+    errorName.invalidType,
+    "The type must be NORMAL or EVENT",
+    initialError
+  );
+}
+
+export function httpErrorInvalidType(initialError?: unknown)
+: HttpError {
+  const aplicationError = applicationErrorInvalidType(initialError);
+
+  return new HttpError(
+    aplicationError.name,
+    aplicationError.message,
+    400,
+    initialError
+  );
+}
+

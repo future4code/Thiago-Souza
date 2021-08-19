@@ -10,7 +10,8 @@ export const errorName = {
   invalidToken:          "InvalidToken",
   alreadyFriends:        "AlreadyFriends",
   friendsNotFound:       "FriendsNotFound",
-  usersNotFriends:       "Users not friends"
+  usersNotFriends:       "UsersNotFriends",
+  invalidType:           "InvalidType"
 };
 
 export class ApplicationError implements ApplicationErrorInterface {
