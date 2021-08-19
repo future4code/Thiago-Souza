@@ -7,10 +7,10 @@ import { httpErrorInvalidToken, sendError } from "../errors";
 export const postRouter = express.Router();
 
 class PostRouter {
-  #postBusiness: PostBusiness
+  #business: PostBusiness
 
   constructor(postBusiness: PostBusiness) {
-    this.#postBusiness = postBusiness;
+    this.#business = postBusiness;
   }
 
   async create(request: Request, response: Response): Promise<void>  {
@@ -32,9 +32,24 @@ class PostRouter {
         type
       };
 
-      await this.#postBusiness.create(post);
+      await this.#business.create(post);
 
       response.status(201).send({ message: "Post created successfully" });
+    } catch (error) {
+      sendError(response, error);
+    }
+  }
+
+  async find(request: Request, response: Response): Promise<void> {
+    try {
+      const { id } = request.params;
+
+      const post = await this.#business.find(id);
+
+      response.send({
+        message: "Post found successfully",
+        post
+      });
     } catch (error) {
       sendError(response, error);
     }
@@ -63,4 +78,5 @@ async function isLogin(request: Request, response: Response, next: NextFunction)
 const routes = new PostRouter(new PostBusiness(postData));
 
 postRouter.post("/", isLogin, (req, res) => routes.create(req, res));
+postRouter.get("/:id", isLogin, (req, res) => routes.find(req, res));
 

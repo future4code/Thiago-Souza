@@ -1,12 +1,12 @@
-import { Post, PostData } from "../@types";
+import { ID, Post, PostData } from "../@types";
 import { generateId } from "../commons";
 import { CreatePostSchema, validate } from "../validate";
 
 export class PostBusiness {
-  #postData: PostData
+  #data: PostData
 
   constructor(postData: PostData) {
-    this.#postData = postData;
+    this.#data = postData;
   }
 
   async create(post: Omit<Post, "id"|"createdAt">): Promise<void> {
@@ -18,7 +18,11 @@ export class PostBusiness {
       createdAt: new Date()
     };
 
-    await this.#postData.insert(newPost);
+    await this.#data.insert(newPost);
+  }
+
+  async find(postID: ID): Promise<Post> {
+    return await this.#data.getById(postID);
   }
 }
 
