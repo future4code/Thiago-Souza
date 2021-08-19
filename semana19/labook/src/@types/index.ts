@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import { Friend } from "./friend";
 import { LikeDatabase } from "./like";
 import { PostDatabase } from "./post";
 import { User } from "./user";
@@ -8,6 +9,7 @@ export * from "./user";
 export * from "./post";
 export * from "./like";
 export * from "./data";
+export * from "./friend";
 
 //Veja https://knexjs.org/#typescript-support
 declare module "knex/types/tables" {
@@ -25,6 +27,8 @@ declare module "knex/types/tables" {
       LikeDatabase,
       LikeDatabase,
       Omit<LikeDatabase, "user_id" | "post_id">
-    >
+    >;
+    LaBook_Friend: Friend;
+    LaBook_Friend_composite: Knex.CompositeTableType<Friend>;
   }
 }

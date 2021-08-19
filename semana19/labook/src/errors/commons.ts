@@ -7,7 +7,10 @@ export const errorName = {
   userEmailAlreadyExist: "UserEmailAlreadyExist",
   invalidPassword:       "InvalidPassword",
   postNotFound:          "PostNotFound",
-  invalidToken:          "InvalidToken"
+  invalidToken:          "InvalidToken",
+  alreadyFriends:        "AlreadyFriends",
+  friendsNotFound:       "FriendsNotFound",
+  usersNotFriends:       "Users not friends"
 };
 
 export class ApplicationError implements ApplicationErrorInterface {

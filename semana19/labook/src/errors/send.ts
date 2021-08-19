@@ -5,6 +5,11 @@ import {
   httpErrorUnexpect,
   httpErrorValidate
 } from "./commons";
+import {
+  httpErrorAlreadyFriends,
+  httpErrorFriendsNotFound,
+  httpErrorUsersNotFriends
+} from "./friend";
 import { httpErrorPostNotFound } from "./post";
 import {
   httpErrorInvalidPassword,
@@ -43,6 +48,15 @@ export function sendError(response: Response, error: any): void {
       break;
     case errorName.invalidToken:
       sendKnowError(response, error, httpErrorInvalidToken);
+      break;
+    case errorName.friendsNotFound:
+      sendKnowError(response, error, httpErrorFriendsNotFound);
+      break;
+    case errorName.alreadyFriends:
+      sendKnowError(response, error, httpErrorAlreadyFriends);
+      break;
+    case errorName.usersNotFriends:
+      sendKnowError(response, error, httpErrorUsersNotFriends);
       break;
     default: {
       console.error(error);

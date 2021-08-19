@@ -1,6 +1,6 @@
 import knex from "knex";
-import { PostData, UserData } from "../@types";
-import { UserDatabaseSQL, PostDatabaseSQL } from "./databaseSQL";
+import { FriendData, PostData, UserData } from "../@types";
+import { UserDatabaseSQL, PostDatabaseSQL, FriendDatabaseSQL } from "./databaseSQL";
 
 const databaseConnection = knex({
   client:     process.env.DATABASE_TYPE,
@@ -16,3 +16,4 @@ const databaseConnection = knex({
 
 export const userData: UserData = new UserDatabaseSQL(databaseConnection);
 export const postData: PostData = new PostDatabaseSQL(databaseConnection);
+export const friendData: FriendData = new FriendDatabaseSQL(databaseConnection);

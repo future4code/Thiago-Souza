@@ -1,21 +1,23 @@
 import { ID } from "./commons";
 import { Like } from "./like";
 import { Post } from "./post";
-import { User } from "./user";
+import { UserView, User } from "./user";
 
 export interface UserData {
-  getById: (userID: ID) => Promise<User>;
-  getByEmail: (email: string) => Promise<User>;
-  getAll: () => Promise<User[]>
+  getById: (userID: ID) => Promise<User|undefined>;
+  getByEmail: (email: string) => Promise<User|undefined>;
+  getAll: () => Promise<User[]>;
+  isUser: (userID: ID) => Promise<boolean>;
+  isUserByEmail: (userID: string) => Promise<boolean>;
   insert: (user: User) => Promise<void>;
   update: (userID: ID, user: User) => Promise<void>;
   delete: (userID: ID) => Promise<void>;
 }
 
 export interface PostData {
-  getById: (postID: ID) => Promise<Post>;
-  getByAuthorID: (authorID: ID) => Promise<Post[]>
-  getAll: () => Promise<Post[]>
+  getById: (postID: ID) => Promise<Post|undefined>;
+  getByAuthorID: (authorID: ID) => Promise<Post[]>;
+  getAll: () => Promise<Post[]>;
   insert: (post: Post) => Promise<void>;
   update: (postID: ID, post: Post) => Promise<void>;
   delete: (postID: ID) => Promise<void>;
@@ -29,3 +31,19 @@ export interface LikeData {
   insert: (userID: ID, postID: ID) => Promise<void>;
   delete: (userID: ID, postID: ID) => Promise<void>;
 }
+
+export interface FriendData {
+  getFriends: (userID: ID) => Promise<UserView[]>;
+  isFriend: (user1: ID, user2: ID) => Promise<boolean>;
+  insert: (user1: ID, user2: ID) => Promise<void>;
+  delete: (user1: ID, user2: ID) => Promise<void>;
+}
+
+export function userToUserView(user: User): UserView {
+  return {
+    id:    user.id,
+    email: user.email,
+    name:  user.email
+  };
+}
+

@@ -1,8 +1,8 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import { PostBusiness } from "../business";
-import { getUserToken } from "../commons";
 import { postData } from "../data";
-import { httpErrorInvalidToken, sendError } from "../errors";
+import { sendError } from "../errors";
+import { isLogin } from "./middleware";
 
 export const postRouter = express.Router();
 
@@ -22,11 +22,11 @@ class PostRouter {
         type
       } = request.body;
 
-      const { authorID } = response.locals;
+      const { userID } = response.locals;
 
       const post = {
         name,
-        authorID,
+        authorID: userID,
         description,
         pothoURL,
         type
@@ -34,7 +34,7 @@ class PostRouter {
 
       await this.#business.create(post);
 
-      response.status(201).send({ message: "Post created successfully" });
+      response.status(201).send({ message: "Post successfully created" });
     } catch (error) {
       sendError(response, error);
     }
@@ -47,31 +47,12 @@ class PostRouter {
       const post = await this.#business.find(id);
 
       response.send({
-        message: "Post found successfully",
+        message: "Post successfully found",
         post
       });
     } catch (error) {
       sendError(response, error);
     }
-  }
-}
-
-async function isLogin(request: Request, response: Response, next: NextFunction)
-: Promise<void> {
-  try {
-    const { authorization = "" } = request.headers;
-
-    const tokenSplit = authorization.split(" ");
-    if (tokenSplit.length !== 2 || tokenSplit[0] !== "Bearer")
-      throw httpErrorInvalidToken();
-
-    const token = await getUserToken(tokenSplit[1]);
-
-    response.locals.authorID = token.id;
-
-    next();
-  } catch (error) {
-    sendError(response, error);
   }
 }
 

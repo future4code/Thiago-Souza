@@ -1,5 +1,6 @@
 import { ID, Post, PostData } from "../@types";
 import { generateId } from "../commons";
+import { applicationErrorPostNotFound } from "../errors";
 import { CreatePostSchema, validate } from "../validate";
 
 export class PostBusiness {
@@ -22,7 +23,11 @@ export class PostBusiness {
   }
 
   async find(postID: ID): Promise<Post> {
-    return await this.#data.getById(postID);
+    const result = await this.#data.getById(postID);
+    if (!result)
+      throw applicationErrorPostNotFound();
+
+    return result;
   }
 }
 

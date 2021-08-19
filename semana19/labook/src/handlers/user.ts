@@ -25,7 +25,7 @@ class UserRouter {
       const token = await this.#userBusiness.create(user);
 
       response.status(201).send({
-        message: "User created successfully",
+        message: "User successfully created",
         token
       });
     } catch (error) {

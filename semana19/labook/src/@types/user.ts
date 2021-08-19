@@ -6,3 +6,5 @@ export interface User {
   password: string;
   email: string;
 }
+
+export type UserView = Omit<User, "password">

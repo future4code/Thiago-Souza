@@ -1,7 +1,7 @@
 import "./env";
 import express, { Request, Response } from "express";
 import cors from "cors";
-import { postRouter, userRouter } from "./handlers";
+import { postRouter, userRouter, friendRouter } from "./handlers";
 
 const serverPort = process.env.NODE_PORT || 3003;
 
@@ -11,6 +11,7 @@ server.use(cors());
 
 server.use("/user", userRouter);
 server.use("/post", postRouter);
+server.use("/friend", friendRouter);
 
 server.get("/ping", (_request: Request, response: Response): void => {
   response.send("pong");
