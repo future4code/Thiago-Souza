@@ -9,6 +9,8 @@ DESCRIBE LaBook_Like;
 
 DESCRIBE LaBook_Friend;
 
+DROP TABLE LaBook_Comment;
+
 DROP TABLE LaBook_Friend;
 
 DROP TABLE LaBook_Like;
@@ -64,3 +66,15 @@ CREATE TABLE LaBook_Friend (
   FOREIGN KEY (user1) REFERENCES LaBook_User(id),
   FOREIGN KEY (user2) REFERENCES LaBook_User(id)
 );
+
+CREATE TABLE LaBook_Comment (
+  id CHAR(36) NOT NULL,
+  post_id CHAR(36) NOT NULL,
+  author_id CHAR(36) NOT NULL,
+  comment VARCHAR(255) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (post_id) REFERENCES LaBook_Post(id),
+  FOREIGN KEY (author_id) REFERENCES LaBook_User(id)
+);
+

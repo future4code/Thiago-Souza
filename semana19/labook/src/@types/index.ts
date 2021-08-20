@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import { CommentDatabase } from "./comment";
 import { Friend } from "./friend";
 import { LikeDatabase } from "./like";
 import { PostDatabase } from "./post";
@@ -10,6 +11,7 @@ export * from "./post";
 export * from "./like";
 export * from "./data";
 export * from "./friend";
+export * from "./comment";
 
 //Veja https://knexjs.org/#typescript-support
 declare module "knex/types/tables" {
@@ -30,5 +32,11 @@ declare module "knex/types/tables" {
     >;
     LaBook_Friend: Friend;
     LaBook_Friend_composite: Knex.CompositeTableType<Friend>;
+    LaBook_Comment: CommentDatabase;
+    LaBook_Comment_composite: Knex.CompositeTableType<
+      CommentDatabase,
+      CommentDatabase,
+      Pick<CommentDatabase, "comment">
+    >;
   }
 }

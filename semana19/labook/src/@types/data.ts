@@ -2,6 +2,7 @@ import { ID } from "./commons";
 import { Like } from "./like";
 import { Post, PostType } from "./post";
 import { UserView, User } from "./user";
+import { Comment } from "./comment";
 
 export interface UserData {
   getById: (userID: ID) => Promise<User|undefined>;
@@ -39,6 +40,14 @@ export interface FriendData {
   isFriend: (user1: ID, user2: ID) => Promise<boolean>;
   insert: (user1: ID, user2: ID) => Promise<void>;
   delete: (user1: ID, user2: ID) => Promise<void>;
+}
+
+export interface CommentData {
+  getByPostID: (postID: ID) => Promise<Comment[]>;
+  getByAuthorID: (authorID: ID) => Promise<Comment[]>;
+  getAll: () => Promise<Comment[]>;
+  insert: (comment: Comment) => Promise<void>;
+  delete: (id: ID) => Promise<void>;
 }
 
 export function userToUserView(user: User): UserView {
