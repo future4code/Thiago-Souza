@@ -1,6 +1,3 @@
 export * from "./commons";
-export * from "./user";
+export * from "./error";
 export * from "./send";
-export * from "./post";
-export * from "./friend";
-export * from "./like";

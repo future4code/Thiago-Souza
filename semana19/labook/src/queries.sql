@@ -64,28 +64,3 @@ CREATE TABLE LaBook_Friend (
   FOREIGN KEY (user1) REFERENCES LaBook_User(id),
   FOREIGN KEY (user2) REFERENCES LaBook_User(id)
 );
-
-SELECT *
-FROM (
-  SELECT * FROM LaBook_Friend
-  WHERE user1 = "4a9eab90-00a1-11ec-aa03-e58e4275381e"
-  OR user2 = "0"
-) AS User
-INNER JOIN LaBook_User
-ON User.user1 = LaBook_User.id
-OR User.user2 = LaBook_User.id
-;
-
-SELECT *
-FROM ( 
-  SELECT * FROM LaBook_Friend
-  WHERE user1 = 'dcfd07e0-0095-11ec-9c00-fff462081313'
-  OR user2 = 'dcfd07e0-0095-11ec-9c00-fff462081313'
-) AS Friend
-INNER JOIN (
-  SELECT * FROM LaBook_User
-  WHERE id != 'dcfd07e0-0095-11ec-9c00-fff462081313'
-) AS User 
-ON Friend.user1 = User.id
-OR Friend.user2 = User.id;
-

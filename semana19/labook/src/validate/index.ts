@@ -1,8 +1,5 @@
 import { AnySchema } from "yup";
-import {
-  applicationErrorUnexpect,
-  applicationErrorValidate
-} from "../errors";
+import { applicationError, errorName } from "../errors";
 
 export * from "./user";
 export * from "./post";
@@ -12,9 +9,9 @@ export async function validate(schema: AnySchema, data: unknown): Promise<void> 
     await schema.validate(data, { abortEarly: false });
   } catch (error) {
     if (error.name === "ValidationError")
-      throw applicationErrorValidate(error);
+      throw applicationError(errorName.Validate, error);
 
-    throw applicationErrorUnexpect(error);
+    throw applicationError(errorName.Unexpected, error);
   }
 }
 

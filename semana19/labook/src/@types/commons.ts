@@ -5,7 +5,7 @@ export type ID = string;
 export type Token = string;
 
 export interface ApplicationErrorInterface {
-  initialError: unknown;
+  initialError: any; //eslint-disable-line
   name: string;
   message: string;
   getMessage: () => string;

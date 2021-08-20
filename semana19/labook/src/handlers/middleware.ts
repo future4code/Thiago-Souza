@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { getUserToken } from "../commons";
-import { httpErrorInvalidToken, sendError } from "../errors";
+import {  errorName, httpError, sendError } from "../errors";
 
 export async function isLogin(
   request: Request,
@@ -12,7 +12,7 @@ export async function isLogin(
 
     const tokenSplit = authorization.split(" ");
     if (tokenSplit.length !== 2 || tokenSplit[0] !== "Bearer")
-      throw httpErrorInvalidToken();
+      throw httpError(errorName.InvalidToken);
 
     const token = await getUserToken(tokenSplit[1]);
 

@@ -5,10 +5,7 @@ import {
   PostData,
   PostType
 } from "../@types";
-import {
-  applicationErrorFriendsNotFound,
-  applicationErrorPostNotFound
-} from "../errors";
+import { applicationError, errorName } from "../errors";
 
 export class FeedBusiness {
   #postData: PostData;
@@ -24,11 +21,11 @@ export class FeedBusiness {
     const friendsID = (await this.#friendData.getFriends(userID))
       .map(({ id }) => id);
     if (!friendsID.length)
-      throw applicationErrorFriendsNotFound();
+      throw applicationError(errorName.FriendsNotFound);
 
     const posts = await this.#postData.getByAuthorIDs(friendsID);
     if (!posts.length)
-      throw applicationErrorPostNotFound();
+      throw applicationError(errorName.PostNotFound);
 
     return posts;
   }
@@ -36,7 +33,7 @@ export class FeedBusiness {
   async feedByType(type: PostType): Promise<Post[]> {
     const posts = await this.#postData.getByType(type);
     if (!posts.length)
-      throw applicationErrorPostNotFound();
+      throw applicationError(errorName.PostNotFound);
 
     return posts;
   }

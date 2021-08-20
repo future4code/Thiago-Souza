@@ -1,32 +1,17 @@
 import { ApplicationErrorInterface, HttpErrorInterface } from "../@types";
-
-export const errorName = {
-  unexpected:            "UnexpectError",
-  validate:              "ValidateError",
-  userNotFound:          "UserNotFound",
-  userEmailAlreadyExist: "UserEmailAlreadyExist",
-  invalidPassword:       "InvalidPassword",
-  postNotFound:          "PostNotFound",
-  invalidToken:          "InvalidToken",
-  alreadyFriends:        "AlreadyFriends",
-  friendsNotFound:       "FriendsNotFound",
-  usersNotFriends:       "UsersNotFriends",
-  invalidType:           "InvalidType",
-  isAlreadyLike:         "IsAlredyLike",
-  isAlreadyDislike:      "IsAlredyDislike"
-};
+import { ErrorName, errorNames, errors } from "./error";
 
 export class ApplicationError implements ApplicationErrorInterface {
   name: string;
 
   message: string;
 
-  initialError: unknown;
+  initialError: any; //eslint-disable-line
 
   constructor(
     name: string,
     message: string,
-    initialError?: unknown
+    initialError?: any //eslint-disable-line
   ) {
     this.name = name;
     this.message = message;
@@ -45,13 +30,13 @@ export class HttpError implements HttpErrorInterface {
 
   httpStatus: number;
 
-  initialError: unknown;
+  initialError: any; //eslint-disable-line
 
   constructor(
     name: string,
     message: string,
     httpStatus: number,
-    initialError?: unknown
+    initialError?: any //eslint-disable-line
   ) {
     this.name = name;
     this.message = message;
@@ -64,44 +49,35 @@ export class HttpError implements HttpErrorInterface {
   }
 }
 
-export function applicationErrorUnexpect(initialError?: unknown): ApplicationError {
+export function applicationError(errorName: string, initialError?: unknown)
+: ApplicationError {
+  if (initialError instanceof ApplicationError || initialError instanceof HttpError)
+    initialError = initialError.initialError;
+
+  const error = errorNames.includes(errorName)
+    ? errors[errorName as ErrorName]
+    : errors.Unexpected;
+
   return new ApplicationError(
-    errorName.unexpected,
-    "An unexpected error has occurred",
+    error.name,
+    error.message,
     initialError
   );
 }
 
-export function httpErrorUnexpect(initialError?: unknown): HttpError {
-  const aplicationError = applicationErrorUnexpect();
+export function httpError(errorName: string, initialError?: unknown)
+: HttpError {
+  if (initialError instanceof HttpError || initialError instanceof ApplicationError)
+    initialError = initialError.initialError;
+
+  const error = errorNames.includes(errorName)
+    ? errors[errorName as ErrorName]
+    : errors.Unexpected;
 
   return new HttpError(
-    aplicationError.name,
-    aplicationError.message,
-    500,
-    initialError
-  );
-}
-
-//eslint-disable-next-line
-export function applicationErrorValidate(initialError?: any): ApplicationError {
-  let message = "";
-
-  if (Array.isArray(initialError.errors))
-    message = `\n  ${initialError.errors.join("\n  ")}`;
-  else
-    message = initialError.message || "Validation error";
-
-  return new ApplicationError(errorName.validate, message, initialError);
-}
-
-export function httpErrorValidate(initialError?: unknown): HttpError {
-  const aplicationError = applicationErrorValidate(initialError);
-
-  return new HttpError(
-    aplicationError.name,
-    aplicationError.message,
-    500,
+    error.name,
+    error.message,
+    error.httpStatus,
     initialError
   );
 }

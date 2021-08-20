@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { FeedBusiness } from "../business";
 import { friendData, postData } from "../data";
-import { httpErrorInvalidType, sendError } from "../errors";
+import { errorName, httpError, sendError } from "../errors";
 import { isLogin } from "./middleware";
 
 export const feedRouter = express.Router();
@@ -29,7 +29,7 @@ class FeedRouter {
     try {
       const { type } = request.query;
       if (type !== "NORMAL" && type !== "EVENT")
-        throw httpErrorInvalidType();
+        throw httpError(errorName.InvalidType);
 
       const feed = await this.#business.feedByType(type);
 

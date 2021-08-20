@@ -1,12 +1,7 @@
 import {
   ID, LikeData, PostData, UserData
 } from "../@types";
-import {
-  applicationErrorPostNotFound,
-  applicationErrorUserNotFound,
-  applicationErrorIsAlredyDislike,
-  applicationErrorIsAlredyLike
-} from "../errors";
+import { applicationError, errorName } from "../errors";
 
 export class LikeBusiness {
   #likeData: LikeData
@@ -23,17 +18,17 @@ export class LikeBusiness {
 
   async #validate(userID: ID, postID: ID): Promise<void> {
     if (!await this.#userData.isUser(userID))
-      throw applicationErrorUserNotFound();
+      throw applicationError(errorName.UserNotFound);
 
     if (!await this.#postData.isPost(postID))
-      throw applicationErrorPostNotFound();
+      throw applicationError(errorName.PostNotFound);
   }
 
   async like(userID: ID, postID: ID): Promise<void> {
     await this.#validate(userID, postID);
 
     if (await this.#likeData.isLike(userID, postID))
-      throw applicationErrorIsAlredyLike();
+      throw applicationError(errorName.IsAlreadyLike);
 
     await this.#likeData.insert(userID, postID);
   }
@@ -42,7 +37,7 @@ export class LikeBusiness {
     await this.#validate(userID, postID);
 
     if (!await this.#likeData.isLike(userID, postID))
-      throw applicationErrorIsAlredyDislike();
+      throw applicationError(errorName.IsAlreadyDislike);
 
     await this.#likeData.delete(userID, postID);
   }

@@ -3,14 +3,17 @@ import { validate } from "uuid";
 import { ID } from "../@types";
 import { FriendBusiness } from "../business";
 import { friendData, userData } from "../data";
-import { httpErrorValidate, sendError } from "../errors";
+import { errorName, httpError, sendError } from "../errors";
 import { isLogin } from "./middleware";
 
 export const friendRouter = express.Router();
 
 function validateNewFriendID(newFriend: ID): void {
   if (typeof newFriend !== "string" || !validate(newFriend))
-    throw httpErrorValidate({ errors: [ "userID from friend must be a valid ID" ] });
+    throw httpError(
+      errorName.Validate,
+      { errors: [ "userID from friend must be a valid ID" ] }
+    );
 }
 
 class FriendRouter {
