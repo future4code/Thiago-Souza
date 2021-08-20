@@ -1,5 +1,6 @@
 import knex from "knex";
 import {
+  CommentData,
   FriendData,
   LikeData,
   PostData,
@@ -9,7 +10,8 @@ import {
   UserDatabaseSQL,
   PostDatabaseSQL,
   FriendDatabaseSQL,
-  LikeDatabaseSQL
+  LikeDatabaseSQL,
+  CommentDatabaseSQL
 } from "./databaseSQL";
 
 const databaseConnection = knex({
@@ -28,3 +30,4 @@ export const userData: UserData = new UserDatabaseSQL(databaseConnection);
 export const postData: PostData = new PostDatabaseSQL(databaseConnection);
 export const friendData: FriendData = new FriendDatabaseSQL(databaseConnection);
 export const likeData: LikeData = new LikeDatabaseSQL(databaseConnection);
+export const commentData: CommentData = new CommentDatabaseSQL(databaseConnection);

@@ -43,9 +43,11 @@ export interface FriendData {
 }
 
 export interface CommentData {
+  getByCommentID: (commentID: ID) => Promise<Comment|undefined>;
   getByPostID: (postID: ID) => Promise<Comment[]>;
   getByAuthorID: (authorID: ID) => Promise<Comment[]>;
   getAll: () => Promise<Comment[]>;
+  isComment: (commentID: ID) => Promise<boolean>
   insert: (comment: Comment) => Promise<void>;
   delete: (id: ID) => Promise<void>;
 }

@@ -23,23 +23,39 @@ export class CommentDatabaseSQL implements CommentData {
     this.#connection = connection;
   }
 
+  async getByCommentID(commentID: ID): Promise<Comment|undefined> {
+    const comment = await this.#connection("LaBook_Comment").select("*")
+      .where({ id: commentID })
+      .first();
+
+    return comment && databaseToData(comment);
+  }
+
   async getByPostID(postID: ID): Promise<Comment[]> {
     return (await this.#connection("LaBook_Comment")
       .select("*")
-      .where({ post_id: postID }))
+      .where({ post_id: postID })
+      .orderBy("created_at", "desc"))
       .map(databaseToData);
   }
 
   async getByAuthorID(authorID: ID): Promise<Comment[]> {
     return (await this.#connection("LaBook_Comment")
       .select("*")
-      .where({ author_id: authorID }))
+      .where({ author_id: authorID })
+      .orderBy("created_at", "desc"))
       .map(databaseToData);
   }
 
   async getAll(): Promise<Comment[]> {
-    return (await this.#connection("LaBook_Comment").select("*"))
+    return (await this.#connection("LaBook_Comment")
+      .select("*")
+      .orderBy("created_at", "desc"))
       .map(databaseToData);
+  }
+
+  async isComment(commentID: ID): Promise<boolean> {
+    return !!await this.getByCommentID(commentID);
   }
 
   async insert(comment: Comment): Promise<void> {

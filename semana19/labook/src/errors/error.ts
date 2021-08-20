@@ -11,7 +11,8 @@ export const errorName = {
   UsersNotFriends:       "UsersNotFriends",
   InvalidType:           "InvalidType",
   IsAlreadyLike:         "IsAlreadyLike",
-  IsAlreadyDislike:      "IsAlreadyDislike"
+  IsAlreadyDislike:      "IsAlreadyDislike",
+  CommentNotFound:       "CommentNotFound"
 };
 
 export type ErrorName = keyof typeof errorName;
@@ -91,6 +92,11 @@ export const errors: Error = {
     name:       errorName.IsAlreadyDislike,
     message:    "User already not like the post",
     httpStatus: 400
+  },
+  CommentNotFound: {
+    name:       errorName.CommentNotFound,
+    message:    "Comment not found",
+    httpStatus: 404
   }
 };
 
