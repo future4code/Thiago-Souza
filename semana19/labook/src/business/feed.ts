@@ -17,21 +17,21 @@ export class FeedBusiness {
     this.#friendData = friendData;
   }
 
-  async feedFriends(userID: ID): Promise<Post[]> {
+  async feedFriends(userID: ID, page = 1): Promise<Post[]> {
     const friendsID = (await this.#friendData.getFriends(userID))
       .map(({ id }) => id);
     if (!friendsID.length)
       throw applicationError(errorName.FriendsNotFound);
 
-    const posts = await this.#postData.getByAuthorIDs(friendsID);
+    const posts = await this.#postData.getByAuthorIDs(friendsID, page);
     if (!posts.length)
       throw applicationError(errorName.PostNotFound);
 
     return posts;
   }
 
-  async feedByType(type: PostType): Promise<Post[]> {
-    const posts = await this.#postData.getByType(type);
+  async feedByType(type: PostType, page = 1): Promise<Post[]> {
+    const posts = await this.#postData.getByType(type, page);
     if (!posts.length)
       throw applicationError(errorName.PostNotFound);
 

@@ -12,7 +12,8 @@ export const errorName = {
   InvalidType:           "InvalidType",
   IsAlreadyLike:         "IsAlreadyLike",
   IsAlreadyDislike:      "IsAlreadyDislike",
-  CommentNotFound:       "CommentNotFound"
+  CommentNotFound:       "CommentNotFound",
+  InvalidPage:           "InvalidPage"
 };
 
 export type ErrorName = keyof typeof errorName;
@@ -97,6 +98,11 @@ export const errors: Error = {
     name:       errorName.CommentNotFound,
     message:    "Comment not found",
     httpStatus: 404
+  },
+  InvalidPage: {
+    name:       errorName.InvalidPage,
+    message:    "The page must be an integer greater than 0",
+    httpStatus: 400
   }
 };
 

@@ -18,6 +18,8 @@ function databaseToData(post: PostDatabase): Post {
   };
 }
 
+const FEED_LENGTH = 5;
+
 export class PostDatabaseSQL implements PostData {
   #connection: Knex;
 
@@ -34,24 +36,30 @@ export class PostDatabaseSQL implements PostData {
     return result && databaseToData(result);
   }
 
-  async getByAuthorIDs(authorIDs: ID[]): Promise<Post[]> {
+  async getByAuthorIDs(authorIDs: ID[], page = 1): Promise<Post[]> {
     return (await this.#connection("LaBook_Post")
       .select("*")
       .where("author_id", authorIDs)
-      .orderBy("created_at", "desc"))
+      .orderBy("created_at", "desc")
+      .offset((page - 1) * FEED_LENGTH)
+      .limit(FEED_LENGTH))
       .map(databaseToData);
   }
 
-  async getByType(type: PostType): Promise<Post[]> {
+  async getByType(type: PostType, page = 1): Promise<Post[]> {
     return (await this.#connection("LaBook_Post")
       .select("*")
       .where({ type_of: type })
-      .orderBy("created_at", "desc"))
+      .orderBy("created_at", "desc")
+      .offset((page - 1) * FEED_LENGTH)
+      .limit(FEED_LENGTH))
       .map(databaseToData);
   }
 
-  async getAll(): Promise<Post[]> {
-    return (await this.#connection("LaBook_Post").select("*"))
+  async getAll(page = 1): Promise<Post[]> {
+    return (await this.#connection("LaBook_Post").select("*")
+      .offset((page - 1) * FEED_LENGTH)
+      .limit(FEED_LENGTH))
       .map(databaseToData);
   }
 

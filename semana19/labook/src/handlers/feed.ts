@@ -9,13 +9,27 @@ export class FeedHandlers {
     this.#business = feedBusiness;
   }
 
-  async feedFriends(_request: Request, response: Response): Promise<void> {
+  #validatePage(page: unknown): number {
+    const pageNumber = Number(page);
+    if (!Number.isInteger(pageNumber) || pageNumber <= 0)
+      throw httpError(errorName.InvalidPage);
+
+    return pageNumber;
+  }
+
+  async feedFriends(request: Request, response: Response): Promise<void> {
     try {
       const { userID } = response.locals;
 
-      const feed = await this.#business.feedFriends(userID);
+      const { page = 1 } = request.query;
+      const pageNumber = this.#validatePage(page);
 
-      response.send({ feed });
+      const feed = await this.#business.feedFriends(userID, pageNumber);
+
+      response.send({
+        feed,
+        nextPage: pageNumber + 1
+      });
     } catch (error) {
       sendError(response, error);
     }
@@ -27,9 +41,15 @@ export class FeedHandlers {
       if (type !== "NORMAL" && type !== "EVENT")
         throw httpError(errorName.InvalidType);
 
-      const feed = await this.#business.feedByType(type);
+      const { page = 1 } = request.query;
+      const pageNumber = this.#validatePage(page);
 
-      response.send({ feed });
+      const feed = await this.#business.feedByType(type, pageNumber);
+
+      response.send({
+        feed,
+        nextPage: pageNumber + 1
+      });
     } catch (error) {
       sendError(response, error);
     }
