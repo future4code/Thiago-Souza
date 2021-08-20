@@ -1,12 +1,8 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { validate } from "uuid";
 import { ID } from "../@types";
 import { FriendBusiness } from "../business";
-import { friendData, userData } from "../data";
 import { errorName, httpError, sendError } from "../errors";
-import { isLogin } from "./middleware";
-
-export const friendRouter = express.Router();
 
 function validateNewFriendID(newFriend: ID): void {
   if (typeof newFriend !== "string" || !validate(newFriend))
@@ -16,14 +12,14 @@ function validateNewFriendID(newFriend: ID): void {
     );
 }
 
-class FriendRouter {
+export class FriendHandlers {
   #business: FriendBusiness
 
   constructor(friendBusiness: FriendBusiness) {
     this.#business = friendBusiness;
   }
 
-  async getFriends(_request: Request, response: Response): Promise<void> {
+  async get(_request: Request, response: Response): Promise<void> {
     try {
       const { userID } = response.locals;
 
@@ -68,10 +64,4 @@ class FriendRouter {
     }
   }
 }
-
-const routes = new FriendRouter(new FriendBusiness(friendData, userData));
-
-friendRouter.get("/", isLogin, (req, res) => routes.getFriends(req, res));
-friendRouter.post("/", isLogin, (req, res) => routes.createFriendship(req, res));
-friendRouter.delete("/", isLogin, (req, res) => routes.deleteFriendship(req, res));
 

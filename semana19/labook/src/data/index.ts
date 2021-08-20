@@ -14,6 +14,8 @@ import {
   CommentDatabaseSQL
 } from "./databaseSQL";
 
+export * from "./databaseSQL";
+
 const databaseConnection = knex({
   client:     process.env.DATABASE_TYPE,
   connection: {

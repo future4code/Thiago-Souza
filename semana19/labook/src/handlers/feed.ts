@@ -1,12 +1,8 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { FeedBusiness } from "../business";
-import { friendData, postData } from "../data";
 import { errorName, httpError, sendError } from "../errors";
-import { isLogin } from "./middleware";
 
-export const feedRouter = express.Router();
-
-class FeedRouter {
+export class FeedHandlers {
   #business: FeedBusiness
 
   constructor(feedBusiness: FeedBusiness) {
@@ -39,9 +35,4 @@ class FeedRouter {
     }
   }
 }
-
-const routes = new FeedRouter(new FeedBusiness(postData, friendData));
-
-feedRouter.get("/", isLogin, (req, res) => routes.feedFriends(req, res));
-feedRouter.get("/type", isLogin, (req, res) => routes.feedByType(req, res));
 

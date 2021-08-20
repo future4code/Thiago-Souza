@@ -1,12 +1,8 @@
-import express, { Request, Response } from "express";
+import  { Request, Response } from "express";
 import { LikeBusiness } from "../business";
-import { likeData, postData, userData } from "../data";
 import { sendError } from "../errors";
-import { isLogin } from "./middleware";
 
-export const likeRouter = express.Router();
-
-class LikeRouter {
+export class LikeHandlers {
   #business: LikeBusiness
 
   constructor(likeBusiness: LikeBusiness) {
@@ -39,9 +35,4 @@ class LikeRouter {
     }
   }
 }
-
-const routes = new LikeRouter(new LikeBusiness(likeData, userData, postData));
-
-likeRouter.post("/:postID", isLogin, (req, res) => routes.like(req, res));
-likeRouter.delete("/:postID", isLogin, (req, res) => routes.dislike(req, res));
 

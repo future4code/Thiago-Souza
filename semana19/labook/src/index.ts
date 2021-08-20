@@ -1,31 +1,12 @@
 import "./env";
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
-import {
-  postRouter,
-  userRouter,
-  feedRouter,
-  friendRouter,
-  likeRouter,
-  commentRouter
-} from "./handlers";
 
 const serverPort = process.env.NODE_PORT || 3003;
 
-const server = express();
+export const server = express();
 server.use(express.json());
 server.use(cors());
-
-server.use("/user", userRouter);
-server.use("/post", postRouter);
-server.use("/friend", friendRouter);
-server.use("/feed", feedRouter);
-server.use("/like", likeRouter);
-server.use("/comment", commentRouter);
-
-server.get("/ping", (_request: Request, response: Response): void => {
-  response.send("pong");
-});
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)
@@ -34,3 +15,4 @@ const serverListener = server.listen(serverPort, () => {
     console.error("Failure upon starting server.");
 });
 
+import "./routes";

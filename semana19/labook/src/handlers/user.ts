@@ -1,11 +1,8 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { UserBusiness } from "../business";
-import { userData } from "../data";
 import { sendError } from "../errors";
 
-export const userRouter = express.Router();
-
-class UserRouter {
+export class UserHandlers {
   #userBusiness: UserBusiness
 
   constructor(userBusiness: UserBusiness) {
@@ -53,9 +50,3 @@ class UserRouter {
     }
   }
 }
-
-const routes = new UserRouter(new UserBusiness(userData));
-
-userRouter.post("/signup", (req, res) => routes.create(req, res));
-userRouter.post("/login", (req, res) => routes.login(req, res));
-

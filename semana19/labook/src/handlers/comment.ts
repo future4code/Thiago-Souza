@@ -1,12 +1,8 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { CommentBusiness } from "../business/comment";
-import { commentData, postData, userData } from "../data";
 import { sendError } from "../errors";
-import { isLogin } from "./middleware";
 
-export const commentRouter = express.Router();
-
-class CommentRouter {
+export class CommentHandlers {
   #business: CommentBusiness
 
   constructor(commentBusiness: CommentBusiness) {
@@ -103,23 +99,3 @@ class CommentRouter {
   }
 }
 
-const routes = new CommentRouter(new CommentBusiness(
-  commentData,
-  postData,
-  userData
-));
-
-commentRouter.get("/", isLogin, (req, res) => routes.getByAuthorID(req, res));
-commentRouter.get("/all", isLogin, (req, res) => routes.getAll(req, res));
-commentRouter.get(
-  "/:commentID",
-  isLogin,
-  (req, res) => routes.getByCommentID(req, res)
-);
-commentRouter.get(
-  "/post/:postID",
-  isLogin,
-  (req, res) => routes.getByPostID(req, res)
-);
-commentRouter.post("/", isLogin, (req, res) => routes.create(req, res));
-commentRouter.delete("/:commentID", isLogin, (req, res) => routes.delete(req, res));

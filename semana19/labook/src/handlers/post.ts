@@ -1,12 +1,8 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { PostBusiness } from "../business";
-import { postData } from "../data";
 import { sendError } from "../errors";
-import { isLogin } from "./middleware";
 
-export const postRouter = express.Router();
-
-class PostRouter {
+export class PostHandlers {
   #business: PostBusiness
 
   constructor(postBusiness: PostBusiness) {
@@ -55,9 +51,4 @@ class PostRouter {
     }
   }
 }
-
-const routes = new PostRouter(new PostBusiness(postData));
-
-postRouter.post("/", isLogin, (req, res) => routes.create(req, res));
-postRouter.get("/:id", isLogin, (req, res) => routes.find(req, res));
 
