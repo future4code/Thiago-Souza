@@ -9,9 +9,22 @@ export function sendError(response: Response, error: any): void {
     console.error(error);
 
   if (finalError.name === errorName.Validate
-      && Array.isArray(finalError.initialError.errors))
-    finalError.message = `\n  ${finalError.initialError.errors.join("\n  ")}`;
+      && Array.isArray(finalError.initialError.errors)) {
+    response.status(finalError.httpStatus).send({
+      error: {
+        name:    finalError.name,
+        message: finalError.message,
+        errors:  finalError.initialError.errors
+      }
+    });
+    return;
+  }
 
-  response.status(finalError.httpStatus).send(finalError.getMessage());
+  response.status(finalError.httpStatus).send({
+    error: {
+      name:    finalError.name,
+      message: finalError.message
+    }
+  });
 }
 

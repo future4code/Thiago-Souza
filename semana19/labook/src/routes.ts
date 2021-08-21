@@ -102,4 +102,3 @@ server.delete(
 server.get("/ping", (_request: Request, response: Response): void => {
   response.send("pong");
 });
-

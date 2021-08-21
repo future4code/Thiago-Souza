@@ -27,7 +27,7 @@ export class PostDatabaseSQL implements PostData {
     this.#connection = connection;
   }
 
-  async getById(id: ID): Promise<Post|undefined> {
+  async getByID(id: ID): Promise<Post|undefined> {
     const result = await this.#connection("LaBook_Post")
       .select("*")
       .where({ id })
@@ -64,7 +64,7 @@ export class PostDatabaseSQL implements PostData {
   }
 
   async isPost(postID: ID): Promise<boolean> {
-    return !!await this.getById(postID);
+    return !!await this.getByID(postID);
   }
 
   async insert(post: Post): Promise<void> {

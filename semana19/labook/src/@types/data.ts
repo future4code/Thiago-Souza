@@ -16,7 +16,7 @@ export interface UserData {
 }
 
 export interface PostData {
-  getById: (postID: ID) => Promise<Post|undefined>;
+  getByID: (postID: ID) => Promise<Post|undefined>;
   getByAuthorIDs: (authorID: ID[], page?: number) => Promise<Post[]>;
   getByType: (type: PostType, page?: number) => Promise<Post[]>;
   getAll: (page?: number) => Promise<Post[]>;

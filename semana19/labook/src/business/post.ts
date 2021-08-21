@@ -22,8 +22,8 @@ export class PostBusiness {
     await this.#data.insert(newPost);
   }
 
-  async find(postID: ID): Promise<Post> {
-    const result = await this.#data.getById(postID);
+  async getByID(id: ID): Promise<Post> {
+    const result = await this.#data.getByID(id);
     if (!result)
       throw applicationError(errorName.PostNotFound);
 

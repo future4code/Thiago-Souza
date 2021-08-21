@@ -1,0 +1,294 @@
+openapi: 3.0.0
+info:
+  title: LaBook
+  description: Descrição de como o backend da rede social LaBook funciona
+  version: 0.0.1
+servers:
+  - url: http://localhost:3000
+    description: URL padrão para desenvolvimento
+
+tags:
+  - name: user
+    description: Operações relacionadas ao usuário
+  - name: post
+    description: Operações relacionadas aos posts
+
+security:
+  - TokenAuth: []
+
+paths:
+  /user/signup:
+    post:
+      summary: Criação de usuário na aplicação
+      description: Recebe as informações necessárias para criação de um usuário e retorna o token de acesso do usuário para a aplicação
+      tags:
+        - user
+      security: []
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+            example:
+              name: Thiago Felipe
+              email: thiago@felipe.com.br
+              password: senhaForte
+      responses:
+        '200':    
+          description: Retornar o token de acesso
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/TokenAccess'
+              example:
+                name: User successfully created
+                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJpYXQiOjE2Mjk0ODQyMjksImV4cCI6MTYyOTQ4NjAyOX0.7ZUHJVvrYrCenqHnVFD7TGgppXfkcrzX9fml2EYyotQ
+        '400':
+          description: Mensagem de erro que foram enviada informaçãoes errada para o cadastro do novo usuário
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateError'
+              example:
+                error:
+                  name: Validate
+                  message: A validation error has occurred
+                  errors: ['name must be defined','password must be defined','email must be defined']
+        '409':
+          description: Mensagem de erro que informar que email do usuário já existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  name: User email already exist
+                  message: The user's email already exist
+        '500':
+          $ref: '#/components/responses/Unexpected'
+  /user/login:
+    post:
+      summary: Faz login do usuário na aplicação
+      description: Recebe informaçãoes necessárias para o login e retonar o token de acesso do usuário para a aplicação
+      tags:
+        - user
+      security: []
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+            example:
+              email: thiago@felipe.com.br
+              password: senhaForte
+      responses:
+        '200':    
+          description: Retornar o token de acesso
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/TokenAccess'
+              example:
+                name: User successfully created
+                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJpYXQiOjE2Mjk0ODQyMjksImV4cCI6MTYyOTQ4NjAyOX0.7ZUHJVvrYrCenqHnVFD7TGgppXfkcrzX9fml2EYyotQ
+        '400':
+          description: Mensagem de erro que foram enviada informaçãoes errada para o cadastro do novo usuário
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateError'
+              example:
+                error:
+                  name: Validate
+                  message: A validation error has occurred
+                  errors: ['password must be defined','email must be defined']
+        '401':
+          description: Mensagem que informa que a senha está incorreta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  name: InvalidPassword
+                  message: Invalid password
+        '404':
+          description: Mensagem que informa que não foi encontrado o usuário
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  name: UserNotFound
+                  message: User not found
+        '500':
+          $ref: '#/components/responses/Unexpected'
+  /post:
+    post:
+      summary: Criação de post na aplicação
+      description: Faz a criação de um post no LaBook
+      tags:
+        - post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type: 
+                  type: string
+                  enum: [NORMAL, EVENT]
+                pothoURL:
+                  type: string
+                description:
+                  type: string
+            example:
+              type: NORMAL
+              pothoURL: https://belasfotos.com/suafoto
+              description: Um lindo texto para descrever o seu post
+      responses:
+        '201':
+          description: Mensagem que informa que o post foi criado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: Post successfully created
+        '401':
+          $ref: "#/components/responses/InvalidToken"
+        '400':
+          description: Mensagem que informa que foram enviadas dados errados para a aplicação
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateError'
+              example:
+                error:
+                  name: Validate
+                  message: A validation error has occurred
+                  errors: ['type must be defined','pothoURL must be defined','description must be defined']
+        '500':
+          $ref: '#/components/responses/Unexpected'
+  /post/{postID}:
+    get:
+      summary: Pega um post pelo id
+      description: Ver todas as informaçãoes de um post pelo seu id
+      tags:
+        - post
+      parameters:
+        - in: path
+          name: postID
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: O id do post
+      responses:
+        '200':
+          description: Mensagem que informa que foi possível pegar as informações do post
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  post:
+                    $ref: '#/components/schemas/Post'
+        '401':
+          $ref: "#/components/responses/InvalidToken"
+        '404':
+          description: Mensagem que informa que não foi possível achar o post
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/ValidateError'
+              example:
+                error:
+                  name: PostNotFound
+                  message: Post not found
+        '500':
+          $ref: '#/components/responses/Unexpected'
+components:
+  schemas:
+    TokenAccess:
+      type: object
+      properties:
+        message:
+          type: string
+        token:
+          type: string
+          format: password
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            name:
+              type: string
+            message:
+              type: string
+    ValidateError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            name:
+              type: string
+            message:
+              type: string
+    Post:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+  securitySchemes:
+    TokenAuth:
+      type: http
+      scheme: bearer
+  responses:
+    Unexpected:
+      description: Mensagem de erro que informa que ocorreu um erro inesperado no servidor
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              name: Unexpect
+              message: An unexpected error has occurred
+    InvalidToken:
+      description: Mensagem de erro que informa que foi enviado um token invalido para a aplicação
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              name: InvalidToken
+              message: Invalid authorization token 

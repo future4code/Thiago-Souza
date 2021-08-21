@@ -40,7 +40,7 @@ export class PostHandlers {
     try {
       const { id } = request.params;
 
-      const post = await this.#business.find(id);
+      const post = await this.#business.getByID(id);
 
       response.send({
         message: "Post successfully found",
