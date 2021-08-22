@@ -5,7 +5,7 @@ import swaggerUi from "swagger-ui-express";
 import files from "fs";
 import yaml from "yaml";
 
-const docs = yaml.parse(files.readFileSync("./src/docs/swagger.yml", "utf8"));
+const docs = yaml.parse(files.readFileSync(process.env.DOCS_PATH as string, "utf8"));
 
 const serverPort = process.env.NODE_PORT || 3003;
 

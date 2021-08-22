@@ -11,7 +11,8 @@ function validateEnvironment() {
     "DATABASE_PORT",
     "DATABASE_SCHEMA",
     "DATABASE_USER",
-    "DATABASE_PASSWORD"
+    "DATABASE_PASSWORD",
+    "DOCS_PATH"
   ];
 
   const missingVariables = [];

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "tsc && node semana19/labook/build/index.js"
+    "start": "node semana19/labook/build/index.js",
+    "postinstall": "tsc"
   },
   "keywords": [],
   "author": "",
