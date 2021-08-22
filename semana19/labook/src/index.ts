@@ -7,7 +7,7 @@ import yaml from "yaml";
 
 const docs = yaml.parse(files.readFileSync(process.env.DOCS_PATH as string, "utf8"));
 
-const serverPort = process.env.NODE_PORT || 3003;
+const serverPort = process.env.PORT || process.env.NODE_PORT || 3003;
 
 export const server = express();
 server.use(express.json());
