@@ -4,6 +4,8 @@ info:
   description: Descrição de como o backend da rede social LaBook funciona
   version: 0.0.1
 servers:
+  - url: https://labook-thiago.herokuapp.com
+    description: URL padrão de deploy
   - url: http://localhost:3000
     description: URL padrão para desenvolvimento
 
