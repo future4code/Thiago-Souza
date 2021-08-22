@@ -4,14 +4,15 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import files from "fs";
 import yaml from "yaml";
-const swaggerDocument2 = yaml.parse(files.readFileSync("./src/swagger.yml", "utf8"));
+
+const docs = yaml.parse(files.readFileSync("./src/docs/swagger.yml", "utf8"));
 
 const serverPort = process.env.NODE_PORT || 3003;
 
 export const server = express();
 server.use(express.json());
 server.use(cors());
-server.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument2));
+server.use("/docs", swaggerUi.serve, swaggerUi.setup(docs));
 
 const serverListener = server.listen(serverPort, () => {
   if (serverListener)
