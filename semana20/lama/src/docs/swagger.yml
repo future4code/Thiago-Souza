@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: LaBook
+  description: Descrição de como o backend da rede social LaBook funciona
+  version: 0.0.1
+
+servers:
+  - url: http://localhost:3000
+    description: URL padrão para desenvolvimento
+
+tags:
+  - name: tag
+    description: 
+
+security:
+  - TokenAuth: []
+
+paths:
+  /:
+    post:
+      summary: 
+      description: 
+      tags:
+        - tag 
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+            example:
+      responses:
+        '200':    
+          description: 
+          content:
+            application/json:
+              schema: 
+              example:
+        '400':
+          description:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateError'
+              example:
+                error:
+                  name: Validate
+                  message: A validation error has occurred
+                  errors: []
+        '401':
+          $ref: '#/components/responses/InvalidToken'
+        '500':
+          $ref: '#/components/responses/Unexpected'
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            name:
+              type: string
+            message:
+              type: string
+    ValidateError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            name:
+              type: string
+            message:
+              type: string
+  securitySchemes:
+    TokenAuth:
+      type: http
+      scheme: bearer
+  responses:
+    Unexpected:
+      description: Mensagem de erro que informa que ocorreu um erro inesperado no servidor
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              name: Unexpect
+              message: An unexpected error has occurred
+    InvalidToken:
+      description: Mensagem de erro que informa que foi enviado um token invalido para a aplicação
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              name: InvalidToken
+              message: Invalid authorization token 
