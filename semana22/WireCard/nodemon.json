@@ -1,0 +1,6 @@
+{
+  "verbose": true,
+  "ignore": ["build", "node_modules"],
+  "ext": "ts,yml",
+  "watch": ["src"]
+}
