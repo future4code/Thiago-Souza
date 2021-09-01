@@ -1,11 +1,12 @@
 {
-  "name": "labook",
+  "name": "aula58",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
-    "start": "node semana19/labook/build/index.js",
-    "postinstall": "tsc"
+    "start": "tsc && node build/index.js",
+    "lint": "eslint --fix ./src",
+    "dev": "nodemon src/index.ts"
   },
   "keywords": [],
   "author": "",
